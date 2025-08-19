@@ -527,13 +527,21 @@ function setupClientSearch(clients) {
 }
 
 function renderLogoShowcase(clients) {
+  console.log("renderLogoShowcase called with clients:", clients);
+  
   const track = document.getElementById("logo-track");
-  if (!track) return;
+  console.log("Found logo-track element:", track);
+  
+  if (!track) {
+    console.error("logo-track element not found!");
+    return;
+  }
   
   track.innerHTML = "";
   
   // Create two sets of clients for seamless infinite scrolling
   const clientsForShowcase = [...clients, ...clients];
+  console.log("Clients for showcase:", clientsForShowcase);
   
   clientsForShowcase.forEach((client, index) => {
     const item = createEl("div", "logo-item");
@@ -551,14 +559,21 @@ function renderLogoShowcase(clients) {
     item.addEventListener("click", () => openClientModal(client));
     
     track.appendChild(item);
+    console.log(`Added logo item for ${client.name}`);
   });
+  
+  console.log("Final track children count:", track.children.length);
 }
 
 async function init() {
+  console.log("init() function called");
+  
   const [resume, clients] = await Promise.all([
     loadJson("data/resume.json", defaultResume),
     loadJson("data/clients.json", defaultClients)
   ]);
+  
+  console.log("Loaded data:", { resume: !!resume, clients: !!clients, clientCount: clients?.length });
 
   renderResume(resume);
   renderClients(clients);
