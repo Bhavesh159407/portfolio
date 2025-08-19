@@ -1,0 +1,116 @@
+{
+  "name": "Bhavesh Reddy Bendabembli",
+  "title": "Experienced SAP UI5 & Fiori Consultant",
+  "summary": "SAP UI5 and Fiori consultant with 2+ years of experience delivering user‑centric applications on SAP BTP. Skilled in SAP Fiori/UI5, SAP Build Apps/Code, OData/REST integration, and CAP on HANA. Proven track record of enabling faster business processes, automation, and cross‑functional collaboration.",
+  "profilePhoto": "https://ibb.co/DDQcSsng",
+  "location": "Hyderabad, TG 500039, India",
+  "email": "bhaveshchintu@gmail.com",
+  "phone": "+91 6309639128",
+  "website": "https://www.linkedin.com/in/bhavesh-reddy-873275318",
+  "socials": [
+    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/bhavesh-reddy-873275318", "icon": "🔗" }
+  ],
+  "skills": {
+    "categories": [
+      { "label": "SAP Technologies — Primary Skills", "items": ["SAP Fiori", "SAP UI5", "SAP Build Apps", "SAP Cloud Connector Configuration", "SAP Build Workzone"] },
+      { "label": "SAP Technologies — Secondary Skills", "items": ["SAP Build Code", "SAP BTP"] },
+      { "label": "SAP Landscape", "items": ["SAP ECC", "SAP S/4HANA", "SAP Public Cloud", "SAP Private Cloud"] },
+      { "label": "Programming Languages", "items": ["JavaScript", "Node.js (Basics)"] },
+      { "label": "Tools & Platforms", "items": ["SAP Web IDE", "SAP Business Application Studio", "Git", "Visual Studio"] },
+      { "label": "Web Technologies", "items": ["HTML5", "CSS3", "XML", "REST APIs", "OData Services"] },
+      { "label": "Database Management", "items": ["SQL (Basics)"] }
+    ],
+    "languages": ["English", "Telugu", "Hindi", "Kannada"]
+  },
+  "experience": [
+    {
+      "role": "SAP UI5 & Fiori Consultant",
+      "company": "Incresol Software Solutions Pvt Ltd",
+      "location": "Hyderabad, Telangana",
+      "period": "Feb 2024 — Present",
+      "summary": "Designing and deploying SAP Fiori/UI5 applications with responsive UX and robust backend integrations.",
+      "highlights": [
+        "Led Fiori app designs and deployments achieving ~75% improvement in user efficiency and ~25% faster process execution.",
+        "Built custom Fiori apps in SAP Web IDE/BAS with user‑centric UX, reducing onboarding time by ~20%.",
+        "Integrated OData services for real‑time data exchange, reducing manual sync delays by ~40%.",
+        "Optimized responsive UI for desktop/tablet/mobile, increasing adoption by >30%.",
+        "Delivered warehouse scanner UIs (UI5/Fiori) cutting inventory audit time by ~70%.",
+        "Developed with SAP Build Apps and CAP on HANA for ~60% faster development cycles with solid test coverage."
+      ]
+    },
+    {
+      "role": "SAP Trainee",
+      "company": "Vani Technologies",
+      "location": "Guntur, Andhra Pradesh",
+      "period": "Apr 2023 — Jan 2024",
+      "summary": "Delivered SAP Fiori/UI5 solutions aligned to customer needs, focusing on report usability and data operations.",
+      "highlights": [
+        "Contributed to 25–30% improvement in user satisfaction through tailored Fiori/UI5 solutions.",
+        "ZSales Application: Implemented end‑to‑end UI and OData features, reducing order processing time by ~40%.",
+        "Z‑Bex Queries: Delivered change requests with better customization/filtering, improving reporting efficiency by ~15%.",
+        "HCP Application: Added CSV export, dynamic OData bindings, and field enhancements enabling ~50% faster data ops."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Email Automation (SAP BTP)",
+      "description": "End‑to‑end email automation on SAP BTP integrating Generative AI classification (Invoice/Support/Bill), OCR data extraction, and SAP integration workflows with role‑based access.",
+      "tech": ["SAP BTP", "Generative AI", "OCR", "OData", "UI5/Fiori"],
+      "url": "",
+      "repo": ""
+    },
+    {
+      "name": "Plant Logistics Management (LE)",
+      "description": "Reporting, Inspection, Loading Weighment, Gate Out, and PGI with camera‑image integration and timed deletion for compliance.",
+      "tech": ["Fiori", "UI5", "OData", "S/4HANA LE"],
+      "url": "",
+      "repo": ""
+    },
+    {
+      "name": "Warehouse/Asset Apps",
+      "description": "Custom WM apps with scanning/dispatch, RFID tracking, and asset management (geo‑tagging, scan‑based reporting, lifecycle tracking).",
+      "tech": ["UI5", "Fiori", "RFID", "OData", "S/4HANA WM"],
+      "url": "",
+      "repo": ""
+    },
+    {
+      "name": "Quality/Approvals Automation",
+      "description": "My Inbox for payment approvals; Quality Approval app automating Debit Note/Customer Invoice creation (UD‑code driven).",
+      "tech": ["Fiori", "UI5", "S/4HANA FI/MM/SD", "OData"],
+      "url": "",
+      "repo": ""
+    }
+  ],
+  "education": [
+    {
+      "school": "Samskruti College of Engineering and Technology",
+      "degree": "B.Tech, Electronics and Communications Engineering",
+      "period": "Aug 2022"
+    }
+  ],
+  "certifications": [
+    {
+      "title": "HackerRank JavaScript (Basic)",
+      "url": "https://www.hackerrank.com/certificates/ce701de4de43",
+      "imageUrl": "/assets/js.svg"
+    },
+    {
+      "title": "Develop and Automate with SAP Build (Foundational)",
+      "url": "https://www.credly.com/badges/a041b4cb-62f7-40ea-8491-dc28308cc469/linked_in_profile",
+      "imageUrl": "https://images.credly.com/size/680x680/images/927c7d2e-4185-4f8d-ae50-b6d5d171eb26/blob"
+    },
+    {
+      "title": "Exploring the SAP Business AI Portfolio (Foundational)",
+      "url": "https://www.credly.com/badges/74963e81-c75b-4842-9b19-e553c85e0a46/linked_in_profile",
+      "imageUrl": "https://images.credly.com/size/680x680/images/a1ab11fb-4b6a-475f-8740-b08730512139/image.png"
+    },
+    {
+      "title": "Extending SAP S/4HANA with SAP Build Apps and Key User Extensibility (Foundational)",
+      "url": "https://www.credly.com/badges/b3dbe498-748c-4ac0-85b8-707d257477ad/linked_in_profile",
+      "imageUrl": "https://images.credly.com/size/680x680/images/fd3989a2-bdfd-4e7d-9da1-6e5df04a944d/image.png"
+    }
+  ]
+}
+
+

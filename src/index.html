@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Portfolio | Your Name</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/portfolio.css" />
+  <style>body{margin:0}</style>
+</head>
+<body>
+  <canvas id="starfield"></canvas>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <img id="brand-avatar" class="brand-avatar" alt="Profile" />
+        <a href="#" class="brand-link" id="brand-name">Your Name</a>
+      </div>
+      <nav class="nav">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#clients">Clients</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="container hero-inner">
+        <div>
+          <h1 id="hero-name">Your Name</h1>
+          <p class="subtitle" id="hero-title">Your Title</p>
+          <p class="tagline" id="hero-summary">Short professional summary goes here.</p>
+          <div class="cta-group">
+            <a id="cta-primary" class="button primary" href="#projects">View Projects</a>
+            <a id="cta-secondary" class="button" href="#contact">Contact Me</a>
+          </div>
+          <div class="social" id="social-links"></div>
+        </div>
+        <div class="hero-photo">
+          <img id="profile-photo" alt="Profile photo" />
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container">
+        <h2>About</h2>
+        <div id="about-content" class="card"></div>
+      </div>
+    </section>
+
+    <section id="experience" class="section alt">
+      <div class="container">
+        <h2>Experience</h2>
+        <div id="experience-list" class="grid timeline"></div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="container">
+        <h2>Projects</h2>
+        <div id="projects-grid" class="grid cards"></div>
+      </div>
+    </section>
+
+    <section id="skills" class="section alt">
+      <div class="container">
+        <h2>Skills</h2>
+        <div id="skills-cloud" class="skills"></div>
+      </div>
+    </section>
+
+    <section id="languages" class="section">
+      <div class="container">
+        <h2>Languages</h2>
+        <div id="languages-list" class="skills"></div>
+      </div>
+    </section>
+
+    <section id="education" class="section">
+      <div class="container">
+        <h2>Education</h2>
+        <div id="education-list" class="grid timeline"></div>
+      </div>
+    </section>
+
+    <section id="certifications" class="section alt">
+      <div class="container">
+        <h2>Certifications</h2>
+        <div id="certifications-grid" class="grid cert-grid"></div>
+      </div>
+    </section>
+
+    <section id="clients" class="section alt">
+      <div class="container">
+        <div class="section-header row">
+          <h2>Clients</h2>
+          <input id="client-search" class="input" placeholder="Search clients" />
+        </div>
+        <div id="clients-grid" class="grid logos"></div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container">
+        <h2>Contact</h2>
+        <div class="card contact-card">
+          <div class="contact-items" id="contact-items"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p id="footer-text">© <span id="footer-year"></span> Your Name. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div id="client-modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-content" role="document">
+      <button class="modal-close" aria-label="Close" data-close-modal>×</button>
+      <div id="modal-body">
+        <div class="modal-header">
+          <img id="modal-logo" class="modal-logo" alt="Client logo" />
+          <div>
+            <h3 id="modal-title">Client</h3>
+            <a id="modal-website" class="link" target="_blank" rel="noopener">Visit website</a>
+          </div>
+        </div>
+        <div class="modal-section" id="modal-documents"></div>
+        <div class="modal-section" id="modal-repos"></div>
+        <div class="modal-section" id="modal-videos"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/script.js"></script>
+</body>
+</html>
