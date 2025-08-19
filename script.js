@@ -212,8 +212,7 @@ function renderResume(resume) {
   setText("hero-name", resume.name);
   setText("hero-title", resume.title);
   setText("hero-summary", resume.summary);
-  setImage("profile-photo", resume.profilePhoto);
-  setImage("brand-avatar", resume.profilePhoto);
+
   const year = new Date().getFullYear();
   document.getElementById("footer-year").textContent = String(year);
   const footer = document.getElementById("footer-text");
