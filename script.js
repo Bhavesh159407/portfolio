@@ -436,6 +436,16 @@ function openClientModal(client) {
   modal.setAttribute("aria-hidden", "false");
   document.getElementById("modal-title").textContent = client.name || "Client";
   document.getElementById("modal-logo").src = logoUrlForClient(client);
+  
+  // Add company description if available
+  const description = document.getElementById("modal-description");
+  if (description && client.description) {
+    description.textContent = client.description;
+    description.style.display = "block";
+  } else if (description) {
+    description.style.display = "none";
+  }
+  
   const website = document.getElementById("modal-website");
   if (client.website) {
     website.href = client.website;
@@ -444,6 +454,16 @@ function openClientModal(client) {
   } else {
     website.removeAttribute("href");
     website.style.display = "none";
+  }
+
+  // Add business divisions if available
+  const businesses = document.getElementById("modal-businesses");
+  if (businesses && client.businesses && client.businesses.length > 0) {
+    const businessItems = client.businesses.map(b => `<li>${b}</li>`).join("");
+    businesses.innerHTML = `<h4>Business Divisions</h4><ul>${businessItems}</ul>`;
+    businesses.style.display = "block";
+  } else if (businesses) {
+    businesses.style.display = "none";
   }
 
   const docs = document.getElementById("modal-documents");

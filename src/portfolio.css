@@ -315,6 +315,42 @@ body::after {
 .modal-logo { width: 64px; height: 64px; object-fit: contain; border-radius: 10px; background: var(--surface-2); border: 1px solid var(--border); }
 .modal-section { padding-top: 14px; }
 .modal-section h4 { margin: 0 0 8px; }
+
+/* Enhanced modal sections for company info */
+#modal-description {
+  background: rgba(7,10,15,0.4);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px 0;
+  border-left: 3px solid var(--primary);
+}
+
+#modal-description:empty {
+  display: none;
+}
+
+#modal-businesses ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#modal-businesses li {
+  background: rgba(7,10,15,0.3);
+  border: 1px solid rgba(148,163,184,0.1);
+  border-radius: 6px;
+  padding: 12px;
+  margin: 8px 0;
+  color: var(--text);
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+#modal-businesses li:hover {
+  background: rgba(7,10,15,0.5);
+  border-color: var(--primary);
+  transform: translateX(4px);
+}
 .link { color: var(--primary); text-decoration: none; }
 .link:hover { text-decoration: underline; }
 .embed { aspect-ratio: 16/9; width: 100%; border: 1px solid var(--border); border-radius: 10px; }
