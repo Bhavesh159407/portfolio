@@ -526,6 +526,34 @@ function setupClientSearch(clients) {
   });
 }
 
+function renderLogoShowcase(clients) {
+  const track = document.getElementById("logo-track");
+  if (!track) return;
+  
+  track.innerHTML = "";
+  
+  // Create two sets of clients for seamless infinite scrolling
+  const clientsForShowcase = [...clients, ...clients];
+  
+  clientsForShowcase.forEach((client, index) => {
+    const item = createEl("div", "logo-item");
+    
+    const img = createEl("img");
+    img.src = logoUrlForClient(client);
+    img.alt = `${client.name} logo`;
+    
+    const name = createEl("div", "company-name", client.name);
+    
+    item.appendChild(img);
+    item.appendChild(name);
+    
+    // Add click event to open modal
+    item.addEventListener("click", () => openClientModal(client));
+    
+    track.appendChild(item);
+  });
+}
+
 async function init() {
   const [resume, clients] = await Promise.all([
     loadJson("data/resume.json", defaultResume),
@@ -534,6 +562,7 @@ async function init() {
 
   renderResume(resume);
   renderClients(clients);
+  renderLogoShowcase(clients);
   setupClientSearch(clients);
 }
 
