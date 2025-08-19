@@ -346,9 +346,75 @@ function renderResume(resume) {
 
   const contact = document.getElementById("contact-items");
   contact.innerHTML = "";
-  if (resume.email) contact.appendChild(safeLink(`mailto:${resume.email}`, resume.email));
-  if (resume.website) contact.appendChild(safeLink(resume.website, resume.website));
-  (resume.socials || []).forEach(s => contact.appendChild(safeLink(s.url, s.label)));
+  
+  // Email contact item
+  if (resume.email) {
+    const emailItem = createEl("div", "contact-item");
+    emailItem.innerHTML = `
+      <div class="contact-icon">✉️</div>
+      <div class="contact-details">
+        <div class="contact-label">Email</div>
+        <a href="mailto:${resume.email}" class="contact-value">${resume.email}</a>
+        <div class="contact-actions">
+          <a href="mailto:${resume.email}" class="contact-action-btn primary">📧 Send Email</a>
+          <button class="contact-action-btn" onclick="navigator.clipboard.writeText('${resume.email}')">📋 Copy</button>
+        </div>
+      </div>
+    `;
+    contact.appendChild(emailItem);
+  }
+  
+  // Phone contact item
+  if (resume.phone) {
+    const phoneItem = createEl("div", "contact-item");
+    phoneItem.innerHTML = `
+      <div class="contact-icon">📞</div>
+      <div class="contact-details">
+        <div class="contact-label">Phone</div>
+        <a href="tel:${resume.phone}" class="contact-value">${resume.phone}</a>
+        <div class="contact-actions">
+          <a href="tel:${resume.phone}" class="contact-action-btn primary">📞 Call Now</a>
+          <button class="contact-action-btn" onclick="navigator.clipboard.writeText('${resume.phone}')">📋 Copy</button>
+        </div>
+      </div>
+    `;
+    contact.appendChild(phoneItem);
+  }
+  
+  // Website contact item
+  if (resume.website) {
+    const websiteItem = createEl("div", "contact-item");
+    websiteItem.innerHTML = `
+      <div class="contact-icon">🌐</div>
+      <div class="contact-details">
+        <div class="contact-label">LinkedIn</div>
+        <a href="${resume.website}" target="_blank" rel="noopener" class="contact-value">${resume.website.replace(/^https?:\/\//, '')}</a>
+        <div class="contact-actions">
+          <a href="${resume.website}" target="_blank" rel="noopener" class="contact-action-btn primary">🔗 Visit Profile</a>
+          <button class="contact-action-btn" onclick="navigator.clipboard.writeText('${resume.website}')">📋 Copy</button>
+        </div>
+      </div>
+    `;
+    contact.appendChild(websiteItem);
+  }
+  
+  // Social media contact items
+  (resume.socials || []).forEach(s => {
+    const socialItem = createEl("div", "contact-item");
+    const icon = s.icon || "🔗";
+    socialItem.innerHTML = `
+      <div class="contact-icon">${icon}</div>
+      <div class="contact-details">
+        <div class="contact-label">${s.label}</div>
+        <a href="${s.url}" target="_blank" rel="noopener" class="contact-value">${s.url.replace(/^https?:\/\//, '')}</a>
+        <div class="contact-actions">
+          <a href="${s.url}" target="_blank" rel="noopener" class="contact-action-btn primary">🔗 Visit ${s.label}</a>
+          <button class="contact-action-btn" onclick="navigator.clipboard.writeText('${s.url}')">📋 Copy</button>
+        </div>
+      </div>
+    `;
+    contact.appendChild(socialItem);
+  });
 }
 
 function renderClients(clients) {
