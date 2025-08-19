@@ -414,6 +414,31 @@ function renderResume(resume) {
 }
 
 function renderClients(clients) {
+  // Render the continuous scrolling showcase
+  const track = document.getElementById("clients-track");
+  track.innerHTML = "";
+  
+  // Create two sets of clients for seamless infinite scrolling
+  const clientsForScroll = [...clients, ...clients];
+  
+  clientsForScroll.forEach((client, index) => {
+    const item = createEl("div", "client-logo-item");
+    item.setAttribute("aria-label", `Open ${client.name} details`);
+    
+    const img = createEl("img");
+    img.src = logoUrlForClient(client);
+    img.alt = `${client.name} logo`;
+    
+    const label = createEl("div", "name", client.name);
+    
+    item.appendChild(img);
+    item.appendChild(label);
+    item.addEventListener("click", () => openClientModal(client));
+    
+    track.appendChild(item);
+  });
+  
+  // Also render the original grid for search functionality (hidden)
   const grid = document.getElementById("clients-grid");
   grid.innerHTML = "";
   clients.forEach((client, index) => {
@@ -519,10 +544,46 @@ function closeClientModal() {
 
 function setupClientSearch(clients) {
   const input = document.getElementById("client-search");
+  const showcase = document.querySelector(".clients-showcase");
+  const grid = document.getElementById("clients-grid");
+  
   input.addEventListener("input", () => {
     const q = input.value.toLowerCase().trim();
-    const filtered = clients.filter(c => c.name.toLowerCase().includes(q));
-    renderClients(filtered);
+    
+    if (q.length > 0) {
+      // Show search results in grid format
+      showcase.style.display = "none";
+      grid.style.display = "grid";
+      
+      const filtered = clients.filter(c => c.name.toLowerCase().includes(q));
+      renderClients(filtered);
+    } else {
+      // Show continuous scrolling showcase
+      showcase.style.display = "block";
+      grid.style.display = "none";
+      
+      // Re-render showcase with all clients
+      const track = document.getElementById("clients-track");
+      track.innerHTML = "";
+      
+      const clientsForScroll = [...clients, ...clients];
+      clientsForScroll.forEach((client, index) => {
+        const item = createEl("div", "client-logo-item");
+        item.setAttribute("aria-label", `Open ${client.name} details`);
+        
+        const img = createEl("img");
+        img.src = logoUrlForClient(client);
+        img.alt = `${client.name} logo`;
+        
+        const label = createEl("div", "name", client.name);
+        
+        item.appendChild(img);
+        item.appendChild(label);
+        item.addEventListener("click", () => openClientModal(client));
+        
+        track.appendChild(item);
+      });
+    }
   });
 }
 
