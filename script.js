@@ -146,7 +146,13 @@ function setText(id, text) {
 
 function setImage(id, url) {
   const img = document.getElementById(id);
-  if (img && url) img.src = url;
+  console.log(`Setting image for ${id}:`, url);
+  if (img && url) {
+    img.src = url;
+    console.log(`Image src set for ${id}:`, img.src);
+  } else {
+    console.log(`Failed to set image for ${id}:`, { img: !!img, url });
+  }
 }
 
 function createEl(tag, className, content) {
