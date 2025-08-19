@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <rect x="8" y="8" width="240" height="240" rx="24" ry="24" fill="#f7df1e"/>
+  <g fill="#1a1a1a" font-family="Arial, Helvetica, sans-serif" font-weight="700">
+    <text x="88" y="168" font-size="128">J</text>
+    <text x="148" y="168" font-size="128">S</text>
+  </g>
+</svg>
+
+
