@@ -503,6 +503,14 @@ function openClientModal(client) {
 function closeClientModal() {
   const modal = document.getElementById("client-modal");
   modal.setAttribute("aria-hidden", "true");
+  
+  // Clear all modal sections
+  const description = document.getElementById("modal-description");
+  if (description) description.innerHTML = "";
+  
+  const businesses = document.getElementById("modal-businesses");
+  if (businesses) businesses.innerHTML = "";
+  
   document.getElementById("modal-documents").innerHTML = "";
   document.getElementById("modal-repos").innerHTML = "";
   document.getElementById("modal-videos").innerHTML = "";

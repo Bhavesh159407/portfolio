@@ -212,8 +212,7 @@ function renderResume(resume) {
   setText("hero-name", resume.name);
   setText("hero-title", resume.title);
   setText("hero-summary", resume.summary);
-  setImage("profile-photo", resume.profilePhoto);
-  setImage("brand-avatar", resume.profilePhoto);
+
   const year = new Date().getFullYear();
   document.getElementById("footer-year").textContent = String(year);
   const footer = document.getElementById("footer-text");
@@ -347,9 +346,71 @@ function renderResume(resume) {
 
   const contact = document.getElementById("contact-items");
   contact.innerHTML = "";
-  if (resume.email) contact.appendChild(safeLink(`mailto:${resume.email}`, resume.email));
-  if (resume.website) contact.appendChild(safeLink(resume.website, resume.website));
-  (resume.socials || []).forEach(s => contact.appendChild(safeLink(s.url, s.label)));
+  
+  // Email contact item
+  if (resume.email) {
+    const emailItem = createEl("div", "contact-item");
+    emailItem.innerHTML = `
+      <div class="contact-icon">✉️</div>
+      <div class="contact-details">
+        <div class="contact-label">Email</div>
+        <a href="mailto:${resume.email}" class="contact-value">${resume.email}</a>
+        <div class="contact-actions">
+          <a href="mailto:${resume.email}" class="contact-action-btn primary">Send Email</a>
+        </div>
+      </div>
+    `;
+    contact.appendChild(emailItem);
+  }
+  
+  // Phone contact item
+  if (resume.phone) {
+    const phoneItem = createEl("div", "contact-item");
+    phoneItem.innerHTML = `
+      <div class="contact-icon">📞</div>
+      <div class="contact-details">
+        <div class="contact-label">Phone</div>
+        <a href="tel:${resume.phone}" class="contact-value">${resume.phone}</a>
+        <div class="contact-actions">
+          <a href="tel:${resume.phone}" class="contact-action-btn primary">Call Now</a>
+        </div>
+      </div>
+    `;
+    contact.appendChild(phoneItem);
+  }
+  
+  // LinkedIn contact item (only if not already in socials)
+  if (resume.website && !resume.socials?.some(s => s.url === resume.website)) {
+    const websiteItem = createEl("div", "contact-item");
+    websiteItem.innerHTML = `
+      <div class="contact-icon">🔗</div>
+      <div class="contact-details">
+        <div class="contact-label">LinkedIn</div>
+        <a href="${resume.website}" target="_blank" rel="noopener" class="contact-value">${resume.website.replace(/^https?:\/\//, '')}</a>
+        <div class="contact-actions">
+          <a href="${resume.website}" target="_blank" rel="noopener" class="contact-action-btn primary">Visit Profile</a>
+        </div>
+      </div>
+    `;
+    contact.appendChild(websiteItem);
+  }
+  
+  // Social media contact items (simplified)
+  (resume.socials || []).forEach(s => {
+    const socialItem = createEl("div", "contact-item");
+    const icon = s.icon || "🔗";
+    socialItem.innerHTML = `
+      <div class="contact-icon">${icon}</div>
+      <div class="contact-details">
+        <div class="contact-label">${s.label}</div>
+        <a href="${s.url}" target="_blank" rel="noopener" class="contact-value">${s.url.replace(/^https?:\/\//, '')}</a>
+        <div class="contact-actions">
+          <a href="${s.url}" target="_blank" rel="noopener" class="contact-action-btn primary">Visit ${s.label}</a>
+        </div>
+      </div>
+    `;
+    contact.appendChild(socialItem);
+  });
 }
 
 function renderClients(clients) {
@@ -375,6 +436,16 @@ function openClientModal(client) {
   modal.setAttribute("aria-hidden", "false");
   document.getElementById("modal-title").textContent = client.name || "Client";
   document.getElementById("modal-logo").src = logoUrlForClient(client);
+  
+  // Add company description if available
+  const description = document.getElementById("modal-description");
+  if (description && client.description) {
+    description.textContent = client.description;
+    description.style.display = "block";
+  } else if (description) {
+    description.style.display = "none";
+  }
+  
   const website = document.getElementById("modal-website");
   if (client.website) {
     website.href = client.website;
@@ -383,6 +454,16 @@ function openClientModal(client) {
   } else {
     website.removeAttribute("href");
     website.style.display = "none";
+  }
+
+  // Add business divisions if available
+  const businesses = document.getElementById("modal-businesses");
+  if (businesses && client.businesses && client.businesses.length > 0) {
+    const businessItems = client.businesses.map(b => `<li>${b}</li>`).join("");
+    businesses.innerHTML = `<h4>Business Divisions</h4><ul>${businessItems}</ul>`;
+    businesses.style.display = "block";
+  } else if (businesses) {
+    businesses.style.display = "none";
   }
 
   const docs = document.getElementById("modal-documents");
@@ -422,6 +503,14 @@ function openClientModal(client) {
 function closeClientModal() {
   const modal = document.getElementById("client-modal");
   modal.setAttribute("aria-hidden", "true");
+  
+  // Clear all modal sections
+  const description = document.getElementById("modal-description");
+  if (description) description.innerHTML = "";
+  
+  const businesses = document.getElementById("modal-businesses");
+  if (businesses) businesses.innerHTML = "";
+  
   document.getElementById("modal-documents").innerHTML = "";
   document.getElementById("modal-repos").innerHTML = "";
   document.getElementById("modal-videos").innerHTML = "";
