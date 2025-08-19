@@ -432,6 +432,7 @@ function renderClients(clients) {
 }
 
 function openClientModal(client) {
+  console.log("Opening modal for client:", client); // Debug log
   const modal = document.getElementById("client-modal");
   modal.setAttribute("aria-hidden", "false");
   document.getElementById("modal-title").textContent = client.name || "Client";

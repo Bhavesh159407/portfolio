@@ -7,7 +7,7 @@
   { 
     "name": "AGI Greenpac Limited", 
     "domain": "agigreenpac.com", 
-    "website": "https://agigreenpac.com", 
+    "website": "https://www.agigreenpac.com", 
     "logoUrl": "https://media.licdn.com/dms/image/v2/C560BAQFIfu3HMkdo4A/company-logo_200_200/company-logo_200_200/0/1652070997159/hsil_ltd_logo?e=2147483647&v=beta&t=SQ5oLLJj4RDCAtYssQBsRwkzRNGIkEqpuC6RZH08hmU", 
     "description": "India's leading Packaging Products Company specializing in glass containers, PET bottles, and security caps & closures",
     "businesses": [
@@ -16,8 +16,8 @@
       "AGI Clozures - Counterfeit-resistant security caps & closures"
     ],
     "documents": [
-      { "title": "Company Overview", "url": "https://agigreenpac.com/about-us/overview" },
-      { "title": "Sustainability Report", "url": "https://agigreenpac.com/sustainability/sustainability-report" }
+      { "title": "Company Overview", "url": "https://www.agigreenpac.com/about-us/overview" },
+      { "title": "Sustainability Report", "url": "https://www.agigreenpac.com/sustainability/sustainability-report" }
     ], 
     "repos": [], 
     "videos": [] 
