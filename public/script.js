@@ -588,11 +588,34 @@ document.addEventListener("keydown", (e) => {
 document.addEventListener("DOMContentLoaded", init);
 // Ensure initialization after Angular renders as well
 window.addEventListener("load", () => {
-  // If main sections are missing (Angular render may be async), retry once
-  if (!document.getElementById("about") || !document.getElementById("clients")) {
-    setTimeout(init, 0);
+  // Wait for Angular to render, then initialize
+  const maxRetries = 10;
+  let retryCount = 0;
+  
+  function tryInit() {
+    console.log(`Attempt ${retryCount + 1} to initialize...`);
+    
+    // Check if key elements exist
+    const about = document.getElementById("about");
+    const clients = document.getElementById("clients");
+    const logoTrack = document.getElementById("logo-track");
+    
+    console.log("Elements found:", { about: !!about, clients: !!clients, logoTrack: !!logoTrack });
+    
+    if (about && clients && logoTrack) {
+      console.log("All elements found, initializing...");
+      init();
+      initStarfield();
+    } else if (retryCount < maxRetries) {
+      retryCount++;
+      console.log(`Retrying in 500ms... (${retryCount}/${maxRetries})`);
+      setTimeout(tryInit, 500);
+    } else {
+      console.error("Failed to initialize after maximum retries");
+    }
   }
-  initStarfield();
+  
+  tryInit();
 });
 
 // ---------- Interactive Starfield ----------
