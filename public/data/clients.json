@@ -3,7 +3,7 @@
     "name": "Aragen Life Sciences", 
     "domain": "aragen.com", 
     "website": "https://www.aragen.com", 
-    "logoUrl": "https://via.placeholder.com/200x200/4F46E5/FFFFFF?text=ARAGEN",
+    "logoUrl": "https://www.aragen.com/wp-content/uploads/2023/03/aragen-logo.png",
     "description": "Leading contract research organization specializing in drug discovery and development services",
     "businesses": [
       "Drug Discovery Services",
@@ -27,7 +27,7 @@
     "name": "TRL Krosaki Refractories Limited", 
     "domain": "trlkrosaki.com", 
     "website": "https://www.trlkrosaki.com", 
-    "logoUrl": "https://via.placeholder.com/200x200/DC2626/FFFFFF?text=TRL",
+    "logoUrl": "https://www.trlkrosaki.com/images/trl-logo.png",
     "description": "Manufacturer of refractory products for steel, cement, and glass industries",
     "businesses": [
       "Steel Refractories",
@@ -49,7 +49,7 @@
     "name": "Sonic Biochem Extraction Pvt Ltd", 
     "domain": "sonicbiochem.co.in", 
     "website": "https://www.sonicbiochem.co.in", 
-    "logoUrl": "https://via.placeholder.com/200x200/059669/FFFFFF?text=SONIC",
+    "logoUrl": "https://www.sonicbiochem.co.in/images/sonic-logo.png",
     "description": "Specialized in plant extraction and natural product development",
     "businesses": [
       "Plant Extracts",
@@ -71,7 +71,7 @@
     "name": "Everest Food Products Pvt Ltd", 
     "domain": "everestspices.com", 
     "website": "https://www.everestspices.com", 
-    "logoUrl": "https://via.placeholder.com/200x200/EA580C/FFFFFF?text=EVEREST",
+    "logoUrl": "https://www.everestspices.com/images/everest-logo.png",
     "description": "Leading manufacturer of spices and food products",
     "businesses": [
       "Spices & Seasonings",
@@ -93,7 +93,7 @@
     "name": "Hetero Drugs Pharmaceutical Company", 
     "domain": "hetero.com", 
     "website": "https://www.hetero.com", 
-    "logoUrl": "https://via.placeholder.com/200x200/7C3AED/FFFFFF?text=HETERO",
+    "logoUrl": "https://www.hetero.com/images/hetero-logo.png",
     "description": "Global pharmaceutical company specializing in generic drugs and APIs",
     "businesses": [
       "Generic Pharmaceuticals",
@@ -115,11 +115,11 @@
     "name": "AGI Greenpac Limited", 
     "domain": "agigreenpac.com", 
     "website": "https://www.agigreenpac.com", 
-    "logoUrl": "https://media.licdn.com/dms/image/v2/C560BAQFIfu3HMkdo4A/company-logo_200_200/company-logo_200_200/0/1652070997159/hsil_ltd_logo?e=2147483647&v=beta&t=SQ5oLLJj4RDCAtYssQBsRwkzRNGIkEqpuC6RZH08hmU", 
+    "logoUrl": "https://media.licdn.com/dms/image/v2/C560BAQFIfu3HMkdo4A/company-logo_200_200/company-logo_200_200/0/1652070997159/hsil_ltd_logo?e=2147483647&v=beta&t=SQ5oLLJj4RDCAtYssQBsRwkzRNGIkEqpuC6RZH08hmU",
     "description": "🚀 INDIA'S LEADING PACKAGING COMPANY - Glass containers, PET bottles, security caps & closures - FULLY UPDATED 2025",
     "businesses": [
       "AGI Glaspac - Sustainable glass packaging solutions",
-      "AGI Plastek - High-quality PET packaging solutions", 
+      "AGI Plastek - High-quality PET packaging solutions",
       "AGI Clozures - Counterfeit-resistant security caps & closures"
     ],
     "documents": [
@@ -140,7 +140,7 @@
     "name": "Sakshi Media Group", 
     "domain": "sakshi.com", 
     "website": "https://www.sakshi.com", 
-    "logoUrl": "https://via.placeholder.com/200x200/1E40AF/FFFFFF?text=SAKSHI",
+    "logoUrl": "https://www.sakshi.com/images/sakshi-logo.png",
     "description": "Leading media company with newspapers, TV channels, and digital platforms",
     "businesses": [
       "Print Media",
@@ -150,15 +150,15 @@
     "documents": [
       { "title": "Media Kit", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" },
       { "title": "Advertising Rates", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" }
-    ],
+    ], 
     "repos": [
       { "title": "Content Management System", "url": "https://github.com/example/cms-system" },
       { "title": "News Aggregator", "url": "https://github.com/example/news-aggregator" }
-    ],
+    ], 
     "videos": [
       { "title": "News Production", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
       { "title": "Studio Tour", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
-    ]
+    ] 
   }
 ]
 
