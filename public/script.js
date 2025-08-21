@@ -134,9 +134,20 @@ async function loadJson(path, fallback) {
 }
 
 function logoUrlForClient(client) {
-  if (client.logoUrl) return client.logoUrl;
-  if (client.domain) return `https://logo.clearbit.com/${client.domain}`;
-  return "https://via.placeholder.com/160x54?text=Logo";
+  console.log("logoUrlForClient called for:", client.name, "logoUrl:", client.logoUrl);
+  
+  if (client.logoUrl) {
+    console.log("Using provided logoUrl:", client.logoUrl);
+    return client.logoUrl;
+  }
+  
+  // Create a text-based logo using the company name
+  const companyName = client.name || "Company";
+  const encodedName = encodeURIComponent(companyName);
+  const fallbackUrl = `https://via.placeholder.com/200x200/3B82F6/FFFFFF?text=${encodedName}`;
+  
+  console.log("Using fallback logo URL:", fallbackUrl);
+  return fallbackUrl;
 }
 
 function setText(id, text) {
@@ -421,6 +432,19 @@ function renderClients(clients) {
     card.setAttribute("type", "button");
     card.setAttribute("aria-label", `Open ${client.name} details`);
     const img = createEl("img");
+    
+    // Set up error handling for the image
+    img.onerror = () => {
+      console.error(`Failed to load logo for ${client.name}, using fallback`);
+      const companyName = client.name || "Company";
+      const encodedName = encodeURIComponent(companyName);
+      img.src = `https://via.placeholder.com/200x200/EF4444/FFFFFF?text=${encodedName}`;
+    };
+    
+    img.onload = () => {
+      console.log(`Successfully loaded logo for ${client.name}:`, img.src);
+    };
+    
     img.src = logoUrlForClient(client);
     img.alt = `${client.name} logo`;
     const label = createEl("div", "name", client.name);
@@ -469,32 +493,63 @@ function openClientModal(client) {
 
   const docs = document.getElementById("modal-documents");
   docs.innerHTML = "";
-  const docItems = (client.documents || []).map(d => `<li><a class="link" target="_blank" rel="noopener" href="${d.url}">${d.title || d.url}</a></li>`).join("");
-  if (docItems) {
-    docs.innerHTML = `<h4>Documents</h4><ul>${docItems}</ul>`;
+  if (client.documents && client.documents.length > 0) {
+    docs.innerHTML = `<h4>📄 Project Documents & PDFs</h4>`;
+    client.documents.forEach(d => {
+      const docItem = createEl("div", "doc-item");
+      const icon = d.type === "pdf" ? "📄" : "🌐";
+      const link = createEl("a", "link doc-link", `${icon} ${d.title}`);
+      link.href = d.url;
+      link.target = "_blank";
+      link.rel = "noopener";
+      docItem.appendChild(link);
+      docs.appendChild(docItem);
+    });
   }
 
   const repos = document.getElementById("modal-repos");
   repos.innerHTML = "";
-  const repoItems = (client.repos || []).map(r => `<li><a class="link" target="_blank" rel="noopener" href="${r.url}">${r.title || r.url}</a></li>`).join("");
-  if (repoItems) {
-    repos.innerHTML = `<h4>Repositories</h4><ul>${repoItems}</ul>`;
+  if (client.repos && client.repos.length > 0) {
+    repos.innerHTML = `<h4>💻 Git Repositories & Code</h4>`;
+    client.repos.forEach(r => {
+      const repoItem = createEl("div", "repo-item");
+      const link = createEl("a", "link repo-link", `🔗 ${r.title}`);
+      link.href = r.url;
+      link.target = "_blank";
+      link.rel = "noopener";
+      repoItem.appendChild(link);
+      repos.appendChild(repoItem);
+    });
   }
 
   const videos = document.getElementById("modal-videos");
   videos.innerHTML = "";
-  (client.videos || []).forEach(v => {
-    const embed = youtubeToEmbed(v.url);
-    if (embed) {
-      const title = v.title ? `<div class="muted" style="margin: 6px 0 6px;">${v.title}</div>` : "";
-      videos.insertAdjacentHTML("beforeend", `${title}<iframe class="embed" src="${embed}" title="${v.title || client.name}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`);
-    } else {
-      const item = createEl("div");
-      const a = safeLink(v.url, v.title || v.url);
-      item.appendChild(a);
-      videos.appendChild(item);
-    }
-  });
+  if (client.videos && client.videos.length > 0) {
+    videos.innerHTML = `<h4>🎥 App Demos & Videos</h4>`;
+    client.videos.forEach(v => {
+      const videoItem = createEl("div", "video-item");
+      const title = createEl("div", "video-title", v.title);
+      videoItem.appendChild(title);
+
+      const embed = youtubeToEmbed(v.url);
+      if (embed) {
+        const iframe = createEl("iframe", "embed");
+        iframe.src = embed;
+        iframe.title = v.title || client.name;
+        iframe.setAttribute("frameborder", "0");
+        iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
+        iframe.setAttribute("allowfullscreen", "");
+        videoItem.appendChild(iframe);
+      } else {
+        const link = createEl("a", "link video-link", `▶️ Watch Video`);
+        link.href = v.url;
+        link.target = "_blank";
+        link.rel = "noopener";
+        videoItem.appendChild(link);
+      }
+      videos.appendChild(videoItem);
+    });
+  }
 
   document.querySelectorAll('[data-close-modal]').forEach(el => {
     el.onclick = () => closeClientModal();
@@ -547,6 +602,19 @@ function renderLogoShowcase(clients) {
     const item = createEl("div", "logo-item");
     
     const img = createEl("img");
+    
+    // Set up error handling for the image
+    img.onerror = () => {
+      console.error(`Failed to load logo for ${client.name} in showcase, using fallback`);
+      const companyName = client.name || "Company";
+      const encodedName = encodeURIComponent(companyName);
+      img.src = `https://via.placeholder.com/200x200/EF4444/FFFFFF?text=${encodedName}`;
+    };
+    
+    img.onload = () => {
+      console.log(`Successfully loaded logo for ${client.name} in showcase:`, img.src);
+    };
+    
     img.src = logoUrlForClient(client);
     img.alt = `${client.name} logo`;
     
