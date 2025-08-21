@@ -1,9 +1,116 @@
 [
-  { "name": "Aragen Life Sciences", "domain": "aragen.com", "website": "https://www.aragen.com", "documents": [], "repos": [], "videos": [] },
-  { "name": "TRL Krosaki Refractories Limited", "domain": "trlkrosaki.com", "website": "https://www.trlkrosaki.com", "documents": [], "repos": [], "videos": [] },
-  { "name": "Sonic Biochem Extraction Pvt Ltd", "domain": "sonicbiochem.co.in", "website": "https://www.sonicbiochem.co.in", "documents": [], "repos": [], "videos": [] },
-  { "name": "Everest Food Products Pvt Ltd", "domain": "everestspices.com", "website": "https://www.everestspices.com", "documents": [], "repos": [], "videos": [] },
-  { "name": "Hetero Drugs Pharmaceutical Company", "domain": "hetero.com", "website": "https://www.hetero.com", "documents": [], "repos": [], "videos": [] },
+  { 
+    "name": "Aragen Life Sciences", 
+    "domain": "aragen.com", 
+    "website": "https://www.aragen.com", 
+    "logoUrl": "https://via.placeholder.com/200x200/4F46E5/FFFFFF?text=ARAGEN",
+    "description": "Leading contract research organization specializing in drug discovery and development services",
+    "businesses": [
+      "Drug Discovery Services",
+      "Medicinal Chemistry",
+      "Biology Services"
+    ],
+    "documents": [
+      { "title": "Project Overview - Drug Discovery Platform", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" },
+      { "title": "Technical Specifications", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" }
+    ], 
+    "repos": [
+      { "title": "Drug Discovery API", "url": "https://github.com/example/drug-discovery-api" },
+      { "title": "Chemistry Database", "url": "https://github.com/example/chemistry-db" }
+    ], 
+    "videos": [
+      { "title": "Platform Demo", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
+      { "title": "User Training", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
+    ] 
+  },
+  { 
+    "name": "TRL Krosaki Refractories Limited", 
+    "domain": "trlkrosaki.com", 
+    "website": "https://www.trlkrosaki.com", 
+    "logoUrl": "https://via.placeholder.com/200x200/DC2626/FFFFFF?text=TRL",
+    "description": "Manufacturer of refractory products for steel, cement, and glass industries",
+    "businesses": [
+      "Steel Refractories",
+      "Cement Refractories",
+      "Glass Refractories"
+    ],
+    "documents": [
+      { "title": "Product Catalog", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" },
+      { "title": "Quality Certificates", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" }
+    ], 
+    "repos": [
+      { "title": "Inventory Management System", "url": "https://github.com/example/inventory-system" }
+    ], 
+    "videos": [
+      { "title": "Manufacturing Process", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
+    ] 
+  },
+  { 
+    "name": "Sonic Biochem Extraction Pvt Ltd", 
+    "domain": "sonicbiochem.co.in", 
+    "website": "https://www.sonicbiochem.co.in", 
+    "logoUrl": "https://via.placeholder.com/200x200/059669/FFFFFF?text=SONIC",
+    "description": "Specialized in plant extraction and natural product development",
+    "businesses": [
+      "Plant Extracts",
+      "Natural Products",
+      "Research Services"
+    ],
+    "documents": [
+      { "title": "Research Paper - Extraction Methods", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" },
+      { "title": "Product Specifications", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" }
+    ], 
+    "repos": [
+      { "title": "Extraction Database", "url": "https://github.com/example/extraction-db" }
+    ], 
+    "videos": [
+      { "title": "Extraction Process", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
+    ] 
+  },
+  { 
+    "name": "Everest Food Products Pvt Ltd", 
+    "domain": "everestspices.com", 
+    "website": "https://www.everestspices.com", 
+    "logoUrl": "https://via.placeholder.com/200x200/EA580C/FFFFFF?text=EVEREST",
+    "description": "Leading manufacturer of spices and food products",
+    "businesses": [
+      "Spices & Seasonings",
+      "Ready-to-Cook Products",
+      "Food Ingredients"
+    ],
+    "documents": [
+      { "title": "Product Brochure", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" },
+      { "title": "Quality Standards", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" }
+    ], 
+    "repos": [
+      { "title": "Recipe Management System", "url": "https://github.com/example/recipe-system" }
+    ], 
+    "videos": [
+      { "title": "Product Showcase", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
+    ] 
+  },
+  { 
+    "name": "Hetero Drugs Pharmaceutical Company", 
+    "domain": "hetero.com", 
+    "website": "https://www.hetero.com", 
+    "logoUrl": "https://via.placeholder.com/200x200/7C3AED/FFFFFF?text=HETERO",
+    "description": "Global pharmaceutical company specializing in generic drugs and APIs",
+    "businesses": [
+      "Generic Pharmaceuticals",
+      "Active Pharmaceutical Ingredients",
+      "Contract Manufacturing"
+    ],
+    "documents": [
+      { "title": "Drug Information", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" },
+      { "title": "Clinical Studies", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" }
+    ], 
+    "repos": [
+      { "title": "Pharma Management System", "url": "https://github.com/example/pharma-system" }
+    ], 
+    "videos": [
+      { "title": "Manufacturing Facility Tour", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
+    ] 
+  },
   { 
     "name": "AGI Greenpac Limited", 
     "domain": "agigreenpac.com", 
@@ -16,13 +123,43 @@
       "AGI Clozures - Counterfeit-resistant security caps & closures"
     ],
     "documents": [
-      { "title": "Company Overview", "url": "https://www.agigreenpac.com/about-us/overview" },
-      { "title": "Sustainability Report", "url": "https://www.agigreenpac.com/sustainability/sustainability-report" }
-    ], 
-    "repos": [], 
-    "videos": [] 
+      { "title": "Company Overview", "url": "https://www.agigreenpac.com/about-us/overview", "type": "web" },
+      { "title": "Sustainability Report", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" },
+      { "title": "Technical Specifications", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" }
+    ],
+    "repos": [
+      { "title": "Packaging Design System", "url": "https://github.com/example/packaging-system" },
+      { "title": "Quality Control Dashboard", "url": "https://github.com/example/quality-dashboard" }
+    ],
+    "videos": [
+      { "title": "Manufacturing Process", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
+      { "title": "Product Showcase", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
+    ]
   },
-  { "name": "Sakshi Media Group", "domain": "sakshi.com", "website": "https://www.sakshi.com", "documents": [], "repos": [], "videos": [] }
+  { 
+    "name": "Sakshi Media Group", 
+    "domain": "sakshi.com", 
+    "website": "https://www.sakshi.com", 
+    "logoUrl": "https://via.placeholder.com/200x200/1E40AF/FFFFFF?text=SAKSHI",
+    "description": "Leading media company with newspapers, TV channels, and digital platforms",
+    "businesses": [
+      "Print Media",
+      "Broadcasting",
+      "Digital Media"
+    ],
+    "documents": [
+      { "title": "Media Kit", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" },
+      { "title": "Advertising Rates", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" }
+    ],
+    "repos": [
+      { "title": "Content Management System", "url": "https://github.com/example/cms-system" },
+      { "title": "News Aggregator", "url": "https://github.com/example/news-aggregator" }
+    ],
+    "videos": [
+      { "title": "News Production", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
+      { "title": "Studio Tour", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
+    ]
+  }
 ]
 
 

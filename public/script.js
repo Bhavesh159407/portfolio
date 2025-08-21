@@ -469,32 +469,63 @@ function openClientModal(client) {
 
   const docs = document.getElementById("modal-documents");
   docs.innerHTML = "";
-  const docItems = (client.documents || []).map(d => `<li><a class="link" target="_blank" rel="noopener" href="${d.url}">${d.title || d.url}</a></li>`).join("");
-  if (docItems) {
-    docs.innerHTML = `<h4>Documents</h4><ul>${docItems}</ul>`;
+  if (client.documents && client.documents.length > 0) {
+    docs.innerHTML = `<h4>📄 Project Documents & PDFs</h4>`;
+    client.documents.forEach(d => {
+      const docItem = createEl("div", "doc-item");
+      const icon = d.type === "pdf" ? "📄" : "🌐";
+      const link = createEl("a", "link doc-link", `${icon} ${d.title}`);
+      link.href = d.url;
+      link.target = "_blank";
+      link.rel = "noopener";
+      docItem.appendChild(link);
+      docs.appendChild(docItem);
+    });
   }
 
   const repos = document.getElementById("modal-repos");
   repos.innerHTML = "";
-  const repoItems = (client.repos || []).map(r => `<li><a class="link" target="_blank" rel="noopener" href="${r.url}">${r.title || r.url}</a></li>`).join("");
-  if (repoItems) {
-    repos.innerHTML = `<h4>Repositories</h4><ul>${repoItems}</ul>`;
+  if (client.repos && client.repos.length > 0) {
+    repos.innerHTML = `<h4>💻 Git Repositories & Code</h4>`;
+    client.repos.forEach(r => {
+      const repoItem = createEl("div", "repo-item");
+      const link = createEl("a", "link repo-link", `🔗 ${r.title}`);
+      link.href = r.url;
+      link.target = "_blank";
+      link.rel = "noopener";
+      repoItem.appendChild(link);
+      repos.appendChild(repoItem);
+    });
   }
 
   const videos = document.getElementById("modal-videos");
   videos.innerHTML = "";
-  (client.videos || []).forEach(v => {
-    const embed = youtubeToEmbed(v.url);
-    if (embed) {
-      const title = v.title ? `<div class="muted" style="margin: 6px 0 6px;">${v.title}</div>` : "";
-      videos.insertAdjacentHTML("beforeend", `${title}<iframe class="embed" src="${embed}" title="${v.title || client.name}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`);
-    } else {
-      const item = createEl("div");
-      const a = safeLink(v.url, v.title || v.url);
-      item.appendChild(a);
-      videos.appendChild(item);
-    }
-  });
+  if (client.videos && client.videos.length > 0) {
+    videos.innerHTML = `<h4>🎥 App Demos & Videos</h4>`;
+    client.videos.forEach(v => {
+      const videoItem = createEl("div", "video-item");
+      const title = createEl("div", "video-title", v.title);
+      videoItem.appendChild(title);
+      
+      const embed = youtubeToEmbed(v.url);
+      if (embed) {
+        const iframe = createEl("iframe", "embed");
+        iframe.src = embed;
+        iframe.title = v.title || client.name;
+        iframe.setAttribute("frameborder", "0");
+        iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
+        iframe.setAttribute("allowfullscreen", "");
+        videoItem.appendChild(iframe);
+      } else {
+        const link = createEl("a", "link video-link", `▶️ Watch Video`);
+        link.href = v.url;
+        link.target = "_blank";
+        link.rel = "noopener";
+        videoItem.appendChild(link);
+      }
+      videos.appendChild(videoItem);
+    });
+  }
 
   document.querySelectorAll('[data-close-modal]').forEach(el => {
     el.onclick = () => closeClientModal();
