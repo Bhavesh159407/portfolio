@@ -584,26 +584,25 @@ function setupClientSearch(clients) {
 function renderLogoShowcase(clients) {
   console.log("renderLogoShowcase called with clients:", clients);
   
-  const track = document.getElementById("logo-track");
-  console.log("Found logo-track element:", track);
+  const showcaseGrid = document.getElementById("clients-showcase-grid");
+  console.log("Found clients-showcase-grid element:", showcaseGrid);
   
-  if (!track) {
-    console.error("logo-track element not found!");
+  if (!showcaseGrid) {
+    console.error("clients-showcase-grid element not found!");
     return;
   }
   
-  track.innerHTML = "";
+  showcaseGrid.innerHTML = "";
   
-  // Create two sets of clients for seamless infinite scrolling
-  const clientsForShowcase = [...clients, ...clients];
-  console.log("Clients for showcase:", clientsForShowcase);
-  
-  clientsForShowcase.forEach((client, index) => {
-    const item = createEl("div", "logo-item");
+  // Use the EXACT same rendering logic as renderClients
+  clients.forEach((client, index) => {
+    const card = createEl("button", "logo-card");
+    card.setAttribute("type", "button");
+    card.setAttribute("aria-label", `Open ${client.name} details`);
     
     const img = createEl("img");
     
-    // Set up error handling for the image
+    // Set up error handling for the image - EXACT same as renderClients
     img.onerror = () => {
       console.error(`Failed to load logo for ${client.name} in showcase, using fallback`);
       const companyName = client.name || "Company";
@@ -618,19 +617,19 @@ function renderLogoShowcase(clients) {
     img.src = logoUrlForClient(client);
     img.alt = `${client.name} logo`;
     
-    const name = createEl("div", "company-name", client.name);
+    const label = createEl("div", "name", client.name);
     
-    item.appendChild(img);
-    item.appendChild(name);
+    card.appendChild(img);
+    card.appendChild(label);
     
-    // Add click event to open modal
-    item.addEventListener("click", () => openClientModal(client));
+    // Add click event to open modal - EXACT same as renderClients
+    card.addEventListener("click", () => openClientModal(client));
     
-    track.appendChild(item);
-    console.log(`Added logo item for ${client.name}`);
+    showcaseGrid.appendChild(card);
+    console.log(`Added showcase logo card for ${client.name}`);
   });
   
-  console.log("Final track children count:", track.children.length);
+  console.log("Final showcase grid children count:", showcaseGrid.children.length);
 }
 
 async function init() {
@@ -666,11 +665,11 @@ window.addEventListener("load", () => {
     // Check if key elements exist
     const about = document.getElementById("about");
     const clients = document.getElementById("clients");
-    const logoTrack = document.getElementById("logo-track");
+    const showcaseGrid = document.getElementById("clients-showcase-grid");
     
-    console.log("Elements found:", { about: !!about, clients: !!clients, logoTrack: !!logoTrack });
+    console.log("Elements found:", { about: !!about, clients: !!clients, showcaseGrid: !!showcaseGrid });
     
-    if (about && clients && logoTrack) {
+    if (about && clients && showcaseGrid) {
       console.log("All elements found, initializing...");
       init();
       initStarfield();
