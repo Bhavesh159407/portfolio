@@ -594,15 +594,16 @@ function renderLogoShowcase(clients) {
   
   showcaseGrid.innerHTML = "";
   
-  // Use the EXACT same rendering logic as renderClients
-  clients.forEach((client, index) => {
-    const card = createEl("button", "logo-card");
-    card.setAttribute("type", "button");
-    card.setAttribute("aria-label", `Open ${client.name} details`);
+  // Create two sets of clients for seamless infinite scrolling
+  const clientsForShowcase = [...clients, ...clients];
+  console.log("Clients for showcase:", clientsForShowcase);
+  
+  clientsForShowcase.forEach((client, index) => {
+    const item = createEl("div", "logo-item");
     
     const img = createEl("img");
     
-    // Set up error handling for the image - EXACT same as renderClients
+    // Set up error handling for the image
     img.onerror = () => {
       console.error(`Failed to load logo for ${client.name} in showcase, using fallback`);
       const companyName = client.name || "Company";
@@ -617,16 +618,16 @@ function renderLogoShowcase(clients) {
     img.src = logoUrlForClient(client);
     img.alt = `${client.name} logo`;
     
-    const label = createEl("div", "name", client.name);
+    const name = createEl("div", "company-name", client.name);
     
-    card.appendChild(img);
-    card.appendChild(label);
+    item.appendChild(img);
+    item.appendChild(name);
     
-    // Add click event to open modal - EXACT same as renderClients
-    card.addEventListener("click", () => openClientModal(client));
+    // Add click event to open modal
+    item.addEventListener("click", () => openClientModal(client));
     
-    showcaseGrid.appendChild(card);
-    console.log(`Added showcase logo card for ${client.name}`);
+    showcaseGrid.appendChild(item);
+    console.log(`Added logo item for ${client.name}`);
   });
   
   console.log("Final showcase grid children count:", showcaseGrid.children.length);
