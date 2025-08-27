@@ -227,6 +227,7 @@ function renderResume(resume) {
   // Set profile photo if available
   if (resume.profilePhoto) {
     setImage("profile-photo", resume.profilePhoto);
+    setImage("brand-avatar", resume.profilePhoto);
   }
 
   const year = new Date().getFullYear();
