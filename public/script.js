@@ -223,6 +223,11 @@ function renderResume(resume) {
   setText("hero-name", resume.name);
   setText("hero-title", resume.title);
   setText("hero-summary", resume.summary);
+  
+  // Set profile photo if available
+  if (resume.profilePhoto) {
+    setImage("profile-photo", resume.profilePhoto);
+  }
 
   const year = new Date().getFullYear();
   document.getElementById("footer-year").textContent = String(year);
