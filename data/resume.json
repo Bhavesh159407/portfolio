@@ -22,6 +22,13 @@
     ],
     "languages": ["English", "Telugu", "Hindi", "Kannada"]
   },
+  "education": [
+    {
+      "school": "Samskruti College of Engineering and Technology",
+      "degree": "B.Tech, Electronics and Communications Engineering",
+      "period": "Aug 2022"
+    }
+  ],
   "experience": [
     {
       "role": "SAP UI5 & Fiori Consultant",
@@ -82,13 +89,7 @@
       "repo": ""
     }
   ],
-  "education": [
-    {
-      "school": "Samskruti College of Engineering and Technology",
-      "degree": "B.Tech, Electronics and Communications Engineering",
-      "period": "Aug 2022"
-    }
-  ],
+
   "certifications": [
     {
       "title": "HackerRank JavaScript (Basic)",
