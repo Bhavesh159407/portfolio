@@ -159,6 +159,54 @@
       { "title": "News Production", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
       { "title": "Studio Tour", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
     ] 
+  },
+  { 
+    "name": "Hindware Limited", 
+    "domain": "hindware.com", 
+    "website": "https://www.hindware.com", 
+    "logoUrl": "https://hindware.com/wp-content/themes/hindware/assets/images/Logo.svg",
+    "description": "Leading manufacturer of sanitaryware, faucets, and wellness products",
+    "businesses": [
+      "Sanitaryware",
+      "Faucets & Fittings",
+      "Wellness Products"
+    ],
+    "documents": [
+      { "title": "Product Catalog", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" },
+      { "title": "Installation Guide", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" }
+    ], 
+    "repos": [
+      { "title": "E-commerce Platform", "url": "https://github.com/example/hindware-ecommerce" },
+      { "title": "Inventory Management", "url": "https://github.com/example/hindware-inventory" }
+    ], 
+    "videos": [
+      { "title": "Product Showcase", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
+      { "title": "Installation Tutorial", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
+    ] 
+  },
+  { 
+    "name": "Laurus Labs", 
+    "domain": "lauruslabs.com", 
+    "website": "https://www.lauruslabs.com", 
+    "logoUrl": "https://www.lauruslabs.com/images/logo.svg",
+    "description": "Leading pharmaceutical company specializing in APIs, formulations, and contract research",
+    "businesses": [
+      "Active Pharmaceutical Ingredients",
+      "Formulations",
+      "Contract Research"
+    ],
+    "documents": [
+      { "title": "Company Profile", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" },
+      { "title": "Research Publications", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" }
+    ], 
+    "repos": [
+      { "title": "Pharma Analytics Platform", "url": "https://github.com/example/laurus-analytics" },
+      { "title": "Research Database", "url": "https://github.com/example/laurus-research" }
+    ], 
+    "videos": [
+      { "title": "Company Overview", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
+      { "title": "Research Facilities", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
+    ] 
   }
 ]
 

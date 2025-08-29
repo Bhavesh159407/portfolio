@@ -590,25 +590,26 @@ function setupClientSearch(clients) {
 function renderLogoShowcase(clients) {
   console.log("renderLogoShowcase called with clients:", clients);
   
-  const showcaseGrid = document.getElementById("clients-showcase-grid");
-  console.log("Found clients-showcase-grid element:", showcaseGrid);
+  const logoTrack = document.getElementById("logo-track");
+  console.log("Found logo-track element:", logoTrack);
   
-  if (!showcaseGrid) {
-    console.error("clients-showcase-grid element not found!");
+  if (!logoTrack) {
+    console.error("logo-track element not found!");
     return;
   }
   
-  showcaseGrid.innerHTML = "";
+  logoTrack.innerHTML = "";
   
-  // Use EXACT same logic as renderClients
-  clients.forEach((client, index) => {
-    const card = createEl("button", "logo-card");
-    card.setAttribute("type", "button");
-    card.setAttribute("aria-label", `Open ${client.name} details`);
+  // Create two sets of logos for seamless scrolling
+  const allLogos = [...clients, ...clients];
+  
+  allLogos.forEach((client, index) => {
+    const card = createEl("div", "logo-card");
+    card.style.cssText = "background: rgba(7,10,15,0.6); border: 1px solid rgba(148,163,184,0.2); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; cursor: pointer; min-width: 160px; flex-shrink: 0;";
     
     const img = createEl("img");
     
-    // Set up error handling for the image - EXACT same as renderClients
+    // Set up error handling for the image
     img.onerror = () => {
       console.error(`Failed to load logo for ${client.name} in showcase, using fallback`);
       const companyName = client.name || "Company";
@@ -622,20 +623,22 @@ function renderLogoShowcase(clients) {
     
     img.src = logoUrlForClient(client);
     img.alt = `${client.name} logo`;
+    img.style.cssText = "max-width: 100%; max-height: 54px; object-fit: contain;";
     
     const label = createEl("div", "name", client.name);
+    label.style.cssText = "font-size: 14px; color: #9fb0c0; text-align: center;";
     
     card.appendChild(img);
     card.appendChild(label);
     
-    // Add click event to open modal - EXACT same as renderClients
+    // Add click event to open modal
     card.addEventListener("click", () => openClientModal(client));
     
-    showcaseGrid.appendChild(card);
+    logoTrack.appendChild(card);
     console.log(`Added showcase logo card for ${client.name}`);
   });
   
-  console.log("Final showcase grid children count:", showcaseGrid.children.length);
+  console.log("Final logo track children count:", logoTrack.children.length);
 }
 
 async function init() {
@@ -671,11 +674,11 @@ window.addEventListener("load", () => {
     // Check if key elements exist
     const about = document.getElementById("about");
     const clients = document.getElementById("clients");
-    const showcaseGrid = document.getElementById("clients-showcase-grid");
+    const logoTrack = document.getElementById("logo-track");
     
-    console.log("Elements found:", { about: !!about, clients: !!clients, showcaseGrid: !!showcaseGrid });
+    console.log("Elements found:", { about: !!about, clients: !!clients, logoTrack: !!logoTrack });
     
-    if (about && clients && showcaseGrid) {
+    if (about && clients && logoTrack) {
       console.log("All elements found, initializing...");
       init();
       initStarfield();
