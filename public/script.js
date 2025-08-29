@@ -605,7 +605,13 @@ function renderLogoShowcase(clients) {
   
   allLogos.forEach((client, index) => {
     const card = createEl("div", "logo-card");
-    card.style.cssText = "background: rgba(7,10,15,0.6); border: 1px solid rgba(148,163,184,0.2); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; cursor: pointer; min-width: 160px; flex-shrink: 0;";
+    
+    // Special styling for Hindware (white background)
+    if (client.name === "Hindware Limited") {
+      card.style.cssText = "background: white; border: 1px solid #e0e0e0; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; cursor: pointer; min-width: 160px; flex-shrink: 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1);";
+    } else {
+      card.style.cssText = "background: rgba(7,10,15,0.6); border: 1px solid rgba(148,163,184,0.2); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; cursor: pointer; min-width: 160px; flex-shrink: 0;";
+    }
     
     const img = createEl("img");
     
