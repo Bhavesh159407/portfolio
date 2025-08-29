@@ -667,11 +667,34 @@ async function init() {
   renderClients(clients);
   renderLogoShowcase(clients);
   setupClientSearch(clients);
+  setupMobileMenu();
 }
 
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeClientModal();
 });
+
+// Mobile menu functionality
+function setupMobileMenu() {
+  const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
+  const navMenu = document.getElementById("nav-menu");
+  
+  if (mobileMenuToggle && navMenu) {
+    mobileMenuToggle.addEventListener("click", () => {
+      mobileMenuToggle.classList.toggle("active");
+      navMenu.classList.toggle("active");
+    });
+    
+    // Close mobile menu when clicking on a link
+    const navLinks = navMenu.querySelectorAll("a");
+    navLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        mobileMenuToggle.classList.remove("active");
+        navMenu.classList.remove("active");
+      });
+    });
+  }
+}
 
 document.addEventListener("DOMContentLoaded", init);
 // Ensure initialization after Angular renders as well
