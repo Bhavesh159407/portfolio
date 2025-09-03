@@ -24,36 +24,25 @@
     ] 
   },
   { 
-    "name": "Enterprise Asset Management Systems", 
+    "name": "Enterprise Asset Management System", 
     "domain": "eams.com", 
     "website": "https://www.eams.com", 
     "logoUrl": "https://via.placeholder.com/200x80/1e293b/7aa2ff?text=EAMS",
-    "description": "Comprehensive SAP Fiori-based Enterprise Asset Management solution for industrial operations and maintenance",
+    "description": "Manufacturer of refractory products for steel, cement, and glass industries",
     "businesses": [
-      "Asset Lifecycle Management",
-      "Predictive Maintenance",
-      "Work Order Management",
-      "Inventory & Spare Parts"
+      "Steel Refractories",
+      "Cement Refractories",
+      "Glass Refractories"
     ],
     "documents": [
-      { "title": "SAP Fiori EAMS Implementation Guide", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" },
-      { "title": "Asset Management Best Practices", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" },
-      { "title": "Technical Architecture Documentation", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" },
-      { "title": "User Training Manual", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" }
+      { "title": "Product Catalog", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" },
+      { "title": "Quality Certificates", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" }
     ], 
     "repos": [
-      { "title": "SAP Fiori EAMS Frontend", "url": "https://github.com/example/sap-fiori-eams" },
-      { "title": "CAP Backend Services", "url": "https://github.com/example/eams-cap-backend" },
-      { "title": "OData Service Definitions", "url": "https://github.com/example/eams-odata-services" },
-      { "title": "Mobile App (SAP Build Apps)", "url": "https://github.com/example/eams-mobile-app" },
-      { "title": "Analytics Dashboard", "url": "https://github.com/example/eams-analytics" }
+      { "title": "Inventory Management System", "url": "https://github.com/example/inventory-system" }
     ], 
     "videos": [
-      { "title": "EAMS System Overview Demo", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
-      { "title": "SAP Fiori App Development Tutorial", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
-      { "title": "Asset Maintenance Workflow", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
-      { "title": "Mobile App Features Walkthrough", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
-      { "title": "Integration with SAP S/4HANA", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
+      { "title": "Manufacturing Process", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
     ] 
   },
   { 
