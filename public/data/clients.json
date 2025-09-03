@@ -24,10 +24,10 @@
     ] 
   },
   { 
-    "name": "Enterprise Asset Management System", 
-    "domain": "eams.com", 
-    "website": "https://www.eams.com", 
-    "logoUrl": "https://via.placeholder.com/200x80/1e293b/7aa2ff?text=EAMS",
+    "name": "TRL Krosaki Refractories Limited", 
+    "domain": "trlkrosaki.com", 
+    "website": "https://www.trlkrosaki.com", 
+    "logoUrl": "https://d3g9tg0xcqrwuo.cloudfront.net/assets/images/logo.png",
     "description": "Manufacturer of refractory products for steel, cement, and glass industries",
     "businesses": [
       "Steel Refractories",
@@ -35,8 +35,9 @@
       "Glass Refractories"
     ],
     "documents": [
-      { "title": "Product Catalog", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" },
-      { "title": "Quality Certificates", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" }
+      { "title": "Enterprise Asset Management System - Implementation Guide", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" },
+      { "title": "Enterprise Asset Management System - Technical Documentation", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" },
+      { "title": "Enterprise Asset Management System - User Manual", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" }
     ], 
     "repos": [
       { "title": "Inventory Management System", "url": "https://github.com/example/inventory-system" }
