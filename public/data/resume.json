@@ -2,11 +2,11 @@
   "name": "Bhavesh Reddy Bendabembli",
   "title": "Experienced SAP UI5 & Fiori Consultant",
   "profilePhoto": "https://i.ibb.co/whdmbg5n/Whats-App-Image-2025-08-18-at-10-46-45-1-Photoroom.jpg",
-  "summary": "SAP UI5 and Fiori consultant with 2+ years of experience delivering user‑centric applications on SAP BTP. Skilled in SAP Fiori/UI5, SAP Build Apps/Code, OData/REST integration, and CAP on HANA. Proven track record of enabling faster business processes, automation, and cross‑functional collaboration.",
+  "summary": "Experienced SAP UI5 & Fiori Consultant with 2+ years of expertise in delivering enterprise-grade applications on SAP Business Technology Platform (BTP). Specialized in SAP Fiori/UI5 development, SAP Build Apps/Code, OData/REST integration, and Cloud Application Programming (CAP) on HANA. Proven track record of enabling digital transformation through faster business processes, automation, and cross-functional collaboration across global teams.",
 
-  "location": "Hyderabad, TG 500039, India",
+  "location": "Hyderabad, Telangana, India",
   "email": "bhaveshchintu@gmail.com",
-  "phone": "+91 6309639128",
+  "phone": "+91 630 963 9128",
   "website": "https://www.linkedin.com/in/bhavesh-reddy-873275318",
   "socials": [
     { "label": "LinkedIn", "url": "https://www.linkedin.com/in/bhavesh-reddy-873275318", "icon": "🔗" }
@@ -21,13 +21,18 @@
       { "label": "Web Technologies", "items": ["HTML5", "CSS3", "XML", "REST APIs", "OData Services"] },
       { "label": "Database Management", "items": ["SQL (Basics)"] }
     ],
-    "languages": ["English", "Telugu", "Hindi", "Kannada"]
+    "languages": [
+      { "language": "English", "proficiency": "Fluent" },
+      { "language": "Telugu", "proficiency": "Native" },
+      { "language": "Hindi", "proficiency": "Conversational" },
+      { "language": "Kannada", "proficiency": "Basic" }
+    ]
   },
   "experience": [
     {
       "role": "SAP UI5 & Fiori Consultant",
       "company": "Incresol Software Solutions Pvt Ltd",
-      "location": "Hyderabad, Telangana",
+      "location": "Hyderabad, Telangana, India",
       "period": "Feb 2024 — Present",
       "summary": "Designing and deploying SAP Fiori/UI5 applications with responsive UX and robust backend integrations.",
       "highlights": [
@@ -42,7 +47,7 @@
     {
       "role": "SAP Trainee",
       "company": "Vani Technologies",
-      "location": "Guntur, Andhra Pradesh",
+      "location": "Guntur, Andhra Pradesh, India",
       "period": "Apr 2023 — Jan 2024",
       "summary": "Delivered SAP Fiori/UI5 solutions aligned to customer needs, focusing on report usability and data operations.",
       "highlights": [
@@ -86,8 +91,10 @@
   "education": [
     {
       "school": "Samskruti College of Engineering and Technology",
-      "degree": "B.Tech, Electronics and Communications Engineering",
-      "period": "Aug 2022"
+      "degree": "Bachelor of Technology (B.Tech), Electronics and Communications Engineering",
+      "period": "2018 — 2022",
+      "gpa": "7.5/10.0",
+      "honors": "First Class"
     }
   ],
   "certifications": [

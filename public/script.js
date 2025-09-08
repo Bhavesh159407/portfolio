@@ -305,18 +305,29 @@ function renderResume(resume) {
   if (lang) {
     lang.innerHTML = "";
     const langs = resume.skills && resume.skills.languages ? resume.skills.languages : (resume.languages || []);
-    langs.forEach(l => lang.appendChild(createEl("span", "chip", l)));
+    langs.forEach(l => {
+      if (typeof l === 'string') {
+        // Handle old format (string)
+        lang.appendChild(createEl("span", "chip", l));
+      } else if (typeof l === 'object' && l.language && l.proficiency) {
+        // Handle new format (object with language and proficiency)
+        const chip = createEl("span", "chip", `${l.language} (${l.proficiency})`);
+        lang.appendChild(chip);
+      }
+    });
   }
 
   const edu = document.getElementById("education-list");
   edu.innerHTML = "";
   (resume.education || []).forEach(e => {
     const row = createEl("div", "item card");
+    const gpaText = e.gpa ? ` • GPA: ${e.gpa}` : "";
+    const honorsText = e.honors ? ` • ${e.honors}` : "";
     row.innerHTML = `
       <div class="period">${e.period || ""}</div>
       <div>
         <h3 class="title">${e.degree || ""}</h3>
-        <div class="where">${e.school || ""}</div>
+        <div class="where">${e.school || ""}${gpaText}${honorsText}</div>
       </div>`;
     edu.appendChild(row);
   });
