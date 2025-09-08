@@ -307,12 +307,11 @@ function renderResume(resume) {
     const langs = resume.skills && resume.skills.languages ? resume.skills.languages : (resume.languages || []);
     langs.forEach(l => {
       if (typeof l === 'string') {
-        // Handle old format (string)
+        // Handle string format
         lang.appendChild(createEl("span", "chip", l));
-      } else if (typeof l === 'object' && l.language && l.proficiency) {
-        // Handle new format (object with language and proficiency)
-        const chip = createEl("span", "chip", `${l.language} (${l.proficiency})`);
-        lang.appendChild(chip);
+      } else if (typeof l === 'object' && l.language) {
+        // Handle object format (just language name)
+        lang.appendChild(createEl("span", "chip", l.language));
       }
     });
   }

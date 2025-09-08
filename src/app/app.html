@@ -4,7 +4,7 @@
   <div class="container header-inner">
     <div class="brand">
       <div class="brand-content" style="display: flex; align-items: center; gap: 12px;">
-        <img id="brand-avatar" class="brand-avatar" alt="Profile photo" style="width: 40px; height: 40px; border-radius: 8px; object-fit: cover;" />
+        <img id="brand-avatar" class="brand-avatar" alt="Profile photo" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(122, 162, 255, 0.3);" />
         <a href="#" class="brand-link" id="brand-name">Your Name</a>
       </div>
     </div>
@@ -25,7 +25,7 @@
     <div class="container hero-inner">
       <div class="hero-content" style="display: flex; align-items: flex-start; gap: 30px;">
         <div class="hero-photo" style="flex-shrink: 0;">
-          <img id="profile-photo" class="hero-avatar" alt="Profile photo" style="width: 180px; height: 180px; border-radius: 8px; object-fit: cover;" />
+          <img id="profile-photo" class="hero-avatar" alt="Profile photo" style="width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(122, 162, 255, 0.4);" />
         </div>
         <div class="hero-text" style="flex: 1;">
           <h1 id="hero-name">Your Name</h1>
@@ -114,7 +114,7 @@
   <div class="container">
     <h2 style="text-align: center; color: #e6edf3; font-size: 2.5rem; margin-bottom: 40px;">Esteemed Clients</h2>
     <div class="logo-showcase" style="background: rgba(15,23,32,0.8); border-radius: 20px; padding: 40px; border: 2px solid #7aa2ff; overflow: hidden;">
-      <div class="logo-track" style="display: flex; gap: 40px; animation: marquee 25s linear infinite; width: max-content;">
+      <div class="logo-track" style="display: flex; gap: 40px; width: max-content;">
         <!-- First set of logos -->
         <div class="logo-card" style="background: rgba(7,10,15,0.6); border: 1px solid rgba(148,163,184,0.2); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; cursor: pointer; min-width: 160px; flex-shrink: 0;">
           <img src="https://www.aragen.com/wp-content/uploads/2021/05/logo-1.svg" alt="Aragen" style="max-width: 100%; max-height: 54px; object-fit: contain;">
@@ -182,14 +182,22 @@
       }
       .logo-track {
         animation: marquee 25s linear infinite;
+        will-change: transform;
       }
       .logo-track:hover {
         animation-play-state: paused;
       }
       .logo-showcase {
         overflow: hidden;
-  }
-</style>
+        position: relative;
+      }
+      .logo-card {
+        transition: transform 0.3s ease;
+      }
+      .logo-card:hover {
+        transform: translateY(-5px);
+      }
+    </style>
 
   </div>
 </section>
