@@ -478,120 +478,92 @@ function renderClients(clients) {
 }
 
 function openClientModal(client) {
-  console.log("Opening modal for client:", client); // Debug log
+  console.log("Opening modal for client:", client);
   const modal = document.getElementById("client-modal");
-  modal.setAttribute("aria-hidden", "false");
-  document.getElementById("modal-title").textContent = client.name || "Client";
-  document.getElementById("modal-logo").src = logoUrlForClient(client);
-  
-  // Add company description if available
-  const description = document.getElementById("modal-description");
-  if (description && client.description) {
-    description.textContent = client.description;
-    description.style.display = "block";
-  } else if (description) {
-    description.style.display = "none";
-  }
-  
-  const website = document.getElementById("modal-website");
-  if (client.website) {
-    website.href = client.website;
-    website.textContent = new URL(client.website).hostname;
-    website.style.display = "inline";
-  } else {
-    website.removeAttribute("href");
-    website.style.display = "none";
-  }
+  const modalLogo = document.getElementById("modal-logo");
+  const modalTitle = document.getElementById("modal-title");
+  const modalWebsite = document.getElementById("modal-website");
+  const modalDescription = document.getElementById("modal-description");
+  const modalDocumentsContent = document.getElementById("modal-documents-content");
+  const modalReposContent = document.getElementById("modal-repos-content");
+  const modalVideosContent = document.getElementById("modal-videos-content");
 
-  // Add business divisions if available
-  const businesses = document.getElementById("modal-businesses");
-  if (businesses && client.businesses && client.businesses.length > 0) {
-    const businessItems = client.businesses.map(b => `<li>${b}</li>`).join("");
-    businesses.innerHTML = `<h4>Business Divisions</h4><ul>${businessItems}</ul>`;
-    businesses.style.display = "block";
-  } else if (businesses) {
-    businesses.style.display = "none";
-  }
+  // Set client info
+  modalLogo.src = logoUrlForClient(client);
+  modalLogo.alt = `${client.name} logo`;
+  modalTitle.textContent = client.name || "Client";
+  modalWebsite.href = client.website;
+  modalWebsite.textContent = `Visit ${client.domain || new URL(client.website).hostname}`;
 
-  const docs = document.getElementById("modal-documents");
-  docs.innerHTML = "";
+  // Set description with businesses
+  modalDescription.innerHTML = `
+    <h4>About ${client.name}</h4>
+    <p>${client.description || 'No description available'}</p>
+    <div class="businesses-list">
+      ${client.businesses ? client.businesses.map(business => `<span class="business-tag">${business}</span>`).join('') : ''}
+    </div>
+  `;
+
+  // Set documents
+  modalDocumentsContent.innerHTML = '';
   if (client.documents && client.documents.length > 0) {
-    docs.innerHTML = `<h4>📄 Project Documents & PDFs</h4>`;
-    client.documents.forEach(d => {
-      const docItem = createEl("div", "doc-item");
-      const icon = d.type === "pdf" ? "📄" : "🌐";
-      const link = createEl("a", "link doc-link", `${icon} ${d.title}`);
-      link.href = d.url;
-      link.target = "_blank";
-      link.rel = "noopener";
-      docItem.appendChild(link);
-      docs.appendChild(docItem);
+    client.documents.forEach(doc => {
+      const docItem = document.createElement('div');
+      docItem.className = 'modal-item';
+      docItem.innerHTML = `
+        <h5>${doc.title}</h5>
+        <p>${doc.type === 'pdf' ? 'PDF Document' : 'Web Page'}</p>
+        <a href="${doc.url}" target="_blank" rel="noopener" class="link">View Document</a>
+      `;
+      modalDocumentsContent.appendChild(docItem);
     });
+  } else {
+    modalDocumentsContent.innerHTML = '<p style="color: #666; font-style: italic;">No documents available</p>';
   }
 
-  const repos = document.getElementById("modal-repos");
-  repos.innerHTML = "";
+  // Set repositories
+  modalReposContent.innerHTML = '';
   if (client.repos && client.repos.length > 0) {
-    repos.innerHTML = `<h4>💻 Git Repositories & Code</h4>`;
-    client.repos.forEach(r => {
-      const repoItem = createEl("div", "repo-item");
-      const link = createEl("a", "link repo-link", `🔗 ${r.title}`);
-      link.href = r.url;
-      link.target = "_blank";
-      link.rel = "noopener";
-      repoItem.appendChild(link);
-      repos.appendChild(repoItem);
+    client.repos.forEach(repo => {
+      const repoItem = document.createElement('div');
+      repoItem.className = 'modal-item';
+      repoItem.innerHTML = `
+        <h5>${repo.title}</h5>
+        <p>GitHub Repository</p>
+        <a href="${repo.url}" target="_blank" rel="noopener" class="link">View Code</a>
+      `;
+      modalReposContent.appendChild(repoItem);
     });
+  } else {
+    modalReposContent.innerHTML = '<p style="color: #666; font-style: italic;">No repositories available</p>';
   }
 
-  const videos = document.getElementById("modal-videos");
-  videos.innerHTML = "";
+  // Set videos
+  modalVideosContent.innerHTML = '';
   if (client.videos && client.videos.length > 0) {
-    videos.innerHTML = `<h4>🎥 App Demos & Videos</h4>`;
-    client.videos.forEach(v => {
-      const videoItem = createEl("div", "video-item");
-      const title = createEl("div", "video-title", v.title);
-      videoItem.appendChild(title);
-
-      const embed = youtubeToEmbed(v.url);
-      if (embed) {
-        const iframe = createEl("iframe", "embed");
-        iframe.src = embed;
-        iframe.title = v.title || client.name;
-        iframe.setAttribute("frameborder", "0");
-        iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
-        iframe.setAttribute("allowfullscreen", "");
-        videoItem.appendChild(iframe);
-      } else {
-        const link = createEl("a", "link video-link", `▶️ Watch Video`);
-        link.href = v.url;
-        link.target = "_blank";
-        link.rel = "noopener";
-        videoItem.appendChild(link);
-      }
-      videos.appendChild(videoItem);
+    client.videos.forEach(video => {
+      const videoItem = document.createElement('div');
+      videoItem.className = 'modal-item';
+      videoItem.innerHTML = `
+        <h5>${video.title}</h5>
+        <p>Video Content</p>
+        <a href="${video.url}" target="_blank" rel="noopener" class="link">Watch Video</a>
+      `;
+      modalVideosContent.appendChild(videoItem);
     });
+  } else {
+    modalVideosContent.innerHTML = '<p style="color: #666; font-style: italic;">No videos available</p>';
   }
 
-  document.querySelectorAll('[data-close-modal]').forEach(el => {
-    el.onclick = () => closeClientModal();
-  });
+  // Show modal
+  modal.classList.add('show');
+  document.body.style.overflow = 'hidden';
 }
 
 function closeClientModal() {
   const modal = document.getElementById("client-modal");
-  modal.setAttribute("aria-hidden", "true");
-  
-  // Clear all modal sections
-  const description = document.getElementById("modal-description");
-  if (description) description.innerHTML = "";
-  
-  const businesses = document.getElementById("modal-businesses");
-  if (businesses) businesses.innerHTML = "";
-  
-  document.getElementById("modal-documents").innerHTML = "";
-  document.getElementById("modal-repos").innerHTML = "";
-  document.getElementById("modal-videos").innerHTML = "";
+  modal.classList.remove('show');
+  document.body.style.overflow = '';
 }
 
 function setupClientSearch(clients) {
@@ -739,6 +711,20 @@ window.addEventListener("load", () => {
   tryInit();
 });
 
+// Add modal event handlers
+document.addEventListener('click', (e) => {
+  if (e.target.hasAttribute('data-close-modal')) {
+    closeClientModal();
+  }
+});
+
+// Close modal on escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeClientModal();
+  }
+});
+
 // ---------- Interactive Starfield ----------
 function initStarfield() {
   const canvas = document.getElementById("starfield");
@@ -811,5 +797,6 @@ function initStarfield() {
   }
   step();
 }
+
 
 
