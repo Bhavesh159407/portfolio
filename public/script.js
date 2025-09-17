@@ -512,30 +512,30 @@ function openClientModal(client) {
       const docs = (p.documents || []).map(d => {
         const cleanTitle = (d.title || '').replace(/\s*\(PPT\)\s*$/i, '');
         return `
-        <div class=\"modal-item\">
-          <h5>${cleanTitle}: Presentation</h5>
-          <a href=\"${d.url}\" target=\"_blank\" rel=\"noopener\" class=\"link\">View Presentation</a>
+        <div class=\"modal-item\" style=\"display:flex;justify-content:space-between;align-items:center;gap:12px;\">
+          <h5 style=\"margin:0;\">${cleanTitle}: Presentation</h5>
+          <a href=\"${d.url}\" target=\"_blank\" rel=\"noopener\" class=\"link\">Open ↗</a>
         </div>`;
       }).join("");
       const repos = (p.repos || []).map(r => `
-        <div class=\"modal-item\">
-          <h5>${r.title}: Code</h5>
-          <a href=\"${r.url}\" target=\"_blank\" rel=\"noopener\" class=\"link\">View Code</a>
+        <div class=\"modal-item\" style=\"display:flex;justify-content:space-between;align-items:center;gap:12px;\">
+          <h5 style=\"margin:0;\">${r.title}: Code</h5>
+          <a href=\"${r.url}\" target=\"_blank\" rel=\"noopener\" class=\"link\">Open ↗</a>
         </div>
       `).join("");
       const videos = (p.videos || []).map(v => `
-        <div class=\"modal-item\">
-          <h5>${v.title}: Video</h5>
-          <a href=\"${v.url}\" target=\"_blank\" rel=\"noopener\" class=\"link\">Watch Video</a>
+        <div class=\"modal-item\" style=\"display:flex;justify-content:space-between;align-items:center;gap:12px;\">
+          <h5 style=\"margin:0;\">${v.title}: Video</h5>
+          <a href=\"${v.url}\" target=\"_blank\" rel=\"noopener\" class=\"link\">Open ↗</a>
         </div>
       `).join("");
       return `
         <div class=\"project-block\">
           <h4>${p.name}</h4>
           ${p.description ? `<p style=\"color:#b0b0b0;margin:0 0 10px 0;\">${p.description}</p>` : ''}
-          ${docs ? `<h5 style=\"color:#7aa2ff;margin:10px 0 8px;\">Presentations</h5>${docs}` : ''}
-          ${videos ? `<h5 style=\"color:#7aa2ff;margin:10px 0 8px;\">Videos</h5>${videos}` : ''}
-          ${repos ? `<h5 style=\"color:#7aa2ff;margin:10px 0 8px;\">Code</h5>${repos}` : ''}
+          ${docs || ''}
+          ${videos || ''}
+          ${repos || ''}
         </div>
       `;
     }).join("");
