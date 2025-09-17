@@ -198,6 +198,17 @@
         transform: translateY(-5px);
       }
       
+      /* Global layout helpers */
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+      .grid { display: grid; gap: 20px; }
+      .grid.cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .grid.timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grid.logos { grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: center; }
+
       /* Client Modal Styles */
       .modal {
         position: fixed;
@@ -392,6 +403,42 @@
       }
       
       @media (max-width: 768px) {
+        /* Header */
+        .header-inner { display: flex; flex-direction: column; gap: 10px; }
+        .brand-content { justify-content: center; }
+        .nav {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          background: #0f1720;
+          border: 1px solid rgba(148,163,184,0.25);
+          border-radius: 12px;
+          padding: 10px;
+          justify-content: center;
+        }
+
+        /* Hero */
+        .hero-inner { padding: 10px 0; }
+        .hero-content { flex-direction: column !important; align-items: center !important; gap: 16px !important; }
+        .hero-photo img { width: 140px !important; height: 140px !important; }
+        #hero-name { font-size: 26px; text-align: center; }
+        #hero-title { font-size: 16px; text-align: center; }
+        #hero-summary { font-size: 14px; line-height: 1.5; text-align: center; }
+        .cta-group { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+        /* Sections */
+        .section .container { padding: 0 16px; }
+        h2 { font-size: 22px; }
+
+        /* Grids */
+        .grid.cards { grid-template-columns: 1fr; }
+        .grid.timeline { grid-template-columns: 1fr; }
+        .grid.logos { grid-template-columns: 1fr 1fr; gap: 12px; }
+
+        /* Clients marquee */
+        .logo-showcase { padding: 20px !important; }
+        .logo-track { gap: 20px !important; }
+
         .modal-content {
           padding: 20px;
           margin: 10px;
