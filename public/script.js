@@ -513,19 +513,19 @@ function openClientModal(client) {
         const cleanTitle = (d.title || '').replace(/\s*\(PPT\)\s*$/i, '');
         return `
         <div class=\"modal-item\">
-          <h5>${cleanTitle}</h5>
+          <h5>${cleanTitle}: Presentation</h5>
           <a href=\"${d.url}\" target=\"_blank\" rel=\"noopener\" class=\"link\">View Presentation</a>
         </div>`;
       }).join("");
       const repos = (p.repos || []).map(r => `
         <div class=\"modal-item\">
-          <h5>${r.title}</h5>
+          <h5>${r.title}: Code</h5>
           <a href=\"${r.url}\" target=\"_blank\" rel=\"noopener\" class=\"link\">View Code</a>
         </div>
       `).join("");
       const videos = (p.videos || []).map(v => `
         <div class=\"modal-item\">
-          <h5>${v.title}</h5>
+          <h5>${v.title}: Video</h5>
           <a href=\"${v.url}\" target=\"_blank\" rel=\"noopener\" class=\"link\">Watch Video</a>
         </div>
       `).join("");
