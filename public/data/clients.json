@@ -34,16 +34,20 @@
       "Cement Refractories",
       "Glass Refractories"
     ],
-    "documents": [
-      { "title": "Enterprise Asset Management System - Implementation Guide", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" },
-      { "title": "Enterprise Asset Management System - Technical Documentation", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" },
-      { "title": "Enterprise Asset Management System - User Manual", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" }
-    ], 
-    "repos": [
-      { "title": "Inventory Management System", "url": "https://github.com/example/inventory-system" }
-    ], 
-    "videos": [
-      { "title": "Manufacturing Process", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
+    "projects": [
+      {
+        "name": "Enterprise Asset Management System",
+        "description": "Comprehensive asset management solution for TRL's manufacturing operations",
+        "repos": [
+          { "title": "Applications (Source Code)", "url": "https://drive.google.com/drive/folders/1KtdbMCwdFnZX3O_cSOM4OmfO7xjQBouR", "type": "code" }
+        ],
+        "videos": [
+          { "title": "All Demo Videos", "url": "https://drive.google.com/drive/folders/1MCRcuhDoefU3lSHApZbMZnFq05XcjGgq", "type": "video" }
+        ],
+        "documents": [
+          { "title": "Presentations & Documentation", "url": "https://drive.google.com/drive/folders/1oYZFLDTSY52qe28gpq0T6pvvhXIbokx4", "type": "ppt" }
+        ]
+      }
     ] 
   },
   { 

@@ -487,6 +487,7 @@ function openClientModal(client) {
   const modalDocumentsContent = document.getElementById("modal-documents-content");
   const modalReposContent = document.getElementById("modal-repos-content");
   const modalVideosContent = document.getElementById("modal-videos-content");
+  const modalProjects = document.getElementById("modal-projects");
 
   // Set client info
   modalLogo.src = logoUrlForClient(client);
@@ -503,6 +504,55 @@ function openClientModal(client) {
       ${client.businesses ? client.businesses.map(business => `<span class="business-tag">${business}</span>`).join('') : ''}
     </div>
   `;
+
+  // If projects exist, render grouped projects and hide standalone sections
+  if (client.projects && client.projects.length > 0 && modalProjects) {
+    modalProjects.style.display = "block";
+    const sectionsHtml = client.projects.map(p => {
+      const docs = (p.documents || []).map(d => `
+        <div class=\"modal-item\">
+          <h5>${d.title}</h5>
+          <p>${d.type === 'ppt' ? 'Presentation' : (d.type || 'Document')}</p>
+          <a href=\"${d.url}\" target=\"_blank\" rel=\"noopener\" class=\"link\">Open</a>
+        </div>
+      `).join("");
+      const repos = (p.repos || []).map(r => `
+        <div class=\"modal-item\">
+          <h5>${r.title}</h5>
+          <p>${r.type === 'code' ? 'Source Code' : 'Repository'}</p>
+          <a href=\"${r.url}\" target=\"_blank\" rel=\"noopener\" class=\"link\">Open</a>
+        </div>
+      `).join("");
+      const videos = (p.videos || []).map(v => `
+        <div class=\"modal-item\">
+          <h5>${v.title}</h5>
+          <p>Video</p>
+          <a href=\"${v.url}\" target=\"_blank\" rel=\"noopener\" class=\"link\">Watch</a>
+        </div>
+      `).join("");
+      return `
+        <div class=\"project-block\">
+          <h4>${p.name}</h4>
+          ${p.description ? `<p style=\"color:#b0b0b0;margin:0 0 10px 0;\">${p.description}</p>` : ''}
+          ${docs ? `<h5 style=\"color:#7aa2ff;margin:10px 0 8px;\">Documents</h5>${docs}` : ''}
+          ${repos ? `<h5 style=\"color:#7aa2ff;margin:10px 0 8px;\">Code</h5>${repos}` : ''}
+          ${videos ? `<h5 style=\"color:#7aa2ff;margin:10px 0 8px;\">Videos</h5>${videos}` : ''}
+        </div>
+      `;
+    }).join("");
+    modalProjects.innerHTML = sectionsHtml;
+
+    // Hide standalone sections when projects exist
+    const docsSection = document.getElementById("modal-documents");
+    const reposSection = document.getElementById("modal-repos");
+    const videosSection = document.getElementById("modal-videos");
+    if (docsSection) docsSection.style.display = "none";
+    if (reposSection) reposSection.style.display = "none";
+    if (videosSection) videosSection.style.display = "none";
+  } else if (modalProjects) {
+    modalProjects.style.display = "none";
+    modalProjects.innerHTML = "";
+  }
 
   // Set documents
   modalDocumentsContent.innerHTML = '';
