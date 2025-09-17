@@ -38,14 +38,73 @@
       {
         "name": "Enterprise Asset Management System",
         "description": "Comprehensive asset management solution for TRL's manufacturing operations",
-        "repos": [
-          { "title": "Applications (Source Code)", "url": "https://drive.google.com/drive/folders/1KtdbMCwdFnZX3O_cSOM4OmfO7xjQBouR", "type": "code" }
-        ],
         "videos": [
-          { "title": "All Demo Videos", "url": "https://drive.google.com/drive/folders/1MCRcuhDoefU3lSHApZbMZnFq05XcjGgq", "type": "video" }
+          { "title": "Asset Tagging", "url": "https://drive.google.com/file/d/1aY9VjA8ebI5WW6C83gP8F1TwX5TH3C1K/view?usp=drive_link", "type": "video" },
+          { "title": "Asset Tagging Using RFID", "url": "https://drive.google.com/file/d/1OasrkWST8TMCNvsdNizUL_Izx98YBT2u/view?usp=drive_link", "type": "video" },
+          { "title": "Asset Report", "url": "https://drive.google.com/file/d/1Sn45reZzVOpfrT4ODmDwtoCtX2_LBn0Q/view?usp=drive_link", "type": "video" },
+          { "title": "Asset Geo Update", "url": "https://drive.google.com/file/d/1gG9PLHFFrZTf5bELzta81FsxsLsGTrN2/view?usp=drive_link", "type": "video" },
+          { "title": "Asset Execution", "url": "https://drive.google.com/file/d/1rWsM-xC9b6hAbkbIOQt21PBHY5bh7_Cy/view?usp=drive_link", "type": "video" }
         ],
         "documents": [
-          { "title": "Presentations & Documentation", "url": "https://drive.google.com/drive/folders/1oYZFLDTSY52qe28gpq0T6pvvhXIbokx4", "type": "ppt" }
+          { "title": "Asset Tagging (PPT)", "url": "https://docs.google.com/presentation/d/12g8p4xoi0i9JlXkinKychBfpAIlgQM8p/edit?usp=drive_link&ouid=115238078648494379307&rtpof=true&sd=true", "type": "ppt" },
+          { "title": "Asset Tagging Using RFID (PPT)", "url": "https://docs.google.com/presentation/d/1pdj4WI060WRPkZSsei7s4RJAyCOyaJrE/edit?usp=drive_link&ouid=115238078648494379307&rtpof=true&sd=true", "type": "ppt" },
+          { "title": "Asset Report (PPT)", "url": "https://docs.google.com/presentation/d/1Vr2zLyM091z9HlGov7SeuJ2DuFT6mJXn/edit?usp=drive_link&ouid=115238078648494379307&rtpof=true&sd=true", "type": "ppt" },
+          { "title": "Asset Geo Update (PPT)", "url": "https://docs.google.com/presentation/d/1vB0cgIAB2xvdR1XEf4kFI0Iji9isLPEQ/edit?usp=drive_link&ouid=115238078648494379307&rtpof=true&sd=true", "type": "ppt" },
+          { "title": "Asset Execution (PPT)", "url": "https://docs.google.com/presentation/d/1FoTxHr206f4mkJjWIrBHcgKrSgQscRio/edit?usp=drive_link&ouid=115238078648494379307&rtpof=true&sd=true", "type": "ppt" }
+        ]
+      },
+      {
+        "name": "RFID Mapping with QR Code",
+        "videos": [
+          { "title": "RFID Mapping with QR Code - Demo", "url": "https://drive.google.com/file/d/1eTuPuqwCl541i4RhlhTWQiqyeagxpJSy/view?usp=drive_link", "type": "video" }
+        ],
+        "documents": [
+          { "title": "RFID Mapping with QR Code (PPT)", "url": "https://docs.google.com/presentation/d/12mVIn9CTlIkqq13_M8uy2OXT9wwdja0J/edit?usp=drive_link&ouid=115238078648494379307&rtpof=true&sd=true", "type": "ppt" }
+        ]
+      },
+      {
+        "name": "Dispatch Order",
+        "videos": [
+          { "title": "Dispatch Order - Demo", "url": "https://drive.google.com/file/d/1M7BIAJmIFpO9oILKI9Vc_9rHyhS-nn6J/view?usp=drive_link", "type": "video" }
+        ],
+        "documents": [
+          { "title": "Dispatch Order (PPT)", "url": "https://docs.google.com/presentation/d/1l1PY4-5OND8fPwL1lw3eOozQYeWjhW8i/edit?usp=drive_link&ouid=115238078648494379307&rtpof=true&sd=true", "type": "ppt" }
+        ]
+      },
+      {
+        "name": "Sales Invoice Approval",
+        "videos": [
+          { "title": "Sales Invoice Approval - Demo", "url": "https://drive.google.com/file/d/1MhyCjMpoWC_OkJIsJrYVwiO6PmAW5d-q/view?usp=drive_link", "type": "video" }
+        ],
+        "documents": [
+          { "title": "Sales Invoice Approval (PPT)", "url": "https://docs.google.com/presentation/d/1LzDSstj2JwJfzWiFh3Tz7sHV07kSLQOp/edit?usp=drive_link&ouid=115238078648494379307&rtpof=true&sd=true", "type": "ppt" }
+        ]
+      },
+      {
+        "name": "SAP Logon Password Reset App",
+        "videos": [
+          { "title": "SAP Logon Password Reset - Demo", "url": "https://drive.google.com/file/d/1NZ6pFAtNp7prVtSf0aXO4ecBlDlHCUk0/view?usp=drive_link", "type": "video" }
+        ],
+        "documents": [
+          { "title": "SAP Logon Password Reset (PPT)", "url": "https://docs.google.com/presentation/d/1OyEmqMOqH-gRMs3zM2hDoZOtC-eEg_Vu/edit?usp=drive_link&ouid=115238078648494379307&rtpof=true&sd=true", "type": "ppt" }
+        ]
+      },
+      {
+        "name": "Travel Requisition",
+        "videos": [
+          { "title": "Travel Requisition - Demo", "url": "https://drive.google.com/file/d/1U_GbzfkZmCneENqiNieuZItzqqEJNVlm/view?usp=drive_link", "type": "video" }
+        ],
+        "documents": [
+          { "title": "Travel Requisition (PPT)", "url": "https://docs.google.com/presentation/d/1ij8Xy66X0RzR-W9XTYkbNQT5SEnQ9Hkh/edit?usp=drive_link&ouid=115238078648494379307&rtpof=true&sd=true", "type": "ppt" }
+        ]
+      },
+      {
+        "name": "Vehicle Requisition",
+        "videos": [
+          { "title": "Vehicle Requisition - Demo", "url": "https://drive.google.com/file/d/1CLfF9T0duhXlDMA8yIAngZHCvSXiWGiF/view?usp=drive_link", "type": "video" }
+        ],
+        "documents": [
+          { "title": "Vehicle Requisition (PPT)", "url": "https://docs.google.com/presentation/d/1Vcb9CoOzBONmPHQN05nKHd4m2DKlx7pJ/edit?usp=drive_link&ouid=115238078648494379307&rtpof=true&sd=true", "type": "ppt" }
         ]
       }
     ] 
