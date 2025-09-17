@@ -6,10 +6,9 @@
       <div class="brand-content" style="display: flex; align-items: center; gap: 12px;">
         <img id="brand-avatar" class="brand-avatar" alt="Profile photo" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(0, 0, 0, 0.3);" />
         <a href="#" class="brand-link" id="brand-name">Your Name</a>
-        <span class="brand-symbol" aria-hidden="true"></span>
+        <button id="mobile-menu-toggle" class="mobile-toggle brand-symbol-btn" aria-label="Open menu" aria-expanded="false">☰</button>
       </div>
     </div>
-    <button id="mobile-menu-toggle" class="mobile-toggle" aria-label="Open menu" aria-expanded="false" style="display:none;">☰ Menu</button>
     <nav id="nav-menu" class="nav">
       <a href="#about">About</a>
       <a href="#education">Education</a>
@@ -177,7 +176,7 @@
         </div>
       </div>
     </div>
-    <style>
+<style>
       @keyframes marquee {
         0% { transform: translateX(0); }
         100% { transform: translateX(-50%); }
@@ -218,7 +217,8 @@
       #nav-menu a:hover { background: rgba(122,162,255,0.14); }
 
       /* Brand symbol */
-      .brand-symbol { width: 8px; height: 8px; border-radius: 50%; background: #7aa2ff; display: inline-block; margin-left: 8px; box-shadow: 0 0 12px rgba(122,162,255,0.6); }
+      .brand-symbol-btn { display: none; margin-left: 10px; font-size: 18px; line-height: 1; padding: 6px 10px; border-radius: 10px; background: #0f1720; border: 1px solid rgba(148,163,184,0.25); color: #e6edf3; box-shadow: 0 0 12px rgba(122,162,255,0.25); }
+      .brand-symbol-btn:hover { background: rgba(122,162,255,0.08); }
 
       /* Client Modal Styles */
       .modal {
