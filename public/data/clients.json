@@ -120,16 +120,17 @@
       "Natural Products",
       "Research Services"
     ],
-    "documents": [
-      { "title": "Research Paper - Extraction Methods", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" },
-      { "title": "Product Specifications", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" }
-    ], 
-    "repos": [
-      { "title": "Extraction Database", "url": "https://github.com/example/extraction-db" }
-    ], 
-    "videos": [
-      { "title": "Extraction Process", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
-    ] 
+    "projects": [
+      {
+        "name": "PLMS (Plant Logistics Management System)",
+        "videos": [
+          { "title": "PLMS Demo", "url": "https://drive.google.com/file/d/1E57VBinyT-P_7uz943qzZ0klo53lmcWK/view?usp=drive_link", "type": "video" }
+        ],
+        "documents": [
+          { "title": "PLMS Presentation", "url": "https://docs.google.com/presentation/d/1NQuJP0RjQtw58ENaiQBJjLefXy0gZeDH/edit?usp=drive_link&ouid=115238078648494379307&rtpof=true&sd=true", "type": "ppt" }
+        ]
+      }
+    ]
   },
   { 
     "name": "Everest Food Products Pvt Ltd", 
@@ -142,15 +143,34 @@
       "Ready-to-Cook Products",
       "Food Ingredients"
     ],
-    "documents": [
-      { "title": "Product Brochure", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" },
-      { "title": "Quality Standards", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" }
-    ], 
-    "repos": [
-      { "title": "Recipe Management System", "url": "https://github.com/example/recipe-system" }
-    ], 
-    "videos": [
-      { "title": "Product Showcase", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
+    "projects": [
+      {
+        "name": "Payment Process",
+        "videos": [
+          { "title": "Payment Process", "url": "https://drive.google.com/file/d/1ajgCHe78Cx_hybSF0sUMkSe3fAkKQ14q/view?usp=drive_link", "type": "video" }
+        ],
+        "documents": [
+          { "title": "Payment Process", "url": "https://docs.google.com/presentation/d/1qoA0luOSVYfMLbCQaXcWM91CRzx-WbLK/edit?usp=drive_link&ouid=115238078648494379307&rtpof=true&sd=true", "type": "ppt" }
+        ]
+      },
+      {
+        "name": "Quality Report",
+        "videos": [
+          { "title": "Quality Report", "url": "https://drive.google.com/file/d/1UbZdYEioTfXnPmGPlawjROGblzjoVsMs/view?usp=drive_link", "type": "video" }
+        ],
+        "documents": [
+          { "title": "Quality Report", "url": "https://docs.google.com/presentation/d/1inzL9kPmn3C19uzJ7ZcdKOPcT39fioAe/edit?usp=drive_link&ouid=115238078648494379307&rtpof=true&sd=true", "type": "ppt" }
+        ]
+      },
+      {
+        "name": "Quality Approval",
+        "videos": [
+          { "title": "Quality Approval", "url": "https://drive.google.com/file/d/1nOporxC-iZeFZg3LbJmf3BrB89ntxIGw/view?usp=drive_link", "type": "video" }
+        ],
+        "documents": [
+          { "title": "Quality Approval", "url": "https://docs.google.com/presentation/d/1_KAIyBlisAl-18z0Hee5Y5pFxHoIfx5E/edit?usp=drive_link&ouid=115238078648494379307&rtpof=true&sd=true", "type": "ppt" }
+        ]
+      }
     ] 
   },
   { 
@@ -164,15 +184,25 @@
       "Active Pharmaceutical Ingredients",
       "Contract Manufacturing"
     ],
-    "documents": [
-      { "title": "Drug Information", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" },
-      { "title": "Clinical Studies", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" }
-    ], 
-    "repos": [
-      { "title": "Pharma Management System", "url": "https://github.com/example/pharma-system" }
-    ], 
-    "videos": [
-      { "title": "Manufacturing Facility Tour", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
+    "projects": [
+      {
+        "name": "Ageing Report",
+        "videos": [
+          { "title": "Ageing Report", "url": "https://drive.google.com/file/d/1djF4K0OJZtWgUFZ0MHLLMNY9SCOUiStw/view?usp=drive_link", "type": "video" }
+        ],
+        "documents": [
+          { "title": "Ageing Report", "url": "https://docs.google.com/presentation/d/1Uf1UAayO3pKxp3gujT6nixZvaBxQIe-A/edit?usp=drive_link&ouid=115238078648494379307&rtpof=true&sd=true", "type": "ppt" }
+        ]
+      },
+      {
+        "name": "My Inbox Bulk Approval",
+        "videos": [
+          { "title": "My Inbox Bulk Approval", "url": "https://drive.google.com/file/d/1w3g8EfxkGIWvk85GhWof0FsDXyKpG_Lp/view?usp=drive_link", "type": "video" }
+        ],
+        "documents": [
+          { "title": "My Inbox Bulk Approval", "url": "https://docs.google.com/presentation/d/18kZ3qEFP0rlnPxlOYFltNfH9cYbVcYPZ/edit?usp=drive_link&ouid=115238078648494379307&rtpof=true&sd=true", "type": "ppt" }
+        ]
+      }
     ] 
   },
   { 
@@ -186,18 +216,52 @@
       "AGI Plastek - High-quality PET packaging solutions",
       "AGI Clozures - Counterfeit-resistant security caps & closures"
     ],
-    "documents": [
-      { "title": "Company Overview", "url": "https://www.agigreenpac.com/about-us/overview", "type": "web" },
-      { "title": "Sustainability Report", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" },
-      { "title": "Technical Specifications", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" }
-    ],
-    "repos": [
-      { "title": "Packaging Design System", "url": "https://github.com/example/packaging-system" },
-      { "title": "Quality Control Dashboard", "url": "https://github.com/example/quality-dashboard" }
-    ],
-    "videos": [
-      { "title": "Manufacturing Process", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
-      { "title": "Product Showcase", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
+    "projects": [
+      {
+        "name": "Asset Maintenance",
+        "videos": [
+          { "title": "Asset Maintenance", "url": "https://drive.google.com/file/d/13SNvxUtXMPoA1zDXiOMSJRLf7H8iRX-s/view?usp=drive_link", "type": "video" }
+        ],
+        "documents": [
+          { "title": "Asset Maintenance", "url": "https://docs.google.com/presentation/d/1Lp_Vpp3-hoAiBLC_4WiaduXAY0NnhEVQ/edit?usp=drive_link&ouid=115238078648494379307&rtpof=true&sd=true", "type": "ppt" }
+        ]
+      },
+      {
+        "name": "Customer Price Approval List",
+        "videos": [
+          { "title": "Customer Price Approval List", "url": "https://drive.google.com/file/d/1Ms6WOykBpZVD5NRewgutEKhBqZYFgfWl/view?usp=drive_link", "type": "video" }
+        ],
+        "documents": [
+          { "title": "Customer Price Approval List", "url": "https://docs.google.com/presentation/d/1OEE_Gpy3F2oi-zoCb-99FAhAnYFY_fQc/edit?usp=drive_link&ouid=115238078648494379307&rtpof=true&sd=true", "type": "ppt" }
+        ]
+      },
+      {
+        "name": "Customer Price List",
+        "videos": [
+          { "title": "Customer Price List", "url": "https://drive.google.com/file/d/13iF0S9Mhut5I-vXG8Ltw9a0_5s8mv7Db/view?usp=drive_link", "type": "video" }
+        ],
+        "documents": [
+          { "title": "Customer Price List", "url": "https://docs.google.com/presentation/d/1e7ciQCK4NV-fJDSv_m1AD_7cGeP4XW0f/edit?usp=drive_link&ouid=115238078648494379307&rtpof=true&sd=true", "type": "ppt" }
+        ]
+      },
+      {
+        "name": "Picklist",
+        "videos": [
+          { "title": "Picklist", "url": "https://drive.google.com/file/d/11bcnbAkOaEaX74LnzaU1aLWdG1YC9BNb/view?usp=drive_link", "type": "video" }
+        ],
+        "documents": [
+          { "title": "Picklist", "url": "https://docs.google.com/presentation/d/12r8WUXM4BYVfL-kVNyfT0k5Ba8EYZc7-/edit?usp=drive_link&ouid=115238078648494379307&rtpof=true&sd=true", "type": "ppt" }
+        ]
+      },
+      {
+        "name": "Putaway",
+        "videos": [
+          { "title": "Putaway", "url": "https://drive.google.com/file/d/1Noq4t9Sr3TubfZXIlA21exRyf3KWBfRD/view?usp=drive_link", "type": "video" }
+        ],
+        "documents": [
+          { "title": "Putaway", "url": "https://docs.google.com/presentation/d/1Y84WXz0cgMBoaWQgDXbPDgq_ZUiuY2_Y/edit?usp=drive_link&ouid=115238078648494379307&rtpof=true&sd=true", "type": "ppt" }
+        ]
+      }
     ]
   },
   { 
@@ -211,17 +275,16 @@
       "Broadcasting",
       "Digital Media"
     ],
-    "documents": [
-      { "title": "Media Kit", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" },
-      { "title": "Advertising Rates", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" }
-    ], 
-    "repos": [
-      { "title": "Content Management System", "url": "https://github.com/example/cms-system" },
-      { "title": "News Aggregator", "url": "https://github.com/example/news-aggregator" }
-    ], 
-    "videos": [
-      { "title": "News Production", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
-      { "title": "Studio Tour", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
+    "projects": [
+      {
+        "name": "Invoice Approval",
+        "videos": [
+          { "title": "Invoice Approval", "url": "https://drive.google.com/file/d/1nxZHAXFQhNHcr4NoOT3I4JZ9s45gcgqs/view?usp=drive_link", "type": "video" }
+        ],
+        "documents": [
+          { "title": "Invoice Approval", "url": "https://docs.google.com/presentation/d/1XGlFbwOUo2mIzOWXB1rqB1gxmBpir72u/edit?usp=drive_link&ouid=115238078648494379307&rtpof=true&sd=true", "type": "ppt" }
+        ]
+      }
     ] 
   },
   { 
