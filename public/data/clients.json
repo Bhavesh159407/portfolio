@@ -1,28 +1,4 @@
 [
-  {
-    "name": "Aragen Life Sciences", 
-    "domain": "aragen.com", 
-    "website": "https://www.aragen.com", 
-    "logoUrl": "https://www.aragen.com/wp-content/uploads/2021/05/logo-1.svg",
-    "description": "Leading contract research organization specializing in drug discovery and development services",
-    "businesses": [
-      "Drug Discovery Services",
-      "Medicinal Chemistry",
-      "Biology Services"
-    ],
-    "documents": [
-      { "title": "Project Overview - Drug Discovery Platform", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" },
-      { "title": "Technical Specifications", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" }
-    ], 
-    "repos": [
-      { "title": "Drug Discovery API", "url": "https://github.com/example/drug-discovery-api" },
-      { "title": "Chemistry Database", "url": "https://github.com/example/chemistry-db" }
-    ], 
-    "videos": [
-      { "title": "Platform Demo", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
-      { "title": "User Training", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
-    ] 
-  },
   { 
     "name": "TRL Krosaki Refractories Limited", 
     "domain": "trlkrosaki.com", 
@@ -298,18 +274,14 @@
       "Faucets & Fittings",
       "Wellness Products"
     ],
-    "documents": [
-      { "title": "Product Catalog", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" },
-      { "title": "Installation Guide", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" }
-    ], 
-    "repos": [
-      { "title": "E-commerce Platform", "url": "https://github.com/example/hindware-ecommerce" },
-      { "title": "Inventory Management", "url": "https://github.com/example/hindware-inventory" }
-    ], 
-    "videos": [
-      { "title": "Product Showcase", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
-      { "title": "Installation Tutorial", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
-    ] 
+    "projects": [
+      {
+        "name": "Hindware Project",
+        "videos": [
+          { "title": "Hindware Project Demo", "url": "https://drive.google.com/file/d/1yQsYX9RAG8N4U_6r3_qVMgKUlpP5maWc/view?usp=drive_link", "type": "video" }
+        ]
+      }
+    ]
   },
   { 
     "name": "Laurus Labs", 
@@ -322,17 +294,73 @@
       "Formulations",
       "Contract Research"
     ],
-    "documents": [
-      { "title": "Company Profile", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" },
-      { "title": "Research Publications", "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "type": "pdf" }
+    "projects": [
+      {
+        "name": "Laurus Labs Project",
+        "videos": [
+          { "title": "Laurus Labs Project Demo", "url": "https://drive.google.com/file/d/1CpwnL7SJ1CMbC5537raj4wtc18cdpv9n/view?usp=drive_link", "type": "video" }
+        ]
+      }
+    ]
+  },
+  { 
+    "name": "Aragen Life Sciences", 
+    "domain": "aragen.com", 
+    "website": "https://www.aragen.com", 
+    "logoUrl": "https://www.aragen.com/wp-content/uploads/2021/05/logo-1.svg",
+    "description": "Leading contract research organization specializing in drug discovery and development services",
+    "businesses": [
+      "Drug Discovery Services",
+      "Medicinal Chemistry",
+      "Biology Services"
     ],
-    "repos": [
-      { "title": "Pharma Analytics Platform", "url": "https://github.com/example/laurus-analytics" },
-      { "title": "Research Database", "url": "https://github.com/example/laurus-research" }
+    "projects": [
+      {
+        "name": "Aragen Project",
+        "videos": [
+          { "title": "Aragen Project Demo", "url": "https://drive.google.com/file/d/1uS6FFB4_FuCvuz5eXApwJ0EaTX2XFq6y/view?usp=drive_link", "type": "video" }
+        ]
+      }
+    ]
+  },
+  { 
+    "name": "Biological E Limited", 
+    "domain": "biologicale.com", 
+    "website": "https://www.biologicale.com", 
+    "logoUrl": "https://www.biologicale.com/images/logo2.png",
+    "description": "Leading biopharmaceutical company specializing in vaccines and biologics",
+    "businesses": [
+      "Vaccines",
+      "Biologics",
+      "Pharmaceutical Products"
     ],
-    "videos": [
-      { "title": "Company Overview", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
-      { "title": "Research Facilities", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
+    "projects": [
+      {
+        "name": "Biological E Project",
+        "documents": [
+          { "title": "Biological E Project Presentation", "url": "https://docs.google.com/presentation/d/1BADJPvW5Q9NwXehP_gB4NfnbMJ1jAUpFMDYxn1k5gIc/edit?usp=drive_link", "type": "ppt" }
+        ]
+      }
+    ]
+  },
+  { 
+    "name": "SMS Pharmaceuticals Limited", 
+    "domain": "smsl.co.in", 
+    "website": "https://www.smsl.co.in", 
+    "logoUrl": "https://smsl.co.in/wp-content/uploads/2024/03/main-logo-e1712042518858.png",
+    "description": "Leading pharmaceutical company specializing in APIs and formulations",
+    "businesses": [
+      "Active Pharmaceutical Ingredients",
+      "Formulations",
+      "Contract Manufacturing"
+    ],
+    "projects": [
+      {
+        "name": "SMS Project",
+        "videos": [
+          { "title": "SMS Project Demo", "url": "https://drive.google.com/file/d/1yQsYX9RAG8N4U_6r3_qVMgKUlpP5maWc/view?usp=drive_link", "type": "video" }
+        ]
+      }
     ]
   }
 ]
