@@ -226,8 +226,8 @@ function renderResume(resume) {
   
   // Set profile photo if available
   if (resume.profilePhoto) {
-    setImage("profile-photo", resume.profilePhoto);
-    setImage("brand-avatar", resume.profilePhoto);
+  setImage("profile-photo", resume.profilePhoto);
+  setImage("brand-avatar", resume.profilePhoto);
   }
 
   const year = new Date().getFullYear();
@@ -470,6 +470,12 @@ function renderClients(clients) {
     img.src = logoUrlForClient(client);
     img.alt = `${client.name} logo`;
     const label = createEl("div", "name", client.name);
+    
+    // Special text styling for Hindware (white text)
+    if (client.name === "Hindware Limited") {
+      label.style.cssText = "color: white; font-size: 14px; text-align: center; font-weight: 500;";
+    }
+    
     card.appendChild(img);
     card.appendChild(label);
     card.addEventListener("click", () => openClientModal(client));
@@ -600,7 +606,7 @@ function openClientModal(client) {
       `;
       modalVideosContent.appendChild(videoItem);
     });
-  } else {
+    } else {
     modalVideosContent.innerHTML = '<p style="color: #666; font-style: italic;">No videos available</p>';
   }
 
