@@ -277,8 +277,8 @@
     "projects": [
       {
         "name": "Hindware Project",
-    "videos": [
-          { "title": "Hindware Project Demo", "url": "https://drive.google.com/file/d/1yQsYX9RAG8N4U_6r3_qVMgKUlpP5maWc/view?usp=drive_link", "type": "video" }
+        "documents": [
+          { "title": "Hindware Project Demo", "url": "https://drive.google.com/file/d/1yQsYX9RAG8N4U_6r3_qVMgKUlpP5maWc/view?usp=drive_link", "type": "ppt" }
         ]
       }
     ]
