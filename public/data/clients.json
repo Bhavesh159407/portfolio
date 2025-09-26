@@ -1,5 +1,5 @@
 [
-  { 
+  {
     "name": "TRL Krosaki Refractories Limited", 
     "domain": "trlkrosaki.com", 
     "website": "https://www.trlkrosaki.com", 
@@ -234,7 +234,7 @@
         "videos": [
           { "title": "Putaway", "url": "https://drive.google.com/file/d/1Noq4t9Sr3TubfZXIlA21exRyf3KWBfRD/view?usp=drive_link", "type": "video" }
         ],
-        "documents": [
+    "documents": [
           { "title": "Putaway", "url": "https://docs.google.com/presentation/d/1Y84WXz0cgMBoaWQgDXbPDgq_ZUiuY2_Y/edit?usp=drive_link&ouid=115238078648494379307&rtpof=true&sd=true", "type": "ppt" }
         ]
       }
@@ -277,7 +277,7 @@
     "projects": [
       {
         "name": "Hindware Project",
-        "videos": [
+    "videos": [
           { "title": "Hindware Project Demo", "url": "https://drive.google.com/file/d/1yQsYX9RAG8N4U_6r3_qVMgKUlpP5maWc/view?usp=drive_link", "type": "video" }
         ]
       }
@@ -297,8 +297,8 @@
     "projects": [
       {
         "name": "Laurus Labs Project",
-        "videos": [
-          { "title": "Laurus Labs Project Demo", "url": "https://drive.google.com/file/d/1CpwnL7SJ1CMbC5537raj4wtc18cdpv9n/view?usp=drive_link", "type": "video" }
+        "documents": [
+          { "title": "Laurus Labs Project Demo", "url": "https://drive.google.com/file/d/1CpwnL7SJ1CMbC5537raj4wtc18cdpv9n/view?usp=drive_link", "type": "ppt" }
         ]
       }
     ]
@@ -317,8 +317,8 @@
     "projects": [
       {
         "name": "Aragen Project",
-        "videos": [
-          { "title": "Aragen Project Demo", "url": "https://drive.google.com/file/d/1uS6FFB4_FuCvuz5eXApwJ0EaTX2XFq6y/view?usp=drive_link", "type": "video" }
+    "documents": [
+          { "title": "Aragen Project Demo", "url": "https://drive.google.com/file/d/1uS6FFB4_FuCvuz5eXApwJ0EaTX2XFq6y/view?usp=drive_link", "type": "ppt" }
         ]
       }
     ]
@@ -357,8 +357,8 @@
     "projects": [
       {
         "name": "SMS Project",
-        "videos": [
-          { "title": "SMS Project Demo", "url": "https://drive.google.com/file/d/1yQsYX9RAG8N4U_6r3_qVMgKUlpP5maWc/view?usp=drive_link", "type": "video" }
+        "documents": [
+          { "title": "SMS Project Demo", "url": "https://drive.google.com/file/d/1yQsYX9RAG8N4U_6r3_qVMgKUlpP5maWc/view?usp=drive_link", "type": "ppt" }
         ]
       }
     ]
