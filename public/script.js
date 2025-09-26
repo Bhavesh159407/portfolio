@@ -471,9 +471,9 @@ function renderClients(clients) {
     img.alt = `${client.name} logo`;
     const label = createEl("div", "name", client.name);
     
-    // Special text styling for Hindware (white text)
+    // Special text styling for Hindware (dark text for white background)
     if (client.name === "Hindware Limited") {
-      label.style.cssText = "color: white; font-size: 14px; text-align: center; font-weight: 500;";
+      label.style.cssText = "color: #333; font-size: 14px; text-align: center; font-weight: 500;";
     }
     
     card.appendChild(img);
