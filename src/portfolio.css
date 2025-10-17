@@ -1,16 +1,44 @@
 :root {
-  --bg: #ffffff;            /* SAP white background */
-  --surface: #f5f7fa;       /* SAP light gray surfaces */
-  --surface-2: #e8ecf0;     /* SAP secondary gray */
-  --text: #0f4c81;          /* SAP primary blue text */
-  --muted: #5a6c7d;         /* SAP muted gray */
-  --primary: #0f4c81;       /* SAP primary blue */
-  --primary-light: #00a1e4; /* SAP light blue */
+  /* SAP Fiori 3 Official Colors */
+  --sapBackgroundColor: #ffffff;
+  --sapBackgroundColor-1: #f7f7f7;
+  --sapBackgroundColor-2: #f2f2f2;
+  --sapBackgroundColor-3: #ffffff;
+  --sapTextColor: #32363a;
+  --sapTextColor-Secondary: #6a6d70;
+  --sapTextColor-Muted: #8b8f94;
+  
+  /* Fiori 3 Brand Colors */
+  --sapBrandColor: #0070f3;
+  --sapBrandColor-Hover: #0052cc;
+  --sapBrandColor-Active: #0041a3;
+  --sapAccentColor: #ff6900;
+  --sapAccentColor-Hover: #e55a00;
+  
+  /* Fiori 3 Semantic Colors */
+  --sapSuccessColor: #107e3e;
+  --sapWarningColor: #f58c00;
+  --sapErrorColor: #d32f2f;
+  --sapInformationColor: #0070f3;
+  
+  /* Fiori 3 Neutral Colors */
+  --sapNeutralColor: #6a6d70;
+  --sapNeutralColor-Hover: #32363a;
+  --sapNeutralColor-Active: #1c1c1c;
+  
+  /* Legacy variables for compatibility */
+  --bg: var(--sapBackgroundColor);
+  --surface: var(--sapBackgroundColor-1);
+  --surface-2: var(--sapBackgroundColor-2);
+  --text: var(--sapTextColor);
+  --muted: var(--sapTextColor-Secondary);
+  --primary: var(--sapBrandColor);
+  --primary-light: var(--sapInformationColor);
   --primary-contrast: #ffffff;
-  --card: #ffffff;          /* SAP white cards */
-  --border: #d1d8e0;        /* SAP light border */
-  --accent: #ff6900;        /* SAP orange accent */
-  --shadow: 0 4px 20px rgba(15, 76, 129, 0.1);
+  --card: var(--sapBackgroundColor-3);
+  --border: #e5e5e5;
+  --accent: var(--sapAccentColor);
+  --shadow: 0 0 1rem rgba(50, 54, 58, 0.08);
 }
 
 * { box-sizing: border-box; }
@@ -18,10 +46,11 @@ html, body { height: 100%; }
 html, body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%); /* SAP gradient */
-  color: var(--text);
-  font-family: "Segoe UI", "Open Sans", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
-  line-height: 1.6;
+  background: var(--sapBackgroundColor);
+  color: var(--sapTextColor);
+  font-family: "72", "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
   overflow-x: hidden;
 }
 
@@ -45,23 +74,23 @@ body::after {
 
 body::before {
   background:
-    radial-gradient(1px 1px at 20px 30px, rgba(15,76,129,0.08), transparent 40%),
-    radial-gradient(1px 1px at 100px 80px, rgba(0,161,228,0.06), transparent 40%),
-    radial-gradient(2px 2px at 50px 120px, rgba(15,76,129,0.04), transparent 40%),
-    radial-gradient(1px 1px at 170px 200px, rgba(0,161,228,0.03), transparent 40%);
+    radial-gradient(1px 1px at 20px 30px, rgba(0,112,243,0.06), transparent 40%),
+    radial-gradient(1px 1px at 100px 80px, rgba(0,112,243,0.04), transparent 40%),
+    radial-gradient(2px 2px at 50px 120px, rgba(0,112,243,0.03), transparent 40%),
+    radial-gradient(1px 1px at 170px 200px, rgba(0,112,243,0.02), transparent 40%);
   background-size: 200px 200px, 300px 300px, 400px 400px, 500px 500px;
   animation: pattern-move 120s linear infinite;
-  opacity: 0.5;
+  opacity: 0.4;
 }
 
 body::after {
   background:
-    radial-gradient(1px 1px at 60px 40px, rgba(15,76,129,0.06), transparent 40%),
-    radial-gradient(1px 1px at 140px 140px, rgba(0,161,228,0.04), transparent 40%),
-    radial-gradient(2px 2px at 220px 60px, rgba(15,76,129,0.03), transparent 40%);
+    radial-gradient(1px 1px at 60px 40px, rgba(0,112,243,0.04), transparent 40%),
+    radial-gradient(1px 1px at 140px 140px, rgba(0,112,243,0.03), transparent 40%),
+    radial-gradient(2px 2px at 220px 60px, rgba(0,112,243,0.02), transparent 40%);
   background-size: 260px 260px, 380px 380px, 540px 540px;
   animation: pattern-move 180s linear infinite reverse;
-  opacity: 0.3;
+  opacity: 0.2;
 }
 
 @keyframes pattern-move {
@@ -71,18 +100,18 @@ body::after {
 
 .container { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
 
-.site-header { position: sticky; top: 0; z-index: 1000; backdrop-filter: saturate(180%) blur(10px); background: rgba(255,255,255,0.9); border-bottom: 2px solid var(--primary); transition: background 0.2s ease, border-color 0.2s ease; box-shadow: 0 2px 8px rgba(15,76,129,0.1); }
-.site-header:hover { background: rgba(255,255,255,1); border-bottom: 2px solid var(--primary-light); }
+.site-header { position: sticky; top: 0; z-index: 1000; backdrop-filter: saturate(180%) blur(10px); background: var(--sapBackgroundColor-3); border-bottom: 1px solid var(--border); transition: background 0.2s ease, border-color 0.2s ease; box-shadow: 0 0.125rem 0.5rem rgba(50, 54, 58, 0.08); }
+.site-header:hover { background: var(--sapBackgroundColor-3); border-bottom: 1px solid var(--sapBrandColor); }
 .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
 .brand-link { display: inline-block; font-weight: 700; letter-spacing: 0.3px; color: var(--text); text-decoration: none; }
 .brand { display: flex; align-items: center; gap: 10px; }
-.brand-avatar { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary); box-shadow: 0 2px 8px rgba(15,76,129,0.2); transition: transform 0.2s ease, box-shadow 0.2s ease; }
-.brand-avatar:hover { transform: scale(1.06); box-shadow: 0 4px 12px rgba(15,76,129,0.3); }
-.nav a { position: relative; color: var(--muted); text-decoration: none; margin-left: 12px; padding: 6px 8px; border-radius: 8px; transition: color 0.18s ease, background 0.18s ease, transform 0.18s ease; }
-.nav a::after { content: ""; position: absolute; left: 8px; right: 8px; bottom: 4px; height: 2px; background: var(--primary); transform: scaleX(0); transform-origin: left; transition: transform 0.2s ease; opacity: 0.85; }
-.nav a:hover { color: var(--primary); background: rgba(15,76,129,0.1); }
+.brand-avatar { width: 32px; height: 32px; border-radius: 0.25rem; object-fit: cover; border: 1px solid var(--border); box-shadow: 0 0.125rem 0.5rem rgba(50, 54, 58, 0.08); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.brand-avatar:hover { transform: scale(1.05); box-shadow: 0 0.25rem 0.75rem rgba(0, 112, 243, 0.15); border-color: var(--sapBrandColor); }
+.nav a { position: relative; color: var(--sapTextColor-Secondary); text-decoration: none; margin-left: 12px; padding: 0.5rem 0.75rem; border-radius: 0.25rem; transition: color 0.18s ease, background 0.18s ease, transform 0.18s ease; font-size: 14px; }
+.nav a::after { content: ""; position: absolute; left: 0.75rem; right: 0.75rem; bottom: 0.25rem; height: 2px; background: var(--sapBrandColor); transform: scaleX(0); transform-origin: left; transition: transform 0.2s ease; opacity: 0.85; }
+.nav a:hover { color: var(--sapBrandColor); background: rgba(0, 112, 243, 0.08); }
 .nav a:hover::after { transform: scaleX(1); }
-.nav a.active { color: var(--primary); background: rgba(15,76,129,0.10); }
+.nav a.active { color: var(--sapBrandColor); background: rgba(0, 112, 243, 0.08); }
 .nav a.active::after { transform: scaleX(1); }
 
 .hero { padding: 72px 0 32px; }
@@ -91,26 +120,26 @@ body::after {
 .subtitle { margin: 0 0 14px; color: var(--muted); font-weight: 600; }
 .tagline { margin-bottom: 16px; }
 .cta-group { display: flex; gap: 12px; margin: 18px 0; }
-.button { display: inline-flex; align-items: center; justify-content: center; padding: 12px 20px; border-radius: 12px; border: 2px solid var(--border); background: var(--card); color: var(--text); text-decoration: none; transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease; font-weight: 500; }
-.button:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); border-color: var(--primary); }
-.button.primary { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: var(--primary-contrast); border-color: transparent; box-shadow: 0 4px 15px rgba(15,76,129,0.3); }
-.button.primary:hover { box-shadow: 0 8px 25px rgba(15,76,129,0.4); transform: translateY(-2px); }
+.button { display: inline-flex; align-items: center; justify-content: center; padding: 0.75rem 1.5rem; border-radius: 0.25rem; border: 1px solid var(--border); background: var(--sapBackgroundColor-3); color: var(--sapTextColor); text-decoration: none; transition: all 0.15s ease; font-weight: 500; font-size: 14px; min-height: 2.5rem; }
+.button:hover { transform: translateY(-1px); box-shadow: 0 0.25rem 0.75rem rgba(50, 54, 58, 0.15); border-color: var(--sapBrandColor); background: var(--sapBackgroundColor-2); }
+.button.primary { background: var(--sapBrandColor); color: var(--sapBackgroundColor-3); border-color: var(--sapBrandColor); box-shadow: 0 0.125rem 0.5rem rgba(0, 112, 243, 0.3); }
+.button.primary:hover { box-shadow: 0 0.25rem 0.75rem rgba(0, 112, 243, 0.4); transform: translateY(-1px); background: var(--sapBrandColor-Hover); border-color: var(--sapBrandColor-Hover); }
 .social { display: flex; gap: 10px; margin-top: 10px; }
 .social a { color: var(--muted); text-decoration: none; }
-.social a:hover { color: var(--primary); }
-.hero-photo img { width: 220px; height: 220px; border-radius: 18px; object-fit: cover; border: 3px solid var(--primary); box-shadow: 0 8px 32px rgba(15,76,129,0.2); }
+.social a:hover { color: var(--sapBrandColor); }
+.hero-photo img { width: 220px; height: 220px; border-radius: 0.5rem; object-fit: cover; border: 2px solid var(--border); box-shadow: 0 0.5rem 2rem rgba(50, 54, 58, 0.12); }
 
 .section { padding: 48px 0; }
 .section.alt { background: linear-gradient(180deg, var(--surface), transparent); }
 
-.card { background: var(--card); border: 2px solid var(--border); border-radius: 16px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); backdrop-filter: saturate(140%) blur(10px); }
+.card { background: var(--sapBackgroundColor-3); border: 1px solid var(--border); border-radius: 0.25rem; padding: 1.5rem; box-shadow: 0 0.125rem 0.5rem rgba(50, 54, 58, 0.08); }
 
 /* Improved Skills layout */
 #skills-cloud { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
 #skills-cloud > .card h3 { margin: 0 0 10px; font-size: 16px; color: var(--muted); }
 .skills { display: flex; flex-wrap: wrap; gap: 10px; }
-.skills .chip { background: var(--surface); border: 2px solid var(--border); border-radius: 999px; padding: 8px 16px; color: var(--text); display: inline-flex; align-items: center; gap: 8px; font-weight: 500; transition: all 0.2s ease; }
-.skills .chip:hover { background: var(--primary); color: var(--primary-contrast); border-color: var(--primary); transform: translateY(-1px); }
+.skills .chip { background: var(--sapBackgroundColor-2); border: 1px solid var(--border); border-radius: 1rem; padding: 0.5rem 1rem; color: var(--sapTextColor); display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 500; transition: all 0.2s ease; font-size: 14px; }
+.skills .chip:hover { background: var(--sapBrandColor); color: var(--sapBackgroundColor-3); border-color: var(--sapBrandColor); transform: translateY(-1px); }
 .skills .chip .icon { font-size: 14px; }
 
 .grid { display: grid; gap: 16px; }
@@ -122,20 +151,20 @@ body::after {
 .project-card h3 { margin: 0 0 6px; }
 .muted { color: var(--muted); }
 
-.logo-card { background: var(--card); border: 2px solid var(--border); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; cursor: pointer; transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease; filter: grayscale(20%); }
-.logo-card:hover { transform: translateY(-4px) scale(1.02); border-color: var(--primary); box-shadow: 0 8px 32px rgba(59,130,246,0.2); filter: grayscale(0%); }
+.logo-card { background: var(--sapBackgroundColor-3); border: 1px solid var(--border); border-radius: 0.25rem; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem; cursor: pointer; transition: all 0.2s ease; filter: grayscale(10%); }
+.logo-card:hover { transform: translateY(-2px); border-color: var(--sapBrandColor); box-shadow: 0 0.25rem 0.75rem rgba(0, 112, 243, 0.15); filter: grayscale(0%); }
 .logo-card img { max-width: 100%; max-height: 54px; object-fit: contain; }
 .logo-card .name { font-size: 14px; color: var(--muted); text-align: center; }
 
-.cert-card { background: var(--card); border: 2px solid var(--border); border-radius: 16px; padding: 20px; display: grid; gap: 12px; align-items: center; text-align: center; transition: all 0.2s ease; }
-.cert-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(59,130,246,0.15); }
+.cert-card { background: var(--sapBackgroundColor-3); border: 1px solid var(--border); border-radius: 0.25rem; padding: 1.5rem; display: grid; gap: 0.75rem; align-items: center; text-align: center; transition: all 0.2s ease; }
+.cert-card:hover { border-color: var(--sapBrandColor); transform: translateY(-2px); box-shadow: 0 0.25rem 0.75rem rgba(0, 112, 243, 0.15); }
 .cert-card img { width: 100%; height: 120px; object-fit: contain; border-radius: 12px; background: var(--surface); }
 .cert-card .title { color: var(--text); font-size: 14px; }
 .cert-card .provider { color: var(--muted); font-size: 12px; }
 
 .row { display: flex; align-items: center; gap: 12px; justify-content: space-between; }
-.input { background: var(--card); border: 2px solid var(--border); color: var(--text); border-radius: 12px; padding: 12px 16px; min-width: 220px; transition: box-shadow 0.15s ease, border-color 0.15s ease, background 0.15s ease; font-weight: 500; }
-.input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(59,130,246,0.1); background: var(--card); }
+.input { background: var(--sapBackgroundColor-3); border: 1px solid var(--border); color: var(--sapTextColor); border-radius: 0.25rem; padding: 0.75rem 1rem; min-width: 220px; transition: all 0.15s ease; font-weight: 500; font-size: 14px; }
+.input:focus { outline: none; border-color: var(--sapBrandColor); box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.1); background: var(--sapBackgroundColor-3); }
 
 .contact-card { 
   display: grid; 
