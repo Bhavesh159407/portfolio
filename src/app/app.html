@@ -111,21 +111,21 @@
   </section>
 </main>
 
-<section id="client-showcase" class="section" style="background: #0f1720; padding: 60px 0;">
-  <div class="container">
-    <h2 style="text-align: center; color: #e6edf3; font-size: 2.5rem; margin-bottom: 40px;">Esteemed Clients</h2>
-    <div class="logo-showcase" style="background: rgba(15,23,32,0.8); border-radius: 20px; padding: 40px; border: 2px solid #7aa2ff; overflow: hidden;">
-      <div class="logo-track" style="display: flex; gap: 40px; width: max-content;" id="logo-track">
-        <!-- Dynamic logos will be populated by JavaScript -->
+  <section id="client-showcase" class="section" style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); padding: 80px 0;">
+    <div class="container">
+      <h2 style="text-align: center; color: white; font-size: 3rem; margin-bottom: 50px; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">Esteemed Clients</h2>
+      <div class="logo-showcase" style="background: rgba(255,255,255,0.95); border-radius: 24px; padding: 50px; border: 3px solid rgba(255,255,255,0.3); overflow: hidden; box-shadow: 0 20px 60px rgba(15,76,129,0.3);">
+        <div class="logo-track" style="display: flex; gap: 50px; width: max-content;" id="logo-track">
+          <!-- Dynamic logos will be populated by JavaScript -->
+        </div>
       </div>
-    </div>
 <style>
       @keyframes marquee {
         0% { transform: translateX(0); }
         100% { transform: translateX(-50%); }
       }
       .logo-track {
-        animation: marquee 25s linear infinite;
+        animation: marquee 30s linear infinite;
         will-change: transform;
       }
       .logo-track:hover {
@@ -136,10 +136,17 @@
         position: relative;
       }
       .logo-card {
-        transition: transform 0.3s ease;
+        transition: all 0.4s ease;
+        background: white !important;
+        border: 2px solid var(--border) !important;
+        border-radius: 20px !important;
+        padding: 25px !important;
+        box-shadow: 0 8px 32px rgba(15,76,129,0.15) !important;
       }
       .logo-card:hover {
-        transform: translateY(-5px);
+        transform: translateY(-8px) scale(1.05);
+        border-color: var(--primary) !important;
+        box-shadow: 0 16px 48px rgba(15,76,129,0.25) !important;
       }
       
       /* Global layout helpers */
