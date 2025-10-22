@@ -325,8 +325,8 @@ function renderResume(resume) {
     
     // Place college logo in the period section before the year
     const periodWithLogo = e.logoUrl ? 
-      `<div style="display: flex; align-items: center; justify-content: flex-end; gap: 8px;">
-        <img src="${e.logoUrl}" alt="${e.school} logo" style="width: 24px; height: 24px; object-fit: contain; border-radius: 3px;">
+      `<div style="display: flex; align-items: center; justify-content: flex-end; gap: 12px;">
+        <img src="${e.logoUrl}" alt="${e.school} logo" style="width: 36px; height: 36px; object-fit: contain; border-radius: 4px;">
         <span>${e.period || ""}</span>
       </div>` : 
       e.period || "";

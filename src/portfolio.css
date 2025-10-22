@@ -335,7 +335,7 @@ body::after {
 .timeline .item .title { margin: 0; }
 .timeline .item .where { color: var(--muted); }
 /* dedicated gutter in details column to avoid overlap */
-.timeline .item > div:nth-child(2) { position: relative; padding-left: 16px; }
+.timeline .item > div:nth-child(2) { position: relative; padding-left: 24px; }
 .timeline .item > div:nth-child(2)::before { content: ""; position: absolute; left: 4px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: var(--sapBrandColor); border: 3px solid var(--card); box-shadow: 0 0 0 2px var(--sapBrandColor); }
 .timeline .item > div:nth-child(2)::after { content: ""; position: absolute; left: 9px; top: 20px; bottom: -16px; width: 3px; background: linear-gradient(var(--sapBrandColor), rgba(0, 112, 243, 0.1)); }
 .timeline .item:last-child > div:nth-child(2)::after { display: none; }
@@ -601,9 +601,9 @@ body::after {
   .hero-inner { grid-template-columns: 1fr; }
   .timeline .item { grid-template-columns: 1fr; }
   .timeline .item .period { text-align: left; }
-  .timeline .item > div:nth-child(2) { padding-left: 16px; }
-  .timeline .item > div:nth-child(2)::before { left: 2px; }
-  .timeline .item > div:nth-child(2)::after { left: 7px; }
+  .timeline .item > div:nth-child(2) { padding-left: 24px; }
+  .timeline .item > div:nth-child(2)::before { left: 6px; }
+  .timeline .item > div:nth-child(2)::after { left: 11px; }
 }
 
 
