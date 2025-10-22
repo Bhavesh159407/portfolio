@@ -323,10 +323,10 @@ function renderResume(resume) {
     const gpaText = e.gpa ? ` • GPA: ${e.gpa}` : "";
     const honorsText = e.honors ? ` • ${e.honors}` : "";
     
-    // Place college logo in the period section before the year - bigger for visibility
+    // Place college logo in the period section before the year - much wider for visibility
     const periodWithLogo = e.logoUrl ? 
-      `<div style="display: flex; align-items: center; justify-content: flex-end; gap: 8px; min-width: 0;">
-        <img src="${e.logoUrl}" alt="${e.school} logo" style="width: 70px; height: 22px; object-fit: cover; object-position: left center; border-radius: 3px; opacity: 0.9; flex-shrink: 0;">
+      `<div style="display: flex; align-items: center; justify-content: flex-end; gap: 10px; min-width: 0;">
+        <img src="${e.logoUrl}" alt="${e.school} logo" style="width: 100px; height: 30px; object-fit: cover; object-position: left center; border-radius: 4px; opacity: 0.95; flex-shrink: 0;">
         <span style="font-size: 13px; color: var(--muted); white-space: nowrap; flex-shrink: 0;">${e.period || ""}</span>
       </div>` : 
       e.period || "";
