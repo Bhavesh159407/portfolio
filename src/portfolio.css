@@ -606,4 +606,22 @@ body::after {
   .timeline .item > div:nth-child(2)::after { left: 11px; }
 }
 
-
+/* Brand Link Styles */
+.brand-link { 
+  color: var(--sapTextColor); 
+  text-decoration: none; 
+  font-weight: 600; 
+  font-size: 18px; 
+  transition: all 0.3s ease; 
+}
+.brand-link:hover { 
+  color: var(--sapBrandColor-Dark); 
+  text-decoration: none; 
+}
+.clickable-brand { 
+  transition: all 0.3s ease; 
+}
+.clickable-brand:hover { 
+  transform: scale(1.05); 
+  opacity: 0.8; 
+}
