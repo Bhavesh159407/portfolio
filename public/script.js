@@ -323,14 +323,19 @@ function renderResume(resume) {
     const gpaText = e.gpa ? ` • GPA: ${e.gpa}` : "";
     const honorsText = e.honors ? ` • ${e.honors}` : "";
     
-    // Check if school has a logo URL and make it more visible
-    const schoolLogo = e.logoUrl ? `<img src="${e.logoUrl}" alt="${e.school} logo" class="school-logo" style="width: 32px; height: 32px; object-fit: contain; margin-right: 12px; vertical-align: middle; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">` : "";
+    // Place college logo in the period section before the year
+    const periodWithLogo = e.logoUrl ? 
+      `<div style="display: flex; align-items: center; justify-content: flex-end; gap: 8px;">
+        <img src="${e.logoUrl}" alt="${e.school} logo" style="width: 24px; height: 24px; object-fit: contain; border-radius: 3px;">
+        <span>${e.period || ""}</span>
+      </div>` : 
+      e.period || "";
     
     row.innerHTML = `
-      <div class="period">${e.period || ""}</div>
+      <div class="period">${periodWithLogo}</div>
       <div>
         <h3 class="title">${e.degree || ""}</h3>
-        <div class="where">${schoolLogo}${e.school || ""}${gpaText}${honorsText}</div>
+        <div class="where">${e.school || ""}${gpaText}${honorsText}</div>
       </div>`;
     edu.appendChild(row);
   });
