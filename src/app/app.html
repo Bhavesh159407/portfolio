@@ -521,59 +521,53 @@ function scrollToHero() {
   }
 }
 
-// Simple Scroll Spy for Header Navigation
+// Basic Scroll Spy Test
 function initScrollSpy() {
+  console.log('Scroll spy initialized!');
+  
   const navLinks = document.querySelectorAll('.nav a');
+  console.log('Found nav links:', navLinks.length);
+  
+  // Test if we can find sections
+  const hero = document.getElementById('hero');
+  const about = document.getElementById('about');
+  const education = document.getElementById('education');
+  
+  console.log('Hero section:', hero ? 'Found' : 'NOT FOUND');
+  console.log('About section:', about ? 'Found' : 'NOT FOUND');
+  console.log('Education section:', education ? 'Found' : 'NOT FOUND');
   
   function updateActiveNav() {
-    const scrollPosition = window.scrollY + 200; // Offset for better detection
+    console.log('Scroll event triggered! Scroll position:', window.scrollY);
     
-    // Remove active class from all nav links
+    // Simple test - just highlight About when scrolled down
     navLinks.forEach(link => {
       link.classList.remove('active');
     });
     
-    // Check each section and find which one is currently visible
-    const sections = [
-      { id: 'hero', element: document.getElementById('hero') },
-      { id: 'about', element: document.getElementById('about') },
-      { id: 'education', element: document.getElementById('education') },
-      { id: 'experience', element: document.getElementById('experience') },
-      { id: 'projects', element: document.getElementById('projects') },
-      { id: 'skills', element: document.getElementById('skills') },
-      { id: 'clients', element: document.getElementById('clients') },
-      { id: 'contact', element: document.getElementById('contact') }
-    ];
-    
-    let currentSection = 'hero'; // Default to hero
-    
-    sections.forEach(section => {
-      if (section.element) {
-        const sectionTop = section.element.offsetTop;
-        const sectionBottom = sectionTop + section.element.offsetHeight;
-        
-        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-          currentSection = section.id;
-        }
+    if (window.scrollY > 500) {
+      const aboutLink = document.querySelector('.nav a[href="#about"]');
+      if (aboutLink) {
+        aboutLink.classList.add('active');
+        console.log('Highlighted About link');
       }
-    });
-    
-    // Add active class to the corresponding nav link
-    navLinks.forEach(link => {
-      const href = link.getAttribute('href');
-      if (href === `#${currentSection}`) {
-        link.classList.add('active');
+    } else {
+      const homeLink = document.querySelector('.nav a[href="#hero"]');
+      if (homeLink) {
+        homeLink.classList.add('active');
+        console.log('Highlighted Home link');
       }
-    });
-    
-    console.log('Scroll position:', window.scrollY, 'Current section:', currentSection);
+    }
   }
   
-  // Update on scroll
+  // Test scroll event
   window.addEventListener('scroll', updateActiveNav);
   
-  // Update on page load
-  setTimeout(updateActiveNav, 100);
+  // Test on load
+  setTimeout(() => {
+    console.log('Testing on load...');
+    updateActiveNav();
+  }, 1000);
 }
 
 // Initialize when DOM is loaded
