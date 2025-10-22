@@ -640,8 +640,7 @@ body::after {
 }
 
 /* Navigation Active State */
-.nav a.active,
-.brand-link.active {
+.nav a.active {
   background: var(--sapBrandColor-Dark) !important;
   color: white !important;
   border-color: var(--sapBrandColor-Dark) !important;

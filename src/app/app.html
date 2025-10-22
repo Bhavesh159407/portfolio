@@ -524,11 +524,11 @@ function scrollToHero() {
 // Scroll Spy Functionality
 function initScrollSpy() {
   const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav a, .brand-link');
+  const navLinks = document.querySelectorAll('.nav a'); // Only nav links, not brand elements
   
   function updateActiveNav() {
     let current = '';
-    const scrollPos = window.scrollY + 150; // Offset for better detection
+    const scrollPos = window.scrollY + 100; // Offset for better detection
     
     // Find the current section
     sections.forEach(section => {
@@ -541,25 +541,19 @@ function initScrollSpy() {
     });
     
     // If no section is detected, check if we're at the top
-    if (!current && window.scrollY < 300) {
+    if (!current && window.scrollY < 200) {
       current = 'hero';
     }
     
-    // Update all navigation links
+    // Update only navigation links (not brand elements)
     navLinks.forEach(link => {
       link.classList.remove('active');
       const href = link.getAttribute('href');
       
-      // Handle different href formats
-      if (href === `#${current}` || 
-          (href === '#hero' && current === 'hero') ||
-          (href === '#' && current === 'hero')) {
+      if (href === `#${current}` || (href === '#hero' && current === 'hero')) {
         link.classList.add('active');
       }
     });
-    
-    // Debug logging (remove in production)
-    console.log('Current section:', current, 'Scroll position:', window.scrollY);
   }
   
   // Throttle scroll events for better performance
