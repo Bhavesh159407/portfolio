@@ -862,78 +862,62 @@ function initStarfield() {
   step();
 }
 
-// Scroll Spy Functionality - Robust Implementation
+// Simple Scroll Spy for Header Navigation
 function initScrollSpy() {
-  const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav a');
   
-  // Debug: Log sections found
-  console.log('Sections found:', sections.length);
-  sections.forEach(section => {
-    console.log('Section ID:', section.id, 'Offset:', section.offsetTop);
-  });
-  
   function updateActiveNav() {
-    const scrollPos = window.scrollY + window.innerHeight / 2; // Use viewport center
-    let current = '';
+    const scrollPosition = window.scrollY + 200; // Offset for better detection
     
-    // Find the section that's currently in the center of the viewport
+    // Remove active class from all nav links
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+    });
+    
+    // Check each section and find which one is currently visible
+    const sections = [
+      { id: 'hero', element: document.getElementById('hero') },
+      { id: 'about', element: document.getElementById('about') },
+      { id: 'education', element: document.getElementById('education') },
+      { id: 'experience', element: document.getElementById('experience') },
+      { id: 'projects', element: document.getElementById('projects') },
+      { id: 'skills', element: document.getElementById('skills') },
+      { id: 'clients', element: document.getElementById('clients') },
+      { id: 'contact', element: document.getElementById('contact') }
+    ];
+    
+    let currentSection = 'hero'; // Default to hero
+    
     sections.forEach(section => {
-      const sectionTop = section.offsetTop;
-      const sectionBottom = sectionTop + section.offsetHeight;
-      
-      if (scrollPos >= sectionTop && scrollPos <= sectionBottom) {
-        current = section.id;
+      if (section.element) {
+        const sectionTop = section.element.offsetTop;
+        const sectionBottom = sectionTop + section.element.offsetHeight;
+        
+        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+          currentSection = section.id;
+        }
       }
     });
     
-    // If no section is found, find the closest one
-    if (!current) {
-      let closestDistance = Infinity;
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const distance = Math.abs(scrollPos - sectionTop);
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          current = section.id;
-        }
-      });
-    }
-    
-    // Special case for top of page
-    if (window.scrollY < 100) {
-      current = 'hero';
-    }
-    
-    // Update navigation
+    // Add active class to the corresponding nav link
     navLinks.forEach(link => {
-      link.classList.remove('active');
       const href = link.getAttribute('href');
-      
-      if (href === `#${current}`) {
+      if (href === `#${currentSection}`) {
         link.classList.add('active');
       }
     });
     
-    // Debug logging
-    console.log('Scroll position:', window.scrollY, 'Current section:', current);
+    console.log('Scroll position:', window.scrollY, 'Current section:', currentSection);
   }
   
-  // Use a more aggressive scroll listener
-  let timeout;
-  window.addEventListener('scroll', function() {
-    clearTimeout(timeout);
-    timeout = setTimeout(updateActiveNav, 10);
-  });
+  // Update on scroll
+  window.addEventListener('scroll', updateActiveNav);
   
   // Update on page load
-  setTimeout(updateActiveNav, 500);
-  
-  // Update on resize
-  window.addEventListener('resize', updateActiveNav);
+  setTimeout(updateActiveNav, 100);
 }
 
-// Initialize scroll spy when DOM is loaded
+// Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', initScrollSpy);
 
 
