@@ -10,7 +10,7 @@
       </div>
     </div>
     <nav id="nav-menu" class="nav">
-      <a href="#" class="nav-home" onclick="scrollToTop()">Home</a>
+      <a href="#hero" class="nav-home" onclick="scrollToHero()">Home</a>
       <a href="#about">About</a>
       <a href="#education">Education</a>
       <a href="#experience">Experience</a>
@@ -511,11 +511,14 @@
 <router-outlet />
 
 <script>
-function scrollToTop() {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
+function scrollToHero() {
+  const heroSection = document.getElementById('hero');
+  if (heroSection) {
+    heroSection.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
 }
 </script>
 
