@@ -263,41 +263,41 @@ function renderResume(resume) {
 
   const socials = safeGetElement("social-links");
   if (socials) {
-    socials.innerHTML = "";
-    (resume.socials || []).forEach(s => {
-      const a = safeLink(s.url, s.icon ? `${s.icon} ${s.label}` : s.label);
-      socials.appendChild(a);
-    });
+  socials.innerHTML = "";
+  (resume.socials || []).forEach(s => {
+    const a = safeLink(s.url, s.icon ? `${s.icon} ${s.label}` : s.label);
+    socials.appendChild(a);
+  });
   }
 
   const about = safeGetElement("about-content");
   if (about) {
-    about.innerHTML = "";
-    const aboutLines = [
-      resume.summary,
-      resume.location ? `📍 ${resume.location}` : null,
-      resume.email ? `✉️ <a class="link" href="mailto:${resume.email}">${resume.email}</a>` : null,
-      resume.phone ? `📞 ${resume.phone}` : null,
-      resume.website ? `🌐 <a class="link" target="_blank" rel="noopener" href="${resume.website}">${resume.website}</a>` : null
-    ].filter(Boolean);
-    about.innerHTML = aboutLines.map(l => `<p>${l}</p>`).join("");
+  about.innerHTML = "";
+  const aboutLines = [
+    resume.summary,
+    resume.location ? `📍 ${resume.location}` : null,
+    resume.email ? `✉️ <a class="link" href="mailto:${resume.email}">${resume.email}</a>` : null,
+    resume.phone ? `📞 ${resume.phone}` : null,
+    resume.website ? `🌐 <a class="link" target="_blank" rel="noopener" href="${resume.website}">${resume.website}</a>` : null
+  ].filter(Boolean);
+  about.innerHTML = aboutLines.map(l => `<p>${l}</p>`).join("");
   }
 
   const expList = safeGetElement("experience-list");
   if (expList) {
-    expList.innerHTML = "";
-    (resume.experience || []).forEach(item => {
-      const row = createEl("div", "item card");
-      row.innerHTML = `
-        <div class="period">${item.period || ""}</div>
-        <div>
-          <h3 class="title">${item.role || ""}</h3>
+  expList.innerHTML = "";
+  (resume.experience || []).forEach(item => {
+    const row = createEl("div", "item card");
+    row.innerHTML = `
+      <div class="period">${item.period || ""}</div>
+      <div>
+        <h3 class="title">${item.role || ""}</h3>
           <div class="where">🏢 ${item.company || ""}${item.location ? ` • 📍 ${item.location}` : ""}</div>
-          ${item.summary ? `<p class="muted">${item.summary}</p>` : ""}
-          ${Array.isArray(item.highlights) && item.highlights.length ? `<ul>` + item.highlights.map(h => `<li>${h}</li>`).join("") + `</ul>` : ""}
-        </div>`;
-      expList.appendChild(row);
-    });
+        ${item.summary ? `<p class="muted">${item.summary}</p>` : ""}
+        ${Array.isArray(item.highlights) && item.highlights.length ? `<ul>` + item.highlights.map(h => `<li>${h}</li>`).join("") + `</ul>` : ""}
+      </div>`;
+    expList.appendChild(row);
+  });
   }
 
   const projGrid = document.getElementById("projects-grid");
@@ -892,56 +892,75 @@ function initStarfield() {
   step();
 }
 
-// Simple Direct Scroll Spy
+// Dynamic Scroll Spy - Detects Real Section Positions
 window.addEventListener('load', function() {
-  console.log('Page loaded, initializing scroll spy...');
+  console.log('Page loaded, initializing dynamic scroll spy...');
   
   const navLinks = document.querySelectorAll('.nav a');
   console.log('Found nav links:', navLinks.length);
   
+  // Get all sections
+  const sections = document.querySelectorAll('section[id]');
+  console.log('Found sections:', sections.length);
+  
   function updateActiveNav() {
-    const scrollPos = window.scrollY;
+    const scrollPos = window.scrollY + 100; // Add offset for better detection
     
     // Remove active class from all nav links
     navLinks.forEach(link => {
       link.classList.remove('active');
     });
     
-    // Simple section detection based on scroll position
-    let activeLink = null;
+    let currentSection = null;
+    let minDistance = Infinity;
     
-    if (scrollPos < 500) {
-      activeLink = document.querySelector('.nav a[href="#hero"]');
-    } else if (scrollPos < 1000) {
-      activeLink = document.querySelector('.nav a[href="#about"]');
-    } else if (scrollPos < 1500) {
-      activeLink = document.querySelector('.nav a[href="#education"]');
-    } else if (scrollPos < 2000) {
-      activeLink = document.querySelector('.nav a[href="#experience"]');
-    } else if (scrollPos < 2500) {
-      activeLink = document.querySelector('.nav a[href="#projects"]');
-    } else if (scrollPos < 3000) {
-      activeLink = document.querySelector('.nav a[href="#skills"]');
-    } else if (scrollPos < 3500) {
-      activeLink = document.querySelector('.nav a[href="#clients"]');
-    } else {
-      activeLink = document.querySelector('.nav a[href="#contact"]');
-    }
+    // Find the closest section to current scroll position
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      const sectionTop = rect.top + window.scrollY;
+      const sectionBottom = sectionTop + rect.height;
+      
+      // Check if we're in this section
+      if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+        currentSection = section.id;
+      }
+      
+      // Also check distance for better detection
+      const distance = Math.abs(scrollPos - sectionTop);
+      if (distance < minDistance) {
+        minDistance = distance;
+        if (!currentSection) {
+          currentSection = section.id;
+        }
+      }
+    });
     
-    // Add active class to the current link
-    if (activeLink) {
-      activeLink.classList.add('active');
-      console.log('Active link:', activeLink.textContent, 'Scroll position:', scrollPos);
+    // Add active class to the corresponding nav link
+    if (currentSection) {
+      const activeLink = document.querySelector(`.nav a[href="#${currentSection}"]`);
+      if (activeLink) {
+        activeLink.classList.add('active');
+        console.log('Active section:', currentSection, 'Scroll position:', scrollPos);
+      }
     }
   }
   
-  // Update on scroll
-  window.addEventListener('scroll', updateActiveNav);
+  // Update on scroll with throttling
+  let ticking = false;
+  function requestTick() {
+    if (!ticking) {
+      requestAnimationFrame(updateActiveNav);
+      ticking = true;
+      setTimeout(() => { ticking = false; }, 16); // ~60fps
+    }
+  }
+  
+  window.addEventListener('scroll', requestTick);
   
   // Initial update
-  updateActiveNav();
+  setTimeout(updateActiveNav, 100);
   
-  console.log('Scroll spy initialized successfully!');
+  console.log('Dynamic scroll spy initialized successfully!');
 });
 
 
