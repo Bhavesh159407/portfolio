@@ -625,3 +625,16 @@ body::after {
   transform: scale(1.05); 
   opacity: 0.8; 
 }
+
+/* Header Full Width */
+.site-header {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.header-inner {
+  width: 100%;
+  margin: 0;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
