@@ -521,56 +521,74 @@ function scrollToHero() {
   }
 }
 
-// Scroll Spy Functionality
+// Scroll Spy Functionality - Robust Implementation
 function initScrollSpy() {
   const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav a'); // Only nav links, not brand elements
+  const navLinks = document.querySelectorAll('.nav a');
+  
+  // Debug: Log sections found
+  console.log('Sections found:', sections.length);
+  sections.forEach(section => {
+    console.log('Section ID:', section.id, 'Offset:', section.offsetTop);
+  });
   
   function updateActiveNav() {
+    const scrollPos = window.scrollY + window.innerHeight / 2; // Use viewport center
     let current = '';
-    const scrollPos = window.scrollY + 100; // Offset for better detection
     
-    // Find the current section
+    // Find the section that's currently in the center of the viewport
     sections.forEach(section => {
       const sectionTop = section.offsetTop;
-      const sectionHeight = section.clientHeight;
+      const sectionBottom = sectionTop + section.offsetHeight;
       
-      if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-        current = section.getAttribute('id');
+      if (scrollPos >= sectionTop && scrollPos <= sectionBottom) {
+        current = section.id;
       }
     });
     
-    // If no section is detected, check if we're at the top
-    if (!current && window.scrollY < 200) {
+    // If no section is found, find the closest one
+    if (!current) {
+      let closestDistance = Infinity;
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const distance = Math.abs(scrollPos - sectionTop);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          current = section.id;
+        }
+      });
+    }
+    
+    // Special case for top of page
+    if (window.scrollY < 100) {
       current = 'hero';
     }
     
-    // Update only navigation links (not brand elements)
+    // Update navigation
     navLinks.forEach(link => {
       link.classList.remove('active');
       const href = link.getAttribute('href');
       
-      if (href === `#${current}` || (href === '#hero' && current === 'hero')) {
+      if (href === `#${current}`) {
         link.classList.add('active');
       }
     });
+    
+    // Debug logging
+    console.log('Scroll position:', window.scrollY, 'Current section:', current);
   }
   
-  // Throttle scroll events for better performance
-  let ticking = false;
-  function requestTick() {
-    if (!ticking) {
-      requestAnimationFrame(updateActiveNav);
-      ticking = true;
-      setTimeout(() => ticking = false, 50);
-    }
-  }
+  // Use a more aggressive scroll listener
+  let timeout;
+  window.addEventListener('scroll', function() {
+    clearTimeout(timeout);
+    timeout = setTimeout(updateActiveNav, 10);
+  });
   
-  // Update on scroll
-  window.addEventListener('scroll', requestTick);
+  // Update on page load
+  setTimeout(updateActiveNav, 500);
   
-  // Update on page load and resize
-  setTimeout(updateActiveNav, 200);
+  // Update on resize
   window.addEventListener('resize', updateActiveNav);
 }
 
