@@ -256,10 +256,7 @@ function renderResume(resume) {
 
   const year = new Date().getFullYear();
   safeSetText("footer-year", String(year));
-  const footer = safeGetElement("footer-text");
-  if (footer) {
-    footer.textContent = `© ${year} ${resume.name}. All rights reserved.`;
-  }
+  // Footer text is already set in HTML, just update the year
 
   const socials = safeGetElement("social-links");
   if (socials) {
@@ -892,9 +889,9 @@ function initStarfield() {
   step();
 }
 
-// Dynamic Scroll Spy - Only Matches Navigation Links
+// Enhanced Scroll Spy with More Debugging
 window.addEventListener('load', function() {
-  console.log('Page loaded, initializing dynamic scroll spy...');
+  console.log('Page loaded, initializing enhanced scroll spy...');
   
   const navLinks = document.querySelectorAll('.nav a');
   console.log('Found nav links:', navLinks.length);
@@ -918,7 +915,8 @@ window.addEventListener('load', function() {
   console.log('Found matching sections:', navSections.length);
   
   function updateActiveNav() {
-    const scrollPos = window.scrollY + 100; // Add offset for better detection
+    const scrollPos = window.scrollY + 100;
+    console.log('Scroll event triggered, position:', scrollPos);
     
     // Remove active class from all nav links
     navLinks.forEach(link => {
@@ -934,9 +932,12 @@ window.addEventListener('load', function() {
       const sectionTop = rect.top + window.scrollY;
       const sectionBottom = sectionTop + rect.height;
       
+      console.log(`Section ${id}: top=${sectionTop}, bottom=${sectionBottom}, height=${rect.height}`);
+      
       // Check if we're in this section
       if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
         currentSection = id;
+        console.log(`Currently in section: ${id}`);
       }
       
       // Also check distance for better detection
@@ -954,10 +955,13 @@ window.addEventListener('load', function() {
       const activeLink = document.querySelector(`.nav a[href="#${currentSection}"]`);
       if (activeLink) {
         activeLink.classList.add('active');
-        console.log('Active section:', currentSection, 'Scroll position:', scrollPos);
+        console.log('✅ Added active class to:', currentSection, 'Scroll position:', scrollPos);
+        console.log('Active link element:', activeLink);
       } else {
-        console.warn('No nav link found for section:', currentSection);
+        console.warn('❌ No nav link found for section:', currentSection);
       }
+    } else {
+      console.log('❌ No current section detected');
     }
   }
   
@@ -967,7 +971,7 @@ window.addEventListener('load', function() {
     if (!ticking) {
       requestAnimationFrame(updateActiveNav);
       ticking = true;
-      setTimeout(() => { ticking = false; }, 16); // ~60fps
+      setTimeout(() => { ticking = false; }, 16);
     }
   }
   
@@ -976,7 +980,7 @@ window.addEventListener('load', function() {
   // Initial update
   setTimeout(updateActiveNav, 100);
   
-  console.log('Dynamic scroll spy initialized successfully!');
+  console.log('Enhanced scroll spy initialized successfully!');
 });
 
 
