@@ -329,7 +329,7 @@ body::after {
 
 /* Timeline */
 .timeline { position: relative; }
-.timeline .item { display: grid; grid-template-columns: 170px 1fr; gap: 8px; position: relative; }
+.timeline .item { display: grid; grid-template-columns: 180px 1fr; gap: 8px; position: relative; }
 .timeline .item .period { color: var(--muted); font-size: 13px; text-align: right; align-self: start; padding-right: 4px; }
 .timeline .item .period .chip { display: inline-block; padding: 8px 16px; border-radius: 999px; background: var(--surface); border: 2px solid var(--border); color: var(--text); font-weight: 500; }
 .timeline .item .title { margin: 0; }
