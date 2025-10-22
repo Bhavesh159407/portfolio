@@ -862,53 +862,65 @@ function initStarfield() {
   step();
 }
 
-// Basic Scroll Spy Test
+// Comprehensive Scroll Spy Implementation
 function initScrollSpy() {
   console.log('Scroll spy initialized!');
   
   const navLinks = document.querySelectorAll('.nav a');
   console.log('Found nav links:', navLinks.length);
   
-  // Test if we can find sections
-  const hero = document.getElementById('hero');
-  const about = document.getElementById('about');
-  const education = document.getElementById('education');
-  
-  console.log('Hero section:', hero ? 'Found' : 'NOT FOUND');
-  console.log('About section:', about ? 'Found' : 'NOT FOUND');
-  console.log('Education section:', education ? 'Found' : 'NOT FOUND');
+  // Log all nav links
+  navLinks.forEach((link, index) => {
+    console.log(`Nav link ${index}:`, link.textContent, 'href:', link.getAttribute('href'));
+  });
   
   function updateActiveNav() {
-    console.log('Scroll event triggered! Scroll position:', window.scrollY);
+    const scrollPos = window.scrollY;
+    console.log('Scroll position:', scrollPos);
     
-    // Simple test - just highlight About when scrolled down
+    // Remove active class from all nav links
     navLinks.forEach(link => {
       link.classList.remove('active');
     });
     
-    if (window.scrollY > 500) {
-      const aboutLink = document.querySelector('.nav a[href="#about"]');
-      if (aboutLink) {
-        aboutLink.classList.add('active');
-        console.log('Highlighted About link');
+    // Define sections with their approximate positions
+    const sections = [
+      { id: 'hero', start: 0, end: 800 },
+      { id: 'about', start: 800, end: 1200 },
+      { id: 'education', start: 1200, end: 1600 },
+      { id: 'experience', start: 1600, end: 2000 },
+      { id: 'projects', start: 2000, end: 2400 },
+      { id: 'skills', start: 2400, end: 2800 },
+      { id: 'clients', start: 2800, end: 3200 },
+      { id: 'contact', start: 3200, end: 3600 }
+    ];
+    
+    let currentSection = 'hero';
+    
+    // Find current section based on scroll position
+    sections.forEach(section => {
+      if (scrollPos >= section.start && scrollPos < section.end) {
+        currentSection = section.id;
       }
-    } else {
-      const homeLink = document.querySelector('.nav a[href="#hero"]');
-      if (homeLink) {
-        homeLink.classList.add('active');
-        console.log('Highlighted Home link');
+    });
+    
+    // Add active class to the corresponding nav link
+    navLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (href === `#${currentSection}`) {
+        link.classList.add('active');
+        console.log('Added active class to:', link.textContent);
       }
-    }
+    });
+    
+    console.log('Current section:', currentSection);
   }
   
-  // Test scroll event
+  // Update on scroll
   window.addEventListener('scroll', updateActiveNav);
   
-  // Test on load
-  setTimeout(() => {
-    console.log('Testing on load...');
-    updateActiveNav();
-  }, 1000);
+  // Update on page load
+  setTimeout(updateActiveNav, 100);
 }
 
 // Initialize when DOM is loaded
