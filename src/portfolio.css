@@ -653,18 +653,3 @@ body::after {
   z-index: 10 !important;
   position: relative !important;
 }
-
-/* Site Footer */
-.site-footer {
-  background: var(--sapBackgroundColor-1);
-  border-top: 1px solid var(--border);
-  padding: 2rem 0;
-  margin-top: 4rem;
-}
-
-.site-footer p {
-  text-align: center;
-  color: var(--muted);
-  font-size: 0.9rem;
-  margin: 0;
-}
