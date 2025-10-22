@@ -862,9 +862,12 @@ function initStarfield() {
   step();
 }
 
-// SAP Fiori 3 Scroll Spy Implementation
-function initScrollSpy() {
+// Simple Direct Scroll Spy
+window.addEventListener('load', function() {
+  console.log('Page loaded, initializing scroll spy...');
+  
   const navLinks = document.querySelectorAll('.nav a');
+  console.log('Found nav links:', navLinks.length);
   
   function updateActiveNav() {
     const scrollPos = window.scrollY;
@@ -874,45 +877,42 @@ function initScrollSpy() {
       link.classList.remove('active');
     });
     
-    // Define sections with their approximate positions
-    const sections = [
-      { id: 'hero', start: 0, end: 800 },
-      { id: 'about', start: 800, end: 1200 },
-      { id: 'education', start: 1200, end: 1600 },
-      { id: 'experience', start: 1600, end: 2000 },
-      { id: 'projects', start: 2000, end: 2400 },
-      { id: 'skills', start: 2400, end: 2800 },
-      { id: 'clients', start: 2800, end: 3200 },
-      { id: 'contact', start: 3200, end: 3600 }
-    ];
+    // Simple section detection based on scroll position
+    let activeLink = null;
     
-    let currentSection = 'hero';
+    if (scrollPos < 500) {
+      activeLink = document.querySelector('.nav a[href="#hero"]');
+    } else if (scrollPos < 1000) {
+      activeLink = document.querySelector('.nav a[href="#about"]');
+    } else if (scrollPos < 1500) {
+      activeLink = document.querySelector('.nav a[href="#education"]');
+    } else if (scrollPos < 2000) {
+      activeLink = document.querySelector('.nav a[href="#experience"]');
+    } else if (scrollPos < 2500) {
+      activeLink = document.querySelector('.nav a[href="#projects"]');
+    } else if (scrollPos < 3000) {
+      activeLink = document.querySelector('.nav a[href="#skills"]');
+    } else if (scrollPos < 3500) {
+      activeLink = document.querySelector('.nav a[href="#clients"]');
+    } else {
+      activeLink = document.querySelector('.nav a[href="#contact"]');
+    }
     
-    // Find current section based on scroll position
-    sections.forEach(section => {
-      if (scrollPos >= section.start && scrollPos < section.end) {
-        currentSection = section.id;
-      }
-    });
-    
-    // Add active class to the corresponding nav link
-    navLinks.forEach(link => {
-      const href = link.getAttribute('href');
-      if (href === `#${currentSection}`) {
-        link.classList.add('active');
-      }
-    });
+    // Add active class to the current link
+    if (activeLink) {
+      activeLink.classList.add('active');
+      console.log('Active link:', activeLink.textContent, 'Scroll position:', scrollPos);
+    }
   }
   
   // Update on scroll
   window.addEventListener('scroll', updateActiveNav);
   
-  // Update on page load
-  setTimeout(updateActiveNav, 100);
-}
-
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', initScrollSpy);
+  // Initial update
+  updateActiveNav();
+  
+  console.log('Scroll spy initialized successfully!');
+});
 
 
 

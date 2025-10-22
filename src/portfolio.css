@@ -639,13 +639,14 @@ body::after {
   box-sizing: border-box;
 }
 
-/* Navigation Active State - SAP Fiori 3 Blue */
+/* Navigation Active State - Very Visible SAP Blue */
 .nav a.active {
   background: var(--sapBrandColor-Dark) !important; /* SAP Fiori 3 Dark Blue */
   color: white !important;
   border-color: var(--sapBrandColor-Dark) !important;
-  box-shadow: 0 4px 12px rgba(0, 65, 163, 0.3) !important;
-  transform: translateY(-1px);
-  font-weight: 700 !important;
-  border-radius: 8px !important;
+  box-shadow: 0 6px 20px rgba(0, 65, 163, 0.5) !important;
+  transform: translateY(-2px) !important;
+  font-weight: 800 !important;
+  border-radius: 10px !important;
+  border: 2px solid var(--sapBrandColor-Dark) !important;
 }
