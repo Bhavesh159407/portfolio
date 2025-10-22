@@ -10,6 +10,7 @@
       </div>
     </div>
     <nav id="nav-menu" class="nav">
+      <a href="#" class="nav-home" onclick="scrollToTop()">Home</a>
       <a href="#about">About</a>
       <a href="#education">Education</a>
       <a href="#experience">Experience</a>
@@ -144,9 +145,10 @@
         box-shadow: 0 0.125rem 0.5rem rgba(50, 54, 58, 0.08) !important;
       }
       .logo-card:hover {
-        transform: translateY(-2px);
-        border-color: var(--sapBrandColor) !important;
-        box-shadow: 0 0.25rem 0.75rem rgba(0, 112, 243, 0.15) !important;
+        transform: translateY(-4px);
+        border-color: var(--sapBrandColor-Dark) !important;
+        box-shadow: 0 0.75rem 2rem rgba(0, 65, 163, 0.3) !important;
+        background: var(--sapBackgroundColor-2) !important;
       }
       
       /* Global layout helpers */
@@ -161,8 +163,31 @@
       /* Mobile menu */
       .mobile-toggle { display: none; }
       #nav-menu { display: flex; gap: 16px; align-items: center; }
-      #nav-menu a { color: #c7d2fe; text-decoration: none; padding: 8px 10px; border-radius: 8px; }
-      #nav-menu a:hover { background: rgba(122,162,255,0.14); }
+      #nav-menu a { 
+        color: var(--sapBrandColor-Dark); 
+        text-decoration: none; 
+        padding: 10px 14px; 
+        border-radius: 8px; 
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: 1px solid transparent;
+      }
+      #nav-menu a:hover { 
+        background: var(--sapBrandColor-Dark); 
+        color: white;
+        border-color: var(--sapBrandColor-Dark);
+        box-shadow: 0 4px 12px rgba(0, 65, 163, 0.3);
+        transform: translateY(-1px);
+      }
+      .nav-home {
+        background: var(--sapBrandColor-Dark);
+        color: white !important;
+        font-weight: 700;
+      }
+      .nav-home:hover {
+        background: var(--sapBrandColor-Active) !important;
+        box-shadow: 0 6px 16px rgba(0, 65, 163, 0.4) !important;
+      }
 
       /* Brand symbol */
       .brand-symbol-btn { display: none; margin-left: 10px; font-size: 18px; line-height: 1; padding: 6px 10px; border-radius: 10px; background: #0f1720; border: 1px solid rgba(148,163,184,0.25); color: #e6edf3; box-shadow: 0 0 12px rgba(122,162,255,0.25); }
@@ -484,4 +509,13 @@
   </div>
 
 <router-outlet />
+
+<script>
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+</script>
 
