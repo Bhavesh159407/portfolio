@@ -638,3 +638,12 @@ body::after {
   padding: 0 20px;
   box-sizing: border-box;
 }
+
+/* Navigation Active State */
+.nav a.active {
+  background: var(--sapBrandColor-Dark) !important;
+  color: white !important;
+  border-color: var(--sapBrandColor-Dark) !important;
+  box-shadow: 0 4px 12px rgba(0, 65, 163, 0.3) !important;
+  transform: translateY(-1px);
+}
