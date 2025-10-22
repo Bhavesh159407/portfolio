@@ -524,12 +524,13 @@ function scrollToHero() {
 // Scroll Spy Functionality
 function initScrollSpy() {
   const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav a');
+  const navLinks = document.querySelectorAll('.nav a, .brand-link');
   
   function updateActiveNav() {
     let current = '';
-    const scrollPos = window.scrollY + 100; // Offset for better detection
+    const scrollPos = window.scrollY + 150; // Offset for better detection
     
+    // Find the current section
     sections.forEach(section => {
       const sectionTop = section.offsetTop;
       const sectionHeight = section.clientHeight;
@@ -540,17 +541,25 @@ function initScrollSpy() {
     });
     
     // If no section is detected, check if we're at the top
-    if (!current && window.scrollY < 200) {
+    if (!current && window.scrollY < 300) {
       current = 'hero';
     }
     
+    // Update all navigation links
     navLinks.forEach(link => {
       link.classList.remove('active');
       const href = link.getAttribute('href');
-      if (href === `#${current}` || (href === '#hero' && current === 'hero')) {
+      
+      // Handle different href formats
+      if (href === `#${current}` || 
+          (href === '#hero' && current === 'hero') ||
+          (href === '#' && current === 'hero')) {
         link.classList.add('active');
       }
     });
+    
+    // Debug logging (remove in production)
+    console.log('Current section:', current, 'Scroll position:', window.scrollY);
   }
   
   // Throttle scroll events for better performance
@@ -559,15 +568,16 @@ function initScrollSpy() {
     if (!ticking) {
       requestAnimationFrame(updateActiveNav);
       ticking = true;
-      setTimeout(() => ticking = false, 100);
+      setTimeout(() => ticking = false, 50);
     }
   }
   
   // Update on scroll
   window.addEventListener('scroll', requestTick);
   
-  // Update on page load
-  setTimeout(updateActiveNav, 100);
+  // Update on page load and resize
+  setTimeout(updateActiveNav, 200);
+  window.addEventListener('resize', updateActiveNav);
 }
 
 // Initialize scroll spy when DOM is loaded
