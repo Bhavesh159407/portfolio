@@ -519,16 +519,30 @@ function scrollToHero() {
   }
 }
 
-// Dynamic Scroll Spy - Detects Real Section Positions
+// Dynamic Scroll Spy - Only Matches Navigation Links
 window.addEventListener('load', function() {
   console.log('Page loaded, initializing dynamic scroll spy...');
   
   const navLinks = document.querySelectorAll('.nav a');
   console.log('Found nav links:', navLinks.length);
   
-  // Get all sections
-  const sections = document.querySelectorAll('section[id]');
-  console.log('Found sections:', sections.length);
+  // Get only sections that have corresponding navigation links
+  const navSections = [];
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const sectionId = href.substring(1);
+      const section = document.getElementById(sectionId);
+      if (section) {
+        navSections.push({ id: sectionId, element: section, link: link });
+        console.log('Found matching section:', sectionId);
+      } else {
+        console.warn('No section found for:', sectionId);
+      }
+    }
+  });
+  
+  console.log('Found matching sections:', navSections.length);
   
   function updateActiveNav() {
     const scrollPos = window.scrollY + 100; // Add offset for better detection
@@ -542,14 +556,14 @@ window.addEventListener('load', function() {
     let minDistance = Infinity;
     
     // Find the closest section to current scroll position
-    sections.forEach(section => {
-      const rect = section.getBoundingClientRect();
+    navSections.forEach(({ id, element, link }) => {
+      const rect = element.getBoundingClientRect();
       const sectionTop = rect.top + window.scrollY;
       const sectionBottom = sectionTop + rect.height;
       
       // Check if we're in this section
       if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
-        currentSection = section.id;
+        currentSection = id;
       }
       
       // Also check distance for better detection
@@ -557,7 +571,7 @@ window.addEventListener('load', function() {
       if (distance < minDistance) {
         minDistance = distance;
         if (!currentSection) {
-          currentSection = section.id;
+          currentSection = id;
         }
       }
     });
@@ -568,6 +582,8 @@ window.addEventListener('load', function() {
       if (activeLink) {
         activeLink.classList.add('active');
         console.log('Active section:', currentSection, 'Scroll position:', scrollPos);
+      } else {
+        console.warn('No nav link found for section:', currentSection);
       }
     }
   }
