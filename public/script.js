@@ -862,21 +862,12 @@ function initStarfield() {
   step();
 }
 
-// Comprehensive Scroll Spy Implementation
+// SAP Fiori 3 Scroll Spy Implementation
 function initScrollSpy() {
-  console.log('Scroll spy initialized!');
-  
   const navLinks = document.querySelectorAll('.nav a');
-  console.log('Found nav links:', navLinks.length);
-  
-  // Log all nav links
-  navLinks.forEach((link, index) => {
-    console.log(`Nav link ${index}:`, link.textContent, 'href:', link.getAttribute('href'));
-  });
   
   function updateActiveNav() {
     const scrollPos = window.scrollY;
-    console.log('Scroll position:', scrollPos);
     
     // Remove active class from all nav links
     navLinks.forEach(link => {
@@ -909,11 +900,8 @@ function initScrollSpy() {
       const href = link.getAttribute('href');
       if (href === `#${currentSection}`) {
         link.classList.add('active');
-        console.log('Added active class to:', link.textContent);
       }
     });
-    
-    console.log('Current section:', currentSection);
   }
   
   // Update on scroll
