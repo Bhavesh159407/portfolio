@@ -528,28 +528,46 @@ function initScrollSpy() {
   
   function updateActiveNav() {
     let current = '';
+    const scrollPos = window.scrollY + 100; // Offset for better detection
     
     sections.forEach(section => {
       const sectionTop = section.offsetTop;
       const sectionHeight = section.clientHeight;
-      if (window.scrollY >= (sectionTop - 200)) {
+      
+      if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
         current = section.getAttribute('id');
       }
     });
     
+    // If no section is detected, check if we're at the top
+    if (!current && window.scrollY < 200) {
+      current = 'hero';
+    }
+    
     navLinks.forEach(link => {
       link.classList.remove('active');
-      if (link.getAttribute('href') === `#${current}`) {
+      const href = link.getAttribute('href');
+      if (href === `#${current}` || (href === '#hero' && current === 'hero')) {
         link.classList.add('active');
       }
     });
   }
   
+  // Throttle scroll events for better performance
+  let ticking = false;
+  function requestTick() {
+    if (!ticking) {
+      requestAnimationFrame(updateActiveNav);
+      ticking = true;
+      setTimeout(() => ticking = false, 100);
+    }
+  }
+  
   // Update on scroll
-  window.addEventListener('scroll', updateActiveNav);
+  window.addEventListener('scroll', requestTick);
   
   // Update on page load
-  updateActiveNav();
+  setTimeout(updateActiveNav, 100);
 }
 
 // Initialize scroll spy when DOM is loaded
