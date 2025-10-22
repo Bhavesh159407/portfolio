@@ -262,8 +262,8 @@ function renderResume(resume) {
     row.innerHTML = `
       <div class="period">${item.period || ""}</div>
       <div>
-        <h3 class="title">${item.role || ""}</h3>
-        <div class="where">${item.company || ""}${item.location ? ` • ${item.location}` : ""}</div>
+        <h3 class="title">💼 ${item.role || ""}</h3>
+        <div class="where">🏢 ${item.company || ""}${item.location ? ` • 📍 ${item.location}` : ""}</div>
         ${item.summary ? `<p class="muted">${item.summary}</p>` : ""}
         ${Array.isArray(item.highlights) && item.highlights.length ? `<ul>` + item.highlights.map(h => `<li>${h}</li>`).join("") + `</ul>` : ""}
       </div>`;
@@ -325,8 +325,8 @@ function renderResume(resume) {
     row.innerHTML = `
       <div class="period">${e.period || ""}</div>
       <div>
-        <h3 class="title">${e.degree || ""}</h3>
-        <div class="where">${e.school || ""}${gpaText}${honorsText}</div>
+        <h3 class="title">🎓 ${e.degree || ""}</h3>
+        <div class="where">🏫 ${e.school || ""}${gpaText}${honorsText}</div>
       </div>`;
     edu.appendChild(row);
   });
