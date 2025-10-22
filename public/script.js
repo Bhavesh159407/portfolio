@@ -262,7 +262,7 @@ function renderResume(resume) {
     row.innerHTML = `
       <div class="period">${item.period || ""}</div>
       <div>
-        <h3 class="title">💼 ${item.role || ""}</h3>
+        <h3 class="title">${item.role || ""}</h3>
         <div class="where">🏢 ${item.company || ""}${item.location ? ` • 📍 ${item.location}` : ""}</div>
         ${item.summary ? `<p class="muted">${item.summary}</p>` : ""}
         ${Array.isArray(item.highlights) && item.highlights.length ? `<ul>` + item.highlights.map(h => `<li>${h}</li>`).join("") + `</ul>` : ""}
@@ -323,13 +323,13 @@ function renderResume(resume) {
     const gpaText = e.gpa ? ` • GPA: ${e.gpa}` : "";
     const honorsText = e.honors ? ` • ${e.honors}` : "";
     
-    // Check if school has a logo URL
-    const schoolLogo = e.logoUrl ? `<img src="${e.logoUrl}" alt="${e.school} logo" class="school-logo" style="width: 20px; height: 20px; object-fit: contain; margin-right: 8px; vertical-align: middle;">` : "🏫 ";
+    // Check if school has a logo URL and make it more visible
+    const schoolLogo = e.logoUrl ? `<img src="${e.logoUrl}" alt="${e.school} logo" class="school-logo" style="width: 32px; height: 32px; object-fit: contain; margin-right: 12px; vertical-align: middle; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">` : "";
     
     row.innerHTML = `
       <div class="period">${e.period || ""}</div>
       <div>
-        <h3 class="title">🎓 ${e.degree || ""}</h3>
+        <h3 class="title">${e.degree || ""}</h3>
         <div class="where">${schoolLogo}${e.school || ""}${gpaText}${honorsText}</div>
       </div>`;
     edu.appendChild(row);
