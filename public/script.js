@@ -254,10 +254,6 @@ function renderResume(resume) {
     safeSetImage("brand-avatar", resume.profilePhoto);
   }
 
-  const year = new Date().getFullYear();
-  safeSetText("footer-year", String(year));
-  // Footer text is already set in HTML, just update the year
-
   const socials = safeGetElement("social-links");
   if (socials) {
   socials.innerHTML = "";
