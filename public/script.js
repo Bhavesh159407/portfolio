@@ -1,3 +1,27 @@
+// Safe element access functions
+function safeGetElement(id) {
+  const element = document.getElementById(id);
+  if (!element) {
+    console.warn(`Element with id "${id}" not found`);
+    return null;
+  }
+  return element;
+}
+
+function safeSetText(id, text) {
+  const element = safeGetElement(id);
+  if (element) {
+    element.textContent = text;
+  }
+}
+
+function safeSetImage(id, src) {
+  const element = safeGetElement(id);
+  if (element) {
+    element.src = src;
+  }
+}
+
 // ---------- Default Data (will be overridden by JSON files if present) ----------
 const defaultResume = {
   name: "Your Name",
@@ -219,56 +243,62 @@ function youtubeToEmbed(url) {
 }
 
 function renderResume(resume) {
-  setText("brand-name", resume.name);
-  setText("hero-name", resume.name);
-  setText("hero-title", resume.title);
-  setText("hero-summary", resume.summary);
+  safeSetText("brand-name", resume.name);
+  safeSetText("hero-name", resume.name);
+  safeSetText("hero-title", resume.title);
+  safeSetText("hero-summary", resume.summary);
   
   // Set profile photo if available
   if (resume.profilePhoto) {
-  setImage("profile-photo", resume.profilePhoto);
-  setImage("brand-avatar", resume.profilePhoto);
+    safeSetImage("profile-photo", resume.profilePhoto);
+    safeSetImage("brand-avatar", resume.profilePhoto);
   }
 
   const year = new Date().getFullYear();
-  document.getElementById("footer-year").textContent = String(year);
-  const footer = document.getElementById("footer-text");
+  safeSetText("footer-year", String(year));
+  const footer = safeGetElement("footer-text");
   if (footer) {
-    footer.textContent = `© ${year} ${resume.name}. ${year}. All rights reserved.`;
+    footer.textContent = `© ${year} ${resume.name}. All rights reserved.`;
   }
 
-  const socials = document.getElementById("social-links");
-  socials.innerHTML = "";
-  (resume.socials || []).forEach(s => {
-    const a = safeLink(s.url, s.icon ? `${s.icon} ${s.label}` : s.label);
-    socials.appendChild(a);
-  });
+  const socials = safeGetElement("social-links");
+  if (socials) {
+    socials.innerHTML = "";
+    (resume.socials || []).forEach(s => {
+      const a = safeLink(s.url, s.icon ? `${s.icon} ${s.label}` : s.label);
+      socials.appendChild(a);
+    });
+  }
 
-  const about = document.getElementById("about-content");
-  about.innerHTML = "";
-  const aboutLines = [
-    resume.summary,
-    resume.location ? `📍 ${resume.location}` : null,
-    resume.email ? `✉️ <a class="link" href="mailto:${resume.email}">${resume.email}</a>` : null,
-    resume.phone ? `📞 ${resume.phone}` : null,
-    resume.website ? `🌐 <a class="link" target="_blank" rel="noopener" href="${resume.website}">${resume.website}</a>` : null
-  ].filter(Boolean);
-  about.innerHTML = aboutLines.map(l => `<p>${l}</p>`).join("");
+  const about = safeGetElement("about-content");
+  if (about) {
+    about.innerHTML = "";
+    const aboutLines = [
+      resume.summary,
+      resume.location ? `📍 ${resume.location}` : null,
+      resume.email ? `✉️ <a class="link" href="mailto:${resume.email}">${resume.email}</a>` : null,
+      resume.phone ? `📞 ${resume.phone}` : null,
+      resume.website ? `🌐 <a class="link" target="_blank" rel="noopener" href="${resume.website}">${resume.website}</a>` : null
+    ].filter(Boolean);
+    about.innerHTML = aboutLines.map(l => `<p>${l}</p>`).join("");
+  }
 
-  const expList = document.getElementById("experience-list");
-  expList.innerHTML = "";
-  (resume.experience || []).forEach(item => {
-    const row = createEl("div", "item card");
-    row.innerHTML = `
-      <div class="period">${item.period || ""}</div>
-      <div>
-        <h3 class="title">${item.role || ""}</h3>
-        <div class="where">🏢 ${item.company || ""}${item.location ? ` • 📍 ${item.location}` : ""}</div>
-        ${item.summary ? `<p class="muted">${item.summary}</p>` : ""}
-        ${Array.isArray(item.highlights) && item.highlights.length ? `<ul>` + item.highlights.map(h => `<li>${h}</li>`).join("") + `</ul>` : ""}
-      </div>`;
-    expList.appendChild(row);
-  });
+  const expList = safeGetElement("experience-list");
+  if (expList) {
+    expList.innerHTML = "";
+    (resume.experience || []).forEach(item => {
+      const row = createEl("div", "item card");
+      row.innerHTML = `
+        <div class="period">${item.period || ""}</div>
+        <div>
+          <h3 class="title">${item.role || ""}</h3>
+          <div class="where">🏢 ${item.company || ""}${item.location ? ` • 📍 ${item.location}` : ""}</div>
+          ${item.summary ? `<p class="muted">${item.summary}</p>` : ""}
+          ${Array.isArray(item.highlights) && item.highlights.length ? `<ul>` + item.highlights.map(h => `<li>${h}</li>`).join("") + `</ul>` : ""}
+        </div>`;
+      expList.appendChild(row);
+    });
+  }
 
   const projGrid = document.getElementById("projects-grid");
   projGrid.innerHTML = "";
