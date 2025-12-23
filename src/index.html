@@ -18,6 +18,14 @@
 
 
   <app-root></app-root>
-  <script src="script.js"></script>
+  <script>
+    // Load script.js after Angular modules
+    window.addEventListener('load', function() {
+      const script = document.createElement('script');
+      script.src = 'script.js';
+      script.async = true;
+      document.body.appendChild(script);
+    });
+  </script>
 </body>
 </html>
