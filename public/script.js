@@ -617,22 +617,30 @@ function renderResume(resume) {
           img.crossOrigin = "anonymous"; // Enable CORS for external images
           img.loading = "lazy"; // Lazy load images for better performance
           
-          if (typeof c === "object" && c && c.imageUrl) {
+          // Debug logging
+          console.log(`Certification ${index}:`, { title: c.title, imageUrl: c.imageUrl, url: meta.url });
+          
+          // Ensure we have a valid imageUrl
+          const imageUrl = (c && typeof c === "object" && c.imageUrl) ? String(c.imageUrl).trim() : null;
+          
+          if (imageUrl && imageUrl !== "undefined" && imageUrl !== "null") {
             // Check if it's a HackerRank certificate URL (not a direct image)
-            const isHackerRank = c.imageUrl.includes("hackerrank.com/certificates") && !c.imageUrl.includes(".png") && !c.imageUrl.includes(".jpg") && !c.imageUrl.includes(".svg");
+            const isHackerRank = imageUrl.includes("hackerrank.com/certificates") && !imageUrl.includes(".png") && !imageUrl.includes(".jpg") && !imageUrl.includes(".svg");
             
             if (isHackerRank) {
               // For HackerRank, use the local asset as it's not a direct image URL
               img.src = "/assets/js.svg";
+              console.log(`HackerRank cert detected, using fallback: ${img.src}`);
             } else {
               // Try the provided image URL first
-              img.src = c.imageUrl;
+              img.src = imageUrl;
+              console.log(`Setting image src to: ${img.src}`);
               
               // If URL ends with /blob, try /image.png as fallback
-              if (c.imageUrl.endsWith('/blob')) {
-                const fallbackUrl = c.imageUrl.replace('/blob', '/image.png');
+              if (imageUrl.endsWith('/blob')) {
+                const fallbackUrl = imageUrl.replace('/blob', '/image.png');
                 img.onerror = () => {
-                  console.warn(`Failed to load image: ${c.imageUrl}, trying fallback: ${fallbackUrl}`);
+                  console.warn(`Failed to load image: ${imageUrl}, trying fallback: ${fallbackUrl}`);
                   img.onerror = null; // Prevent infinite loop
                   img.src = fallbackUrl;
                   // Final fallback to local icon
@@ -640,20 +648,28 @@ function renderResume(resume) {
                     const h = (meta.url || "");
                     if (h.includes("hackerrank")) img.src = "/assets/hackerrank.svg";
                     else img.src = "/assets/sap.svg";
+                    console.log(`Final fallback image: ${img.src}`);
                   };
                 };
               } else {
                 // Standard error handling for other URLs
                 img.onerror = () => {
-                  console.warn(`Failed to load image: ${c.imageUrl}`);
+                  console.warn(`Failed to load image: ${imageUrl}`);
                   const h = (meta.url || "");
                   if (h.includes("hackerrank")) img.src = "/assets/hackerrank.svg";
                   else img.src = "/assets/sap.svg";
+                  console.log(`Fallback image: ${img.src}`);
                 };
               }
+              
+              // Log successful image load
+              img.onload = () => {
+                console.log(`✅ Successfully loaded image for: ${c.title}`);
+              };
             }
           } else {
             // choose local fallback based on host
+            console.warn(`No imageUrl found for certification ${index}, using fallback`);
             try {
               const h = new URL(meta.url).hostname;
               if (h.includes("hackerrank")) img.src = "/assets/hackerrank.svg";
@@ -662,8 +678,9 @@ function renderResume(resume) {
             } catch {
               img.src = "/assets/sap.svg";
             }
+            console.log(`Using fallback image: ${img.src}`);
           }
-          img.alt = meta.label;
+          img.alt = meta.label || c.title || "Certification";
           const title = createEl("div", "title", meta.label);
           const provider = createEl("div", "provider", meta.url.replace(/^https?:\/\//, "").split("/")[0]);
           card.appendChild(img);
