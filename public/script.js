@@ -1534,26 +1534,68 @@ async function initializePortfolio() {
 }
 
 // Initialize when everything is ready
-// This will be called when script.js is loaded
-(function() {
-  // Wait for window to be fully loaded first
+// Wait for both DOM and Angular to be ready
+(function init() {
+  // Use MutationObserver to detect when Angular renders content
+  const observer = new MutationObserver(function(mutations, obs) {
+    const appRoot = document.querySelector('app-root');
+    const certGrid = document.getElementById('certifications-grid');
+    
+    // Check if Angular has rendered and certifications-grid exists
+    if (appRoot && (appRoot.children.length > 0 || appRoot.innerHTML.trim().length > 0)) {
+      if (certGrid || document.readyState === 'complete') {
+        obs.disconnect();
+        // Small delay to ensure everything is ready
+        setTimeout(() => {
+          initializePortfolio().catch(error => {
+            console.error('Failed to initialize portfolio:', error);
+          });
+        }, 500);
+      }
+    }
+  });
+  
+  // Start observing
+  const appRoot = document.querySelector('app-root');
+  if (appRoot) {
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  }
+  
+  // Fallback: if page is already loaded, wait a bit and try
   if (document.readyState === 'complete') {
-    // Already loaded, wait a bit more for Angular
     setTimeout(() => {
-      initializePortfolio().catch(error => {
-        console.error('Failed to initialize portfolio:', error);
-      });
-    }, 1000);
-  } else {
-    // Wait for load event
-    window.addEventListener('load', function() {
-      setTimeout(() => {
+      const certGrid = document.getElementById('certifications-grid');
+      if (certGrid) {
+        observer.disconnect();
         initializePortfolio().catch(error => {
           console.error('Failed to initialize portfolio:', error);
         });
-      }, 1000);
+      }
+    }, 2000);
+  } else {
+    window.addEventListener('load', function() {
+      setTimeout(() => {
+        const certGrid = document.getElementById('certifications-grid');
+        if (certGrid) {
+          observer.disconnect();
+          initializePortfolio().catch(error => {
+            console.error('Failed to initialize portfolio:', error);
+          });
+        }
+      }, 2000);
     });
   }
+  
+  // Safety timeout - initialize after 5 seconds regardless
+  setTimeout(() => {
+    observer.disconnect();
+    initializePortfolio().catch(error => {
+      console.error('Failed to initialize portfolio:', error);
+    });
+  }, 5000);
 })();
 
 // Enhanced Scroll Spy with More Debugging
