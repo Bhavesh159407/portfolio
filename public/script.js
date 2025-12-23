@@ -716,42 +716,68 @@ function renderResume(resume) {
             }
             console.log(`Using fallback image: ${img.src}`);
           }
-          // Ensure we have a valid title/label - use c.title directly as primary source
-          // Multiple fallbacks to ensure we never get undefined
-          let displayTitle = "";
-          if (c && c.title && typeof c.title === 'string' && c.title.trim() !== "") {
-            displayTitle = c.title.trim();
-          } else if (meta && meta.label && typeof meta.label === 'string' && meta.label.trim() !== "") {
-            displayTitle = meta.label.trim();
-          } else {
-            displayTitle = "Certification";
+          // SIMPLIFIED: Get title ONLY from c.title - ignore meta.label completely
+          let finalTitle = "Certification"; // Safe default
+          
+          // Direct access to c.title - this is the ONLY source we trust
+          if (c && typeof c === 'object' && c.hasOwnProperty('title')) {
+            const rawTitle = c.title;
+            if (rawTitle !== null && rawTitle !== undefined) {
+              const titleStr = String(rawTitle).trim();
+              // Only use if it's a valid non-empty string and not the literal "undefined"
+              if (titleStr.length > 0 && titleStr !== "undefined" && titleStr !== "null") {
+                finalTitle = titleStr;
+              }
+            }
           }
           
-          // Final validation - ensure no undefined/null values
-          const finalTitle = (displayTitle && displayTitle !== "undefined" && displayTitle !== "null" && displayTitle.trim() !== "") 
-            ? displayTitle.trim() 
-            : "Certification";
+          // Get provider from URL
+          let finalProvider = "";
+          if (meta && meta.url && typeof meta.url === 'string') {
+            try {
+              finalProvider = meta.url.replace(/^https?:\/\//, "").split("/")[0];
+            } catch (e) {
+              console.warn(`Error parsing provider from URL: ${meta.url}`, e);
+            }
+          }
           
-          const displayProvider = (meta.url && typeof meta.url === 'string') 
-            ? meta.url.replace(/^https?:\/\//, "").split("/")[0] 
-            : "";
-          const finalProvider = (displayProvider && displayProvider !== "undefined" && displayProvider.trim() !== "") 
-            ? displayProvider.trim() 
-            : "";
+          console.log(`[CERT ${index}] Title extraction:`, {
+            rawC: c,
+            cTitle: c.title,
+            cTitleType: typeof c.title,
+            cHasTitle: c && c.hasOwnProperty('title'),
+            finalTitle: finalTitle,
+            finalTitleType: typeof finalTitle,
+            finalTitleLength: finalTitle.length
+          });
           
-          console.log(`[CERT ${index}] Final values:`, { finalTitle, finalProvider, displayTitle, metaLabel: meta.label });
+          // Triple-check: finalTitle MUST be a valid string
+          if (typeof finalTitle !== 'string' || finalTitle === "undefined" || finalTitle === "null" || finalTitle.length === 0) {
+            console.error(`[CERT ${index}] CRITICAL: Title is invalid!`, { finalTitle, c });
+            finalTitle = "Certification"; // Force safe default
+          }
           
           img.alt = finalTitle;
           
-          // Create title element with explicit textContent
+          // Create title element - use ONLY textContent, NEVER innerHTML
           const titleDiv = document.createElement("div");
           titleDiv.className = "title";
+          // Direct assignment - no function calls, no conversions
           titleDiv.textContent = finalTitle;
           
-          // Create provider element with explicit textContent
+          // Verify it was set correctly
+          if (titleDiv.textContent !== finalTitle) {
+            console.error(`[CERT ${index}] Title element textContent mismatch!`, {
+              expected: finalTitle,
+              actual: titleDiv.textContent
+            });
+            titleDiv.textContent = finalTitle; // Force set again
+          }
+          
+          // Create provider element
           const providerDiv = document.createElement("div");
           providerDiv.className = "provider";
-          providerDiv.textContent = finalProvider;
+          providerDiv.textContent = finalProvider || "";
           
           card.appendChild(img);
           card.appendChild(titleDiv);

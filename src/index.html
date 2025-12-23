@@ -19,10 +19,10 @@
 
   <app-root></app-root>
   <script>
-    // Load script.js after Angular modules
+    // Load script.js after Angular modules with cache busting
     window.addEventListener('load', function() {
       const script = document.createElement('script');
-      script.src = 'script.js';
+      script.src = 'script.js?v=' + Date.now();
       script.async = true;
       document.body.appendChild(script);
     });
