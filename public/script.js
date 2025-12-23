@@ -623,7 +623,12 @@ function renderResume(resume) {
     } else {
       certifications.forEach((c, index) => {
         try {
+          // Log raw certification data
+          console.log(`[CERT ${index}] Raw data:`, JSON.stringify(c));
+          
           const meta = getCertificationMeta(c);
+          console.log(`[CERT ${index}] Meta result:`, JSON.stringify(meta));
+          
           if (!meta.url) {
             console.warn(`Certification ${index} has no URL, skipping`);
             return;
@@ -637,7 +642,13 @@ function renderResume(resume) {
           img.loading = "lazy"; // Lazy load images for better performance
           
           // Debug logging
-          console.log(`Certification ${index}:`, { title: c.title, imageUrl: c.imageUrl, url: meta.url });
+          console.log(`[CERT ${index}] Processing:`, { 
+            cTitle: c.title, 
+            cImageUrl: c.imageUrl, 
+            metaUrl: meta.url,
+            metaLabel: meta.label,
+            metaLabelType: typeof meta.label
+          });
           
           // Ensure we have a valid imageUrl
           const imageUrl = (c && typeof c === "object" && c.imageUrl) ? String(c.imageUrl).trim() : null;
@@ -700,21 +711,47 @@ function renderResume(resume) {
             console.log(`Using fallback image: ${img.src}`);
           }
           // Ensure we have a valid title/label - use c.title directly as primary source
-          const displayTitle = (c && c.title) ? String(c.title).trim() : (meta.label ? String(meta.label).trim() : "Certification");
-          const displayProvider = meta.url ? meta.url.replace(/^https?:\/\//, "").split("/")[0] : "";
+          // Multiple fallbacks to ensure we never get undefined
+          let displayTitle = "";
+          if (c && c.title && typeof c.title === 'string' && c.title.trim() !== "") {
+            displayTitle = c.title.trim();
+          } else if (meta && meta.label && typeof meta.label === 'string' && meta.label.trim() !== "") {
+            displayTitle = meta.label.trim();
+          } else {
+            displayTitle = "Certification";
+          }
           
-          // Final validation - ensure no undefined values
-          const finalTitle = displayTitle && displayTitle !== "undefined" && displayTitle !== "null" ? displayTitle : "Certification";
-          const finalProvider = displayProvider && displayProvider !== "undefined" ? displayProvider : "";
+          // Final validation - ensure no undefined/null values
+          const finalTitle = (displayTitle && displayTitle !== "undefined" && displayTitle !== "null" && displayTitle.trim() !== "") 
+            ? displayTitle.trim() 
+            : "Certification";
+          
+          const displayProvider = (meta.url && typeof meta.url === 'string') 
+            ? meta.url.replace(/^https?:\/\//, "").split("/")[0] 
+            : "";
+          const finalProvider = (displayProvider && displayProvider !== "undefined" && displayProvider.trim() !== "") 
+            ? displayProvider.trim() 
+            : "";
+          
+          console.log(`[CERT ${index}] Final values:`, { finalTitle, finalProvider, displayTitle, metaLabel: meta.label });
           
           img.alt = finalTitle;
-          const title = createEl("div", "title", finalTitle);
-          const provider = createEl("div", "provider", finalProvider);
+          
+          // Create title element with explicit textContent
+          const titleDiv = document.createElement("div");
+          titleDiv.className = "title";
+          titleDiv.textContent = finalTitle;
+          
+          // Create provider element with explicit textContent
+          const providerDiv = document.createElement("div");
+          providerDiv.className = "provider";
+          providerDiv.textContent = finalProvider;
+          
           card.appendChild(img);
-          card.appendChild(title);
-          card.appendChild(provider);
+          card.appendChild(titleDiv);
+          card.appendChild(providerDiv);
           certGrid.appendChild(card);
-          console.log(`Added certification card: ${displayTitle}`);
+          console.log(`✅ Added certification card ${index}: "${finalTitle}"`);
         } catch (error) {
           console.error(`Error rendering certification ${index}:`, error);
         }
