@@ -423,7 +423,14 @@ function setImage(id, url) {
 function createEl(tag, className, content) {
   const el = document.createElement(tag);
   if (className) el.className = className;
-  if (content !== undefined) el.innerHTML = content;
+  if (content !== undefined && content !== null && content !== "undefined" && content !== "null") {
+    // Use textContent for safety, or innerHTML if it contains HTML
+    if (typeof content === 'string' && content.includes('<')) {
+      el.innerHTML = content;
+    } else {
+      el.textContent = String(content);
+    }
+  }
   return el;
 }
 
@@ -461,11 +468,14 @@ function getCertificationMeta(cert) {
   }
   
   // Ensure label is never empty or undefined
-  if (!label || label === "undefined" || label === "null") {
+  if (!label || label === "undefined" || label === "null" || label.trim() === "") {
     label = title || "Certification";
   }
   
-  return { url: url || "", label: String(label), icon };
+  // Final validation - ensure we always return a valid string
+  const finalLabel = (label && typeof label === 'string' && label.trim() !== "") ? label.trim() : (title || "Certification");
+  
+  return { url: url || "", label: finalLabel, icon };
 }
 
 function youtubeToEmbed(url) {
@@ -689,13 +699,17 @@ function renderResume(resume) {
             }
             console.log(`Using fallback image: ${img.src}`);
           }
-          // Ensure we have a valid title/label
-          const displayTitle = meta.label || c.title || "Certification";
+          // Ensure we have a valid title/label - use c.title directly as primary source
+          const displayTitle = (c && c.title) ? String(c.title).trim() : (meta.label ? String(meta.label).trim() : "Certification");
           const displayProvider = meta.url ? meta.url.replace(/^https?:\/\//, "").split("/")[0] : "";
           
-          img.alt = displayTitle;
-          const title = createEl("div", "title", displayTitle);
-          const provider = createEl("div", "provider", displayProvider);
+          // Final validation - ensure no undefined values
+          const finalTitle = displayTitle && displayTitle !== "undefined" && displayTitle !== "null" ? displayTitle : "Certification";
+          const finalProvider = displayProvider && displayProvider !== "undefined" ? displayProvider : "";
+          
+          img.alt = finalTitle;
+          const title = createEl("div", "title", finalTitle);
+          const provider = createEl("div", "provider", finalProvider);
           card.appendChild(img);
           card.appendChild(title);
           card.appendChild(provider);
