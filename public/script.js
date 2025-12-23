@@ -1536,22 +1536,36 @@ async function initializePortfolio() {
 // Initialize when everything is ready
 // Wait for both DOM and Angular to be ready
 (function init() {
-  // Use MutationObserver to detect when Angular renders content
-  const observer = new MutationObserver(function(mutations, obs) {
+  let initialized = false;
+  
+  function tryInitialize() {
+    if (initialized) return;
+    
     const appRoot = document.querySelector('app-root');
     const certGrid = document.getElementById('certifications-grid');
     
-    // Check if Angular has rendered and certifications-grid exists
-    if (appRoot && (appRoot.children.length > 0 || appRoot.innerHTML.trim().length > 0)) {
-      if (certGrid || document.readyState === 'complete') {
-        obs.disconnect();
+    // Check if Angular has rendered AND certifications-grid exists
+    if (appRoot && certGrid) {
+      const hasContent = appRoot.children.length > 0 || appRoot.innerHTML.trim().length > 0;
+      if (hasContent) {
+        initialized = true;
+        console.log('✅ Found certifications-grid, initializing portfolio...');
         // Small delay to ensure everything is ready
         setTimeout(() => {
           initializePortfolio().catch(error => {
             console.error('Failed to initialize portfolio:', error);
           });
-        }, 500);
+        }, 300);
+        return true;
       }
+    }
+    return false;
+  }
+  
+  // Use MutationObserver to detect when Angular renders content
+  const observer = new MutationObserver(function(mutations, obs) {
+    if (tryInitialize()) {
+      obs.disconnect();
     }
   });
   
@@ -1564,38 +1578,49 @@ async function initializePortfolio() {
     });
   }
   
-  // Fallback: if page is already loaded, wait a bit and try
+  // Try immediately if already loaded
   if (document.readyState === 'complete') {
-    setTimeout(() => {
-      const certGrid = document.getElementById('certifications-grid');
-      if (certGrid) {
-        observer.disconnect();
-        initializePortfolio().catch(error => {
-          console.error('Failed to initialize portfolio:', error);
-        });
-      }
-    }, 2000);
+    if (!tryInitialize()) {
+      // Keep trying every 500ms for up to 5 seconds
+      let attempts = 0;
+      const maxAttempts = 10;
+      const interval = setInterval(() => {
+        attempts++;
+        if (tryInitialize() || attempts >= maxAttempts) {
+          clearInterval(interval);
+          observer.disconnect();
+        }
+      }, 500);
+    }
   } else {
     window.addEventListener('load', function() {
       setTimeout(() => {
-        const certGrid = document.getElementById('certifications-grid');
-        if (certGrid) {
-          observer.disconnect();
-          initializePortfolio().catch(error => {
-            console.error('Failed to initialize portfolio:', error);
-          });
+        if (!tryInitialize()) {
+          // Keep trying every 500ms for up to 5 seconds
+          let attempts = 0;
+          const maxAttempts = 10;
+          const interval = setInterval(() => {
+            attempts++;
+            if (tryInitialize() || attempts >= maxAttempts) {
+              clearInterval(interval);
+              observer.disconnect();
+            }
+          }, 500);
         }
-      }, 2000);
+      }, 1000);
     });
   }
   
-  // Safety timeout - initialize after 5 seconds regardless
+  // Safety timeout - initialize after 6 seconds regardless
   setTimeout(() => {
-    observer.disconnect();
-    initializePortfolio().catch(error => {
-      console.error('Failed to initialize portfolio:', error);
-    });
-  }, 5000);
+    if (!initialized) {
+      observer.disconnect();
+      console.warn('⚠️ Timeout reached, initializing anyway...');
+      initializePortfolio().catch(error => {
+        console.error('Failed to initialize portfolio:', error);
+      });
+    }
+  }, 6000);
 })();
 
 // Enhanced Scroll Spy with More Debugging
