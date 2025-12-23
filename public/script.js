@@ -439,24 +439,33 @@ function safeLink(url, label) {
 
 function getCertificationMeta(cert) {
   // Accepts string URL or { url, title }
-  const url = typeof cert === "string" ? cert : cert && cert.url ? cert.url : "";
-  const title = typeof cert === "object" && cert && cert.title ? cert.title : "";
+  const url = typeof cert === "string" ? cert : (cert && cert.url ? cert.url : "");
+  const title = typeof cert === "object" && cert && cert.title ? String(cert.title).trim() : "";
   let icon = "📜";
-  let label = title || url;
+  let label = title || url || "Certification";
+  
   try {
-    const u = new URL(url);
-    const host = u.hostname;
-    if (host.includes("hackerrank.com")) {
-      icon = "🟨"; // JS-like badge
-      label = title || "JavaScript (HackerRank)";
-    } else if (host.includes("credly.com")) {
-      icon = "💠"; // SAP/Credly badge style
-      label = title || "SAP Certification (Credly)";
+    if (url) {
+      const u = new URL(url);
+      const host = u.hostname;
+      if (host.includes("hackerrank.com")) {
+        icon = "🟨"; // JS-like badge
+        label = title || "JavaScript (HackerRank)";
+      } else if (host.includes("credly.com")) {
+        icon = "💠"; // SAP/Credly badge style
+        label = title || "SAP Certification (Credly)";
+      }
     }
   } catch {
-    // leave defaults
+    // leave defaults - label already set above
   }
-  return { url, label, icon };
+  
+  // Ensure label is never empty or undefined
+  if (!label || label === "undefined" || label === "null") {
+    label = title || "Certification";
+  }
+  
+  return { url: url || "", label: String(label), icon };
 }
 
 function youtubeToEmbed(url) {
@@ -680,14 +689,18 @@ function renderResume(resume) {
             }
             console.log(`Using fallback image: ${img.src}`);
           }
-          img.alt = meta.label || c.title || "Certification";
-          const title = createEl("div", "title", meta.label);
-          const provider = createEl("div", "provider", meta.url.replace(/^https?:\/\//, "").split("/")[0]);
+          // Ensure we have a valid title/label
+          const displayTitle = meta.label || c.title || "Certification";
+          const displayProvider = meta.url ? meta.url.replace(/^https?:\/\//, "").split("/")[0] : "";
+          
+          img.alt = displayTitle;
+          const title = createEl("div", "title", displayTitle);
+          const provider = createEl("div", "provider", displayProvider);
           card.appendChild(img);
           card.appendChild(title);
           card.appendChild(provider);
           certGrid.appendChild(card);
-          console.log(`Added certification card: ${meta.label}`);
+          console.log(`Added certification card: ${displayTitle}`);
         } catch (error) {
           console.error(`Error rendering certification ${index}:`, error);
         }
