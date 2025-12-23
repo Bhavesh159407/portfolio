@@ -614,13 +614,19 @@ function renderResume(resume) {
 
   const certGrid = document.getElementById("certifications-grid");
   if (certGrid) {
-    console.log('Rendering certifications, count:', (resume.certifications || []).length);
+    console.log('=== STARTING CERTIFICATION RENDERING ===');
+    console.log('certGrid element found:', !!certGrid);
+    console.log('resume.certifications:', resume.certifications);
+    console.log('resume.certifications type:', typeof resume.certifications);
+    console.log('resume.certifications is array:', Array.isArray(resume.certifications));
+    console.log('Certifications count:', (resume.certifications || []).length);
     certGrid.innerHTML = "";
     const certifications = resume.certifications || [];
     if (certifications.length === 0) {
       console.warn('No certifications found in resume data');
       certGrid.innerHTML = '<p class="muted">No certifications available.</p>';
     } else {
+      console.log(`Processing ${certifications.length} certifications...`);
       certifications.forEach((c, index) => {
         try {
           // Log raw certification data
@@ -1569,6 +1575,11 @@ async function initializePortfolio() {
     }
     const resume = await resumeResponse.json();
     console.log('Resume data loaded:', resume);
+    console.log('Certifications in resume:', resume.certifications);
+    console.log('Certifications count:', resume.certifications ? resume.certifications.length : 0);
+    if (resume.certifications && resume.certifications.length > 0) {
+      console.log('First certification:', JSON.stringify(resume.certifications[0]));
+    }
     renderResume(resume);
     
     // Load clients data
