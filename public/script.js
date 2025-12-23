@@ -817,31 +817,15 @@ function renderResume(resume) {
           card.appendChild(titleDiv);
           card.appendChild(providerDiv);
           certGrid.appendChild(card);
-          successCount++;
           console.log(`✅ Added certification card ${index}: "${finalTitle}"`);
-          console.log(`   - Card href: ${card.href}`);
-          console.log(`   - Image src: ${img.src}`);
-          console.log(`   - Title: ${titleDiv.textContent}`);
         } catch (error) {
-          errorCount++;
-          console.error(`❌ Error rendering certification ${index}:`, error);
-          console.error('Error details:', {
-            error: error.message,
-            stack: error.stack,
-            cert: c
-          });
+          console.error(`Error rendering certification ${index}:`, error);
         }
       });
-      console.log(`✅ Certification rendering complete: ${successCount} successful, ${errorCount} errors`);
-      console.log(`certifications-grid now has ${certGrid.children.length} children`);
-      console.log('certifications-grid innerHTML preview:', certGrid.innerHTML.substring(0, 500));
-      
-      // Final verification
-      if (certGrid.children.length === 0 && certifications.length > 0) {
-        console.error('❌ CRITICAL: No cards were added despite having certifications!');
-        console.error('certGrid.innerHTML:', certGrid.innerHTML);
-      }
+      console.log(`Successfully rendered ${certGrid.children.length} certification cards`);
     }
+  } else {
+    console.error('certifications-grid element not found in DOM');
   }
 
   const contact = document.getElementById("contact-items");
@@ -1327,7 +1311,7 @@ function initStarfield() {
 }
 
 // Main Render Functions
-// DUPLICATE FUNCTION REMOVED - Using the main renderResume function at line 494
+// NOTE: The main renderResume function is defined at line 494 - do not duplicate it here
 
 function renderClients(clients) {
   const clientsGrid = safeGetElement("clients-grid");
