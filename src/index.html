@@ -33,10 +33,11 @@
       // Wait for Angular modules to load
       if (document.readyState === 'complete') {
         // Page already loaded, wait a bit for Angular
-        setTimeout(loadScript, 500);
+        setTimeout(loadScript, 1500);
       } else {
         window.addEventListener('load', function() {
-          setTimeout(loadScript, 500);
+          // Wait for Angular to bootstrap
+          setTimeout(loadScript, 1500);
         });
       }
     })();
