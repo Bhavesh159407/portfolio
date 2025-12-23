@@ -22,6 +22,236 @@ function safeSetImage(id, src) {
   }
 }
 
+// Client Modal Functions
+function openClientModal(client) {
+  const modal = document.getElementById('client-modal');
+  if (!modal) return;
+  
+  // Set client info
+  safeSetText('modal-title', client.name);
+  safeSetImage('modal-logo', client.logoUrl);
+  
+  const websiteLink = safeGetElement('modal-website');
+  if (websiteLink && client.website) {
+    websiteLink.href = client.website;
+    websiteLink.textContent = 'Visit website';
+    websiteLink.style.display = 'inline-block';
+  } else if (websiteLink) {
+    websiteLink.style.display = 'none';
+  }
+  
+  // Set description
+  const descriptionDiv = safeGetElement('modal-description');
+  if (descriptionDiv) {
+    descriptionDiv.innerHTML = `<h4>About ${client.name}</h4><p>${client.description || 'No description available.'}</p>`;
+  }
+  
+  // Clear and populate projects
+  const projectsDiv = safeGetElement('modal-projects');
+  if (projectsDiv && client.projects && client.projects.length > 0) {
+    projectsDiv.style.display = 'block';
+    projectsDiv.innerHTML = '<h4>Projects</h4>';
+    
+    client.projects.forEach(project => {
+      const projectDiv = document.createElement('div');
+      projectDiv.className = 'project-block';
+      projectDiv.innerHTML = `<h5>${project.name}</h5>`;
+      projectsDiv.appendChild(projectDiv);
+    });
+  } else if (projectsDiv) {
+    projectsDiv.style.display = 'none';
+  }
+  
+  // Clear and populate documents
+  const documentsDiv = safeGetElement('modal-documents-content');
+  if (documentsDiv) {
+    documentsDiv.innerHTML = '';
+    
+    if (client.projects && client.projects.length > 0) {
+      client.projects.forEach(project => {
+        if (project.documents && project.documents.length > 0) {
+          project.documents.forEach(doc => {
+            const docDiv = document.createElement('div');
+            docDiv.className = 'modal-item';
+            docDiv.innerHTML = `
+              <h5>${doc.title}</h5>
+              <a href="${doc.url}" target="_blank" rel="noopener" class="link">📄 View</a>
+            `;
+            documentsDiv.appendChild(docDiv);
+          });
+        }
+      });
+    }
+    
+    if (documentsDiv.children.length === 0) {
+      documentsDiv.innerHTML = '<p style="color: var(--sapTextColor-Secondary); font-style: italic;">No presentations available.</p>';
+    }
+  }
+  
+  // Clear and populate repositories
+  const reposDiv = safeGetElement('modal-repos-content');
+  if (reposDiv) {
+    reposDiv.innerHTML = '';
+    
+    if (client.projects && client.projects.length > 0) {
+      client.projects.forEach(project => {
+        if (project.repos && project.repos.length > 0) {
+          project.repos.forEach(repo => {
+            const repoDiv = document.createElement('div');
+            repoDiv.className = 'modal-item';
+            repoDiv.innerHTML = `
+              <h5>${repo.title}</h5>
+              <a href="${repo.url}" target="_blank" rel="noopener" class="link">📁 View</a>
+            `;
+            reposDiv.appendChild(repoDiv);
+          });
+        }
+      });
+    }
+    
+    if (reposDiv.children.length === 0) {
+      reposDiv.innerHTML = '<p style="color: var(--sapTextColor-Secondary); font-style: italic;">No repositories available.</p>';
+    }
+  }
+  
+  // Clear and populate videos
+  const videosDiv = safeGetElement('modal-videos-content');
+  if (videosDiv) {
+    videosDiv.innerHTML = '';
+    
+    if (client.projects && client.projects.length > 0) {
+      client.projects.forEach(project => {
+        if (project.videos && project.videos.length > 0) {
+          project.videos.forEach(video => {
+            const videoDiv = document.createElement('div');
+            videoDiv.className = 'modal-item';
+            const icon = video.type === 'presentation' ? '📊' : '🎥';
+            videoDiv.innerHTML = `
+              <h5>${video.title}</h5>
+              <a href="${video.url}" target="_blank" rel="noopener" class="link">${icon} View</a>
+            `;
+            videosDiv.appendChild(videoDiv);
+          });
+        }
+      });
+    }
+    
+    if (videosDiv.children.length === 0) {
+      videosDiv.innerHTML = '<p style="color: var(--sapTextColor-Secondary); font-style: italic;">No videos available.</p>';
+    }
+  }
+  
+  // Show modal
+  modal.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeClientModal() {
+  const modal = document.getElementById('client-modal');
+  if (modal) {
+    modal.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+}
+
+// Logo Showcase Functions
+function renderLogoShowcase(clients) {
+  const logoTrack = safeGetElement('logo-track');
+  if (!logoTrack) return;
+  
+  logoTrack.innerHTML = '';
+  
+  // Duplicate clients for seamless scrolling
+  const duplicatedClients = [...clients, ...clients];
+  
+  duplicatedClients.forEach(client => {
+    const logoCard = document.createElement('div');
+    logoCard.className = 'logo-card';
+    logoCard.style.cssText = 'flex-shrink: 0; min-width: 200px; cursor: pointer;';
+    logoCard.onclick = () => openClientModal(client);
+    
+    logoCard.innerHTML = `
+      <img src="${client.logoUrl}" alt="${client.name}" style="width: 100%; height: 80px; object-fit: contain; margin-bottom: 10px;" />
+      <h4 style="text-align: center; font-size: 14px; color: var(--sapTextColor); margin: 0;">${client.name}</h4>
+    `;
+    
+    logoTrack.appendChild(logoCard);
+  });
+}
+
+// Mobile Menu Functions
+function setupMobileMenu() {
+  const toggle = safeGetElement('mobile-menu-toggle');
+  const menu = safeGetElement('nav-menu');
+  
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      const isOpen = menu.classList.contains('active');
+      menu.classList.toggle('active');
+      toggle.setAttribute('aria-expanded', !isOpen);
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!toggle.contains(e.target) && !menu.contains(e.target)) {
+        menu.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+}
+
+// Starfield Animation
+function initStarfield() {
+  const canvas = document.getElementById('starfield');
+  if (!canvas) return;
+  
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  
+  const stars = [];
+  const numStars = 100;
+  
+  for (let i = 0; i < numStars; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: Math.random() * 2,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5
+    });
+  }
+  
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    stars.forEach(star => {
+      star.x += star.vx;
+      star.y += star.vy;
+      
+      if (star.x < 0) star.x = canvas.width;
+      if (star.x > canvas.width) star.x = 0;
+      if (star.y < 0) star.y = canvas.height;
+      if (star.y > canvas.height) star.y = 0;
+      
+      ctx.beginPath();
+      ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(122, 162, 255, 0.3)';
+      ctx.fill();
+    });
+    
+    requestAnimationFrame(animate);
+  }
+  
+  animate();
+  
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+}
+
 // ---------- Default Data (will be overridden by JSON files if present) ----------
 const defaultResume = {
   name: "Your Name",
@@ -365,42 +595,82 @@ function renderResume(resume) {
 
   const certGrid = document.getElementById("certifications-grid");
   if (certGrid) {
+    console.log('Rendering certifications, count:', (resume.certifications || []).length);
     certGrid.innerHTML = "";
-    (resume.certifications || []).forEach(c => {
-      const meta = getCertificationMeta(c);
-      if (!meta.url) return;
-      const card = createEl("a", "cert-card");
-      card.href = meta.url;
-      card.target = "_blank";
-      card.rel = "noopener";
-      const img = createEl("img");
-      if (typeof c === "object" && c && c.imageUrl) {
-        img.src = c.imageUrl;
-      } else {
-        // choose local fallback based on host
+    const certifications = resume.certifications || [];
+    if (certifications.length === 0) {
+      console.warn('No certifications found in resume data');
+      certGrid.innerHTML = '<p class="muted">No certifications available.</p>';
+    } else {
+      certifications.forEach((c, index) => {
         try {
-          const h = new URL(meta.url).hostname;
-          if (h.includes("hackerrank")) img.src = "/assets/hackerrank.svg";
-          else if (h.includes("credly") || h.includes("sap")) img.src = "/assets/sap.svg";
-          else img.src = "/assets/sap.svg";
-        } catch {
-          img.src = "/assets/sap.svg";
+          const meta = getCertificationMeta(c);
+          if (!meta.url) {
+            console.warn(`Certification ${index} has no URL, skipping`);
+            return;
+          }
+          const card = createEl("a", "cert-card");
+          card.href = meta.url;
+          card.target = "_blank";
+          card.rel = "noopener";
+          const img = createEl("img");
+          img.crossOrigin = "anonymous"; // Enable CORS for external images
+          img.loading = "lazy"; // Lazy load images for better performance
+          
+          if (typeof c === "object" && c && c.imageUrl) {
+            // Try the provided image URL first
+            img.src = c.imageUrl;
+            
+            // If URL ends with /blob, try /image.png as fallback
+            if (c.imageUrl.endsWith('/blob')) {
+              const fallbackUrl = c.imageUrl.replace('/blob', '/image.png');
+              img.onerror = () => {
+                console.warn(`Failed to load image: ${c.imageUrl}, trying fallback: ${fallbackUrl}`);
+                img.onerror = null; // Prevent infinite loop
+                img.src = fallbackUrl;
+                // Final fallback to local icon
+                img.onerror = () => {
+                  const h = (meta.url || "");
+                  if (h.includes("hackerrank")) img.src = "/assets/hackerrank.svg";
+                  else img.src = "/assets/sap.svg";
+                };
+              };
+            } else {
+              // Standard error handling for other URLs
+              img.onerror = () => {
+                console.warn(`Failed to load image: ${c.imageUrl}`);
+                const h = (meta.url || "");
+                if (h.includes("hackerrank")) img.src = "/assets/hackerrank.svg";
+                else img.src = "/assets/sap.svg";
+              };
+            }
+          } else {
+            // choose local fallback based on host
+            try {
+              const h = new URL(meta.url).hostname;
+              if (h.includes("hackerrank")) img.src = "/assets/hackerrank.svg";
+              else if (h.includes("credly") || h.includes("sap")) img.src = "/assets/sap.svg";
+              else img.src = "/assets/sap.svg";
+            } catch {
+              img.src = "/assets/sap.svg";
+            }
+          }
+          img.alt = meta.label;
+          const title = createEl("div", "title", meta.label);
+          const provider = createEl("div", "provider", meta.url.replace(/^https?:\/\//, "").split("/")[0]);
+          card.appendChild(img);
+          card.appendChild(title);
+          card.appendChild(provider);
+          certGrid.appendChild(card);
+          console.log(`Added certification card: ${meta.label}`);
+        } catch (error) {
+          console.error(`Error rendering certification ${index}:`, error);
         }
-      }
-      // onerror fallback to local icons
-      img.onerror = () => {
-        const h = (meta.url || "");
-        if (h.includes("hackerrank")) img.src = "/assets/hackerrank.svg";
-        else img.src = "/assets/sap.svg";
-      };
-      img.alt = meta.label;
-      const title = createEl("div", "title", meta.label);
-      const provider = createEl("div", "provider", meta.url.replace(/^https?:\/\//, "").split("/")[0]);
-      card.appendChild(img);
-      card.appendChild(title);
-      card.appendChild(provider);
-      certGrid.appendChild(card);
-    });
+      });
+      console.log(`Successfully rendered ${certGrid.children.length} certification cards`);
+    }
+  } else {
+    console.error('certifications-grid element not found in DOM');
   }
 
   const contact = document.getElementById("contact-items");
@@ -885,6 +1155,407 @@ function initStarfield() {
   step();
 }
 
+// Main Render Functions
+function renderResume(resume) {
+  safeSetText("brand-name", resume.name);
+  safeSetText("hero-name", resume.name);
+  safeSetText("hero-title", resume.title);
+  safeSetText("hero-summary", resume.summary);
+  
+  // Set profile photo if available
+  if (resume.profilePhoto) {
+    safeSetImage("profile-photo", resume.profilePhoto);
+    safeSetImage("brand-avatar", resume.profilePhoto);
+  }
+
+  const socials = safeGetElement("social-links");
+  if (socials) {
+    socials.innerHTML = "";
+    (resume.socials || []).forEach(s => {
+      const a = safeLink(s.url, s.icon ? `${s.icon} ${s.label}` : s.label);
+      socials.appendChild(a);
+    });
+  }
+
+  // Render about section
+  const aboutContent = safeGetElement("about-content");
+  if (aboutContent) {
+    aboutContent.innerHTML = `
+      <p style="font-size: 16px; line-height: 1.6; color: var(--sapTextColor);">
+        ${resume.summary}
+      </p>
+      <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px;">
+        <span style="background: var(--sapBrandColor-Light); color: white; padding: 6px 12px; border-radius: 20px; font-size: 14px;">📍 ${resume.location}</span>
+        <span style="background: var(--sapBrandColor-Light); color: white; padding: 6px 12px; border-radius: 20px; font-size: 14px;">📧 ${resume.email}</span>
+        <span style="background: var(--sapBrandColor-Light); color: white; padding: 6px 12px; border-radius: 20px; font-size: 14px;">📱 ${resume.phone}</span>
+      </div>
+    `;
+  }
+
+  // Render education
+  const educationList = safeGetElement("education-list");
+  if (educationList && resume.education) {
+    educationList.innerHTML = "";
+    resume.education.forEach(e => {
+      const item = document.createElement("div");
+      item.className = "item";
+      
+      const periodDiv = document.createElement("div");
+      periodDiv.className = "period";
+      
+      // Add college logo if available
+      if (e.logoUrl) {
+        periodDiv.innerHTML = `
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="${e.logoUrl}" alt="${e.school}" style="width: 70px; height: 22px; object-fit: cover; object-position: left center; opacity: 0.95; border-radius: 4px;">
+            <span style="font-size: 12px; color: var(--muted); white-space: nowrap; flex-shrink: 0;">${e.period}</span>
+          </div>
+        `;
+      } else {
+        periodDiv.innerHTML = `<span class="chip">${e.period}</span>`;
+      }
+      
+      item.appendChild(periodDiv);
+      
+      const contentDiv = document.createElement("div");
+      contentDiv.innerHTML = `
+        <h3>${e.school}</h3>
+        <p class="muted">${e.degree}</p>
+      `;
+      item.appendChild(contentDiv);
+      
+      educationList.appendChild(item);
+    });
+  }
+
+  // Render experience
+  const experienceList = safeGetElement("experience-list");
+  if (experienceList && resume.experience) {
+    experienceList.innerHTML = "";
+    resume.experience.forEach(exp => {
+      const item = document.createElement("div");
+      item.className = "item";
+      
+      const periodDiv = document.createElement("div");
+      periodDiv.className = "period";
+      periodDiv.innerHTML = `<span class="chip">${exp.period}</span>`;
+      item.appendChild(periodDiv);
+      
+      const contentDiv = document.createElement("div");
+      contentDiv.innerHTML = `
+        <h3>${exp.role}</h3>
+        <p class="muted">${exp.company} • ${exp.location}</p>
+        <p>${exp.summary}</p>
+        ${exp.highlights ? `<ul>${exp.highlights.map(h => `<li>${h}</li>`).join('')}</ul>` : ''}
+      `;
+      item.appendChild(contentDiv);
+      
+      experienceList.appendChild(item);
+    });
+  }
+
+  // Render projects
+  const projectsGrid = safeGetElement("projects-grid");
+  if (projectsGrid && resume.projects) {
+    projectsGrid.innerHTML = "";
+    resume.projects.forEach(project => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <h3>${project.name}</h3>
+        <p>${project.description}</p>
+        <div class="tags">
+          ${project.tech ? project.tech.map(t => `<span class="tag">${t}</span>`).join('') : ''}
+        </div>
+        <div class="links">
+          ${project.live ? `<a href="${project.live}" target="_blank" class="button primary">Live Demo</a>` : ''}
+          ${project.repo ? `<a href="${project.repo}" target="_blank" class="button">Code</a>` : ''}
+        </div>
+      `;
+      projectsGrid.appendChild(card);
+    });
+  }
+
+  // Render skills
+  const skillsCloud = safeGetElement("skills-cloud");
+  if (skillsCloud && resume.skills) {
+    skillsCloud.innerHTML = "";
+    if (resume.skills.categories) {
+      resume.skills.categories.forEach(category => {
+        const categoryDiv = document.createElement("div");
+        categoryDiv.innerHTML = `
+          <h4 style="color: var(--sapBrandColor-Dark); margin-bottom: 10px; font-size: 16px;">${category.label}</h4>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
+            ${category.items.map(skill => `<span class="chip">${skill}</span>`).join('')}
+          </div>
+        `;
+        skillsCloud.appendChild(categoryDiv);
+      });
+    }
+  }
+
+  // Render languages
+  const languagesList = safeGetElement("languages-list");
+  if (languagesList && resume.skills && resume.skills.languages) {
+    languagesList.innerHTML = "";
+    resume.skills.languages.forEach(lang => {
+      const chip = document.createElement("span");
+      chip.className = "chip";
+      chip.textContent = lang;
+      languagesList.appendChild(chip);
+    });
+  }
+
+  // Render certifications
+  const certGrid = safeGetElement("certifications-grid");
+  if (certGrid && resume.certifications) {
+    certGrid.innerHTML = "";
+    resume.certifications.forEach(cert => {
+      const card = document.createElement("div");
+      card.className = "cert-card";
+      card.innerHTML = `
+        <h3>${cert.name}</h3>
+        <p class="muted">${cert.issuer}</p>
+        <span class="chip">${cert.date}</span>
+      `;
+      certGrid.appendChild(card);
+    });
+  }
+}
+
+function renderClients(clients) {
+  const clientsGrid = safeGetElement("clients-grid");
+  if (!clientsGrid) return;
+  
+  clientsGrid.innerHTML = "";
+  
+  clients.forEach(client => {
+    const card = document.createElement("div");
+    card.className = "logo-card";
+    card.style.cursor = "pointer";
+    card.onclick = () => openClientModal(client);
+    
+    card.innerHTML = `
+      <img src="${client.logoUrl}" alt="${client.name}" style="width: 100%; height: 80px; object-fit: contain; margin-bottom: 10px;" />
+      <h4 style="text-align: center; font-size: 14px; color: var(--sapTextColor); margin: 0;">${client.name}</h4>
+    `;
+    
+    clientsGrid.appendChild(card);
+  });
+}
+
+function renderContact(resume) {
+  const contactItems = safeGetElement("contact-items");
+  if (!contactItems) return;
+  
+  const contacts = [
+    { icon: "📧", label: "Email", value: resume.email, url: `mailto:${resume.email}` },
+    { icon: "📱", label: "Phone", value: resume.phone, url: `tel:${resume.phone}` },
+    { icon: "🌐", label: "Website", value: resume.website, url: resume.website },
+    { icon: "📍", label: "Location", value: resume.location }
+  ];
+  
+  contactItems.innerHTML = "";
+  
+  contacts.forEach(contact => {
+    const item = document.createElement("div");
+    item.className = "contact-item";
+    
+    if (contact.url) {
+      item.innerHTML = `
+        <div class="contact-icon">${contact.icon}</div>
+        <div>
+          <h3>${contact.label}</h3>
+          <a href="${contact.url}" target="_blank" rel="noopener">${contact.value}</a>
+        </div>
+      `;
+    } else {
+      item.innerHTML = `
+        <div class="contact-icon">${contact.icon}</div>
+        <div>
+          <h3>${contact.label}</h3>
+          <p>${contact.value}</p>
+        </div>
+      `;
+    }
+    
+    contactItems.appendChild(item);
+  });
+}
+
+// Utility function for creating links
+function safeLink(href, text) {
+  const a = document.createElement("a");
+  a.href = href;
+  a.textContent = text;
+  a.target = "_blank";
+  a.rel = "noopener";
+  return a;
+}
+
+// Wait for an element to appear in the DOM (useful for Angular apps)
+function waitForElement(elementId, timeout = 5000) {
+  return new Promise((resolve, reject) => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      resolve(element);
+      return;
+    }
+    
+    const observer = new MutationObserver((mutations, obs) => {
+      const element = document.getElementById(elementId);
+      if (element) {
+        obs.disconnect();
+        resolve(element);
+      }
+    });
+    
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+    
+    setTimeout(() => {
+      observer.disconnect();
+      const element = document.getElementById(elementId);
+      if (element) {
+        resolve(element);
+      } else {
+        console.warn(`Element ${elementId} not found after ${timeout}ms`);
+        resolve(null); // Resolve anyway to continue execution
+      }
+    }, timeout);
+  });
+}
+
+// Main initialization - wait for both DOM and Angular to be ready
+async function initializePortfolio() {
+  console.log('Starting portfolio initialization...');
+  
+  // Wait for window to be fully loaded
+  if (document.readyState !== 'complete') {
+    await new Promise(resolve => {
+      if (document.readyState === 'complete') {
+        resolve();
+      } else {
+        window.addEventListener('load', resolve);
+      }
+    });
+  }
+  
+  // Wait for Angular app to be initialized - check for app-root content
+  let retries = 0;
+  const maxRetries = 100; // 10 seconds max wait
+  
+  while (retries < maxRetries) {
+    const appRoot = document.querySelector('app-root');
+    // Check if Angular has rendered by looking for content
+    if (appRoot) {
+      const hasContent = appRoot.children.length > 0 || 
+                        appRoot.shadowRoot?.children.length > 0 ||
+                        appRoot.innerHTML.trim().length > 0;
+      if (hasContent) {
+        console.log('Angular app detected, proceeding...');
+        break;
+      }
+    }
+    await new Promise(resolve => setTimeout(resolve, 100));
+    retries++;
+  }
+  
+  if (retries >= maxRetries) {
+    console.warn('Angular app may not be fully loaded, continuing anyway...');
+  }
+  
+  // Additional wait for specific elements
+  console.log('Waiting for certifications-grid element...');
+  await waitForElement('certifications-grid', 5000);
+  
+  try {
+    console.log('Loading resume data...');
+    // Load resume data
+    const resumeResponse = await fetch('/data/resume.json');
+    if (!resumeResponse.ok) {
+      throw new Error(`Failed to load resume.json: ${resumeResponse.status} ${resumeResponse.statusText}`);
+    }
+    const resume = await resumeResponse.json();
+    console.log('Resume data loaded:', resume);
+    renderResume(resume);
+    
+    // Load clients data
+    console.log('Loading clients data...');
+    const clientsResponse = await fetch('/data/clients.json');
+    if (!clientsResponse.ok) {
+      throw new Error(`Failed to load clients.json: ${clientsResponse.status}`);
+    }
+    const clients = await clientsResponse.json();
+    console.log('Clients data loaded:', clients.length, 'clients');
+    renderClients(clients);
+    renderLogoShowcase(clients);
+    
+    // Render contact section
+    renderContact(resume);
+    
+    // Setup mobile menu
+    if (typeof setupMobileMenu === 'function') {
+      setupMobileMenu();
+    }
+    
+    // Initialize starfield
+    if (typeof initStarfield === 'function') {
+      initStarfield();
+    }
+    
+    // Setup modal close handlers
+    const modal = document.getElementById('client-modal');
+    if (modal) {
+      const closeButtons = modal.querySelectorAll('[data-close-modal]');
+      closeButtons.forEach(btn => {
+        btn.addEventListener('click', closeClientModal);
+      });
+      
+      // Close on backdrop click
+      const backdrop = modal.querySelector('.modal-backdrop');
+      if (backdrop) {
+        backdrop.addEventListener('click', closeClientModal);
+      }
+    }
+    
+    console.log('✅ Portfolio initialized successfully!');
+  } catch (error) {
+    console.error('Error loading portfolio data:', error);
+    // Fallback to default data
+    if (typeof defaultResume !== 'undefined') {
+      renderResume(defaultResume);
+    } else {
+      console.error('No default resume data available');
+    }
+  }
+}
+
+// Initialize when everything is ready
+// This will be called when script.js is loaded
+(function() {
+  // Wait for window to be fully loaded first
+  if (document.readyState === 'complete') {
+    // Already loaded, wait a bit more for Angular
+    setTimeout(() => {
+      initializePortfolio().catch(error => {
+        console.error('Failed to initialize portfolio:', error);
+      });
+    }, 1000);
+  } else {
+    // Wait for load event
+    window.addEventListener('load', function() {
+      setTimeout(() => {
+        initializePortfolio().catch(error => {
+          console.error('Failed to initialize portfolio:', error);
+        });
+      }, 1000);
+    });
+  }
+})();
+
 // Enhanced Scroll Spy with More Debugging
 window.addEventListener('load', function() {
   console.log('Page loaded, initializing enhanced scroll spy...');
@@ -979,5 +1650,11 @@ window.addEventListener('load', function() {
   console.log('Enhanced scroll spy initialized successfully!');
 });
 
-
+// Initialize footer year
+document.addEventListener('DOMContentLoaded', function() {
+  const footerYear = document.getElementById('footer-year');
+  if (footerYear) {
+    footerYear.textContent = new Date().getFullYear();
+  }
+});
 

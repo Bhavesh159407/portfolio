@@ -653,3 +653,24 @@ body::after {
   z-index: 10 !important;
   position: relative !important;
 }
+
+/* Footer Styles */
+.site-footer {
+  background: var(--sapBackgroundColor-1);
+  border-top: 1px solid var(--border);
+  padding: 2rem 0;
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.site-footer p {
+  color: var(--sapTextColor-Secondary);
+  font-size: 14px;
+  margin: 0;
+  font-weight: 500;
+}
+
+.site-footer #footer-year {
+  font-weight: 600;
+  color: var(--sapBrandColor-Dark);
+}
