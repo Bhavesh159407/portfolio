@@ -613,21 +613,44 @@ function renderResume(resume) {
   });
 
   const certGrid = document.getElementById("certifications-grid");
-  if (certGrid) {
-    console.log('=== STARTING CERTIFICATION RENDERING ===');
-    console.log('certGrid element found:', !!certGrid);
-    console.log('resume.certifications:', resume.certifications);
-    console.log('resume.certifications type:', typeof resume.certifications);
-    console.log('resume.certifications is array:', Array.isArray(resume.certifications));
-    console.log('Certifications count:', (resume.certifications || []).length);
-    certGrid.innerHTML = "";
-    const certifications = resume.certifications || [];
-    if (certifications.length === 0) {
-      console.warn('No certifications found in resume data');
-      certGrid.innerHTML = '<p class="muted">No certifications available.</p>';
-    } else {
-      console.log(`Processing ${certifications.length} certifications...`);
-      certifications.forEach((c, index) => {
+  console.log('=== STARTING CERTIFICATION RENDERING ===');
+  console.log('certGrid element found:', !!certGrid);
+  console.log('certGrid element:', certGrid);
+  if (!certGrid) {
+    console.error('❌ CRITICAL ERROR: certifications-grid element NOT FOUND!');
+    console.error('Searching for alternative selectors...');
+    const altSelectors = [
+      '#certifications-grid',
+      '[id="certifications-grid"]',
+      '.cert-grid',
+      '#certifications .grid',
+      'section#certifications div.grid'
+    ];
+    altSelectors.forEach(sel => {
+      const el = document.querySelector(sel);
+      console.log(`  Selector "${sel}":`, el ? 'FOUND' : 'NOT FOUND', el);
+    });
+    console.error('Available section IDs:', Array.from(document.querySelectorAll('section[id]')).map(s => s.id));
+    return; // Exit early if element not found
+  }
+  
+  console.log('certGrid element found:', certGrid);
+  console.log('certGrid parent:', certGrid.parentElement);
+  console.log('resume.certifications:', resume.certifications);
+  console.log('resume.certifications type:', typeof resume.certifications);
+  console.log('resume.certifications is array:', Array.isArray(resume.certifications));
+  console.log('Certifications count:', (resume.certifications || []).length);
+  
+  certGrid.innerHTML = "";
+  const certifications = resume.certifications || [];
+  if (certifications.length === 0) {
+    console.warn('No certifications found in resume data');
+    certGrid.innerHTML = '<p class="muted">No certifications available.</p>';
+  } else {
+    console.log(`Processing ${certifications.length} certifications...`);
+    let successCount = 0;
+    let errorCount = 0;
+    certifications.forEach((c, index) => {
         try {
           // Log raw certification data
           console.log(`[CERT ${index}] Raw data:`, JSON.stringify(c));
@@ -794,15 +817,31 @@ function renderResume(resume) {
           card.appendChild(titleDiv);
           card.appendChild(providerDiv);
           certGrid.appendChild(card);
+          successCount++;
           console.log(`✅ Added certification card ${index}: "${finalTitle}"`);
+          console.log(`   - Card href: ${card.href}`);
+          console.log(`   - Image src: ${img.src}`);
+          console.log(`   - Title: ${titleDiv.textContent}`);
         } catch (error) {
-          console.error(`Error rendering certification ${index}:`, error);
+          errorCount++;
+          console.error(`❌ Error rendering certification ${index}:`, error);
+          console.error('Error details:', {
+            error: error.message,
+            stack: error.stack,
+            cert: c
+          });
         }
       });
-      console.log(`Successfully rendered ${certGrid.children.length} certification cards`);
+      console.log(`✅ Certification rendering complete: ${successCount} successful, ${errorCount} errors`);
+      console.log(`certifications-grid now has ${certGrid.children.length} children`);
+      console.log('certifications-grid innerHTML preview:', certGrid.innerHTML.substring(0, 500));
+      
+      // Final verification
+      if (certGrid.children.length === 0 && certifications.length > 0) {
+        console.error('❌ CRITICAL: No cards were added despite having certifications!');
+        console.error('certGrid.innerHTML:', certGrid.innerHTML);
+      }
     }
-  } else {
-    console.error('certifications-grid element not found in DOM');
   }
 
   const contact = document.getElementById("contact-items");
@@ -1617,7 +1656,34 @@ async function initializePortfolio() {
     if (resume.certifications && resume.certifications.length > 0) {
       console.log('First certification:', JSON.stringify(resume.certifications[0]));
     }
-    renderResume(resume);
+    
+    // Check if certifications-grid exists before rendering
+    const certGridCheck = document.getElementById("certifications-grid");
+    console.log('certifications-grid element exists before renderResume:', !!certGridCheck);
+    if (!certGridCheck) {
+      console.error('ERROR: certifications-grid element NOT FOUND in DOM!');
+      console.log('Available elements with "cert" in id:', Array.from(document.querySelectorAll('[id*="cert"]')).map(el => el.id));
+    }
+    
+    try {
+      renderResume(resume);
+      console.log('renderResume() completed successfully');
+      
+      // Verify certifications were rendered
+      setTimeout(() => {
+        const certGridAfter = document.getElementById("certifications-grid");
+        if (certGridAfter) {
+          console.log('certifications-grid children count after render:', certGridAfter.children.length);
+          console.log('certifications-grid innerHTML length:', certGridAfter.innerHTML.length);
+          if (certGridAfter.children.length === 0) {
+            console.error('ERROR: No certification cards were rendered!');
+          }
+        }
+      }, 500);
+    } catch (error) {
+      console.error('ERROR in renderResume:', error);
+      console.error('Error stack:', error.stack);
+    }
     
     // Load clients data
     console.log('Loading clients data...');
