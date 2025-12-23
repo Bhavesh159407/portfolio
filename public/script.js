@@ -618,31 +618,39 @@ function renderResume(resume) {
           img.loading = "lazy"; // Lazy load images for better performance
           
           if (typeof c === "object" && c && c.imageUrl) {
-            // Try the provided image URL first
-            img.src = c.imageUrl;
+            // Check if it's a HackerRank certificate URL (not a direct image)
+            const isHackerRank = c.imageUrl.includes("hackerrank.com/certificates") && !c.imageUrl.includes(".png") && !c.imageUrl.includes(".jpg") && !c.imageUrl.includes(".svg");
             
-            // If URL ends with /blob, try /image.png as fallback
-            if (c.imageUrl.endsWith('/blob')) {
-              const fallbackUrl = c.imageUrl.replace('/blob', '/image.png');
-              img.onerror = () => {
-                console.warn(`Failed to load image: ${c.imageUrl}, trying fallback: ${fallbackUrl}`);
-                img.onerror = null; // Prevent infinite loop
-                img.src = fallbackUrl;
-                // Final fallback to local icon
+            if (isHackerRank) {
+              // For HackerRank, use the local asset as it's not a direct image URL
+              img.src = "/assets/js.svg";
+            } else {
+              // Try the provided image URL first
+              img.src = c.imageUrl;
+              
+              // If URL ends with /blob, try /image.png as fallback
+              if (c.imageUrl.endsWith('/blob')) {
+                const fallbackUrl = c.imageUrl.replace('/blob', '/image.png');
                 img.onerror = () => {
+                  console.warn(`Failed to load image: ${c.imageUrl}, trying fallback: ${fallbackUrl}`);
+                  img.onerror = null; // Prevent infinite loop
+                  img.src = fallbackUrl;
+                  // Final fallback to local icon
+                  img.onerror = () => {
+                    const h = (meta.url || "");
+                    if (h.includes("hackerrank")) img.src = "/assets/hackerrank.svg";
+                    else img.src = "/assets/sap.svg";
+                  };
+                };
+              } else {
+                // Standard error handling for other URLs
+                img.onerror = () => {
+                  console.warn(`Failed to load image: ${c.imageUrl}`);
                   const h = (meta.url || "");
                   if (h.includes("hackerrank")) img.src = "/assets/hackerrank.svg";
                   else img.src = "/assets/sap.svg";
                 };
-              };
-            } else {
-              // Standard error handling for other URLs
-              img.onerror = () => {
-                console.warn(`Failed to load image: ${c.imageUrl}`);
-                const h = (meta.url || "");
-                if (h.includes("hackerrank")) img.src = "/assets/hackerrank.svg";
-                else img.src = "/assets/sap.svg";
-              };
+              }
             }
           } else {
             // choose local fallback based on host

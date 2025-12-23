@@ -92,14 +92,14 @@
 
   "certifications": [
     {
-      "title": "HackerRank JavaScript (Basic)",
-      "url": "https://www.hackerrank.com/certificates/ce701de4de43",
-      "imageUrl": "/assets/js.svg"
-    },
-    {
       "title": "Develop and Automate with SAP Build (Foundational)",
       "url": "https://www.credly.com/badges/a041b4cb-62f7-40ea-8491-dc28308cc469/linked_in_profile",
       "imageUrl": "https://images.credly.com/size/680x680/images/927c7d2e-4185-4f8d-ae50-b6d5d171eb26/blob"
+    },
+    {
+      "title": "Extending SAP S/4HANA with SAP Build Apps and Key User Extensibility (Foundational)",
+      "url": "https://www.credly.com/badges/b3dbe498-748c-4ac0-85b8-707d257477ad/linked_in_profile",
+      "imageUrl": "https://images.credly.com/size/680x680/images/fd3989a2-bdfd-4e7d-9da1-6e5df04a944d/image.png"
     },
     {
       "title": "Exploring the SAP Business AI Portfolio (Foundational)",
@@ -107,9 +107,9 @@
       "imageUrl": "https://images.credly.com/size/680x680/images/a1ab11fb-4b6a-475f-8740-b08730512139/image.png"
     },
     {
-      "title": "Extending SAP S/4HANA with SAP Build Apps and Key User Extensibility (Foundational)",
-      "url": "https://www.credly.com/badges/b3dbe498-748c-4ac0-85b8-707d257477ad/linked_in_profile",
-      "imageUrl": "https://images.credly.com/size/680x680/images/fd3989a2-bdfd-4e7d-9da1-6e5df04a944d/image.png"
+      "title": "HackerRank JavaScript (Basic)",
+      "url": "https://www.hackerrank.com/certificates/ce701de4de43",
+      "imageUrl": "https://www.hackerrank.com/certificates/ce701de4de43"
     },
     {
       "title": "SAP Build Apps - Extending SAP Solutions (Foundational)",
