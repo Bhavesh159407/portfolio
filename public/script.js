@@ -639,82 +639,93 @@ function renderResume(resume) {
             console.warn(`Certification ${index} has no URL, skipping`);
             return;
           }
-          const card = createEl("a", "cert-card");
-          card.href = meta.url;
+          // Create card as anchor element - ensure href is set correctly
+          const card = document.createElement("a");
+          card.className = "cert-card";
+          const certUrl = meta.url || c.url || "#";
+          card.href = certUrl;
           card.target = "_blank";
-          card.rel = "noopener";
-          const img = createEl("img");
-          img.crossOrigin = "anonymous"; // Enable CORS for external images
-          img.loading = "lazy"; // Lazy load images for better performance
+          card.rel = "noopener noreferrer";
+          card.style.cursor = "pointer";
+          card.style.textDecoration = "none";
+          
+          console.log(`[CERT ${index}] Card created with href: ${card.href}`);
+          
+          // Create image element
+          const img = document.createElement("img");
+          img.crossOrigin = "anonymous";
+          img.loading = "lazy";
           
           // Debug logging
           console.log(`[CERT ${index}] Processing:`, { 
             cTitle: c.title, 
             cImageUrl: c.imageUrl, 
+            cUrl: c.url,
             metaUrl: meta.url,
-            metaLabel: meta.label,
-            metaLabelType: typeof meta.label
+            cardHref: card.href
           });
           
           // Ensure we have a valid imageUrl
-          const imageUrl = (c && typeof c === "object" && c.imageUrl) ? String(c.imageUrl).trim() : null;
+          let imageUrl = (c && typeof c === "object" && c.imageUrl) ? String(c.imageUrl).trim() : null;
           
-          if (imageUrl && imageUrl !== "undefined" && imageUrl !== "null") {
+          // Fix /blob URLs immediately - change to /image.png
+          if (imageUrl && imageUrl.endsWith('/blob')) {
+            imageUrl = imageUrl.replace('/blob', '/image.png');
+            console.log(`[CERT ${index}] Fixed /blob URL to: ${imageUrl}`);
+          }
+          
+          if (imageUrl && imageUrl !== "undefined" && imageUrl !== "null" && imageUrl.length > 0) {
             // Check if it's a HackerRank certificate URL (not a direct image)
-            const isHackerRank = imageUrl.includes("hackerrank.com/certificates") && !imageUrl.includes(".png") && !imageUrl.includes(".jpg") && !imageUrl.includes(".svg");
+            const isHackerRank = imageUrl.includes("hackerrank.com/certificates") && 
+                                 !imageUrl.includes(".png") && 
+                                 !imageUrl.includes(".jpg") && 
+                                 !imageUrl.includes(".svg") &&
+                                 !imageUrl.includes("images.credly.com");
             
             if (isHackerRank) {
-              // For HackerRank, use the local asset as it's not a direct image URL
+              // For HackerRank, use a local asset as it's not a direct image URL
               img.src = "/assets/js.svg";
-              console.log(`HackerRank cert detected, using fallback: ${img.src}`);
+              console.log(`[CERT ${index}] HackerRank cert detected, using fallback: ${img.src}`);
             } else {
-              // Try the provided image URL first
+              // Set image source
               img.src = imageUrl;
-              console.log(`Setting image src to: ${img.src}`);
+              console.log(`[CERT ${index}] Setting image src to: ${img.src}`);
               
-              // If URL ends with /blob, try /image.png as fallback
-              if (imageUrl.endsWith('/blob')) {
-                const fallbackUrl = imageUrl.replace('/blob', '/image.png');
-                img.onerror = () => {
-                  console.warn(`Failed to load image: ${imageUrl}, trying fallback: ${fallbackUrl}`);
-                  img.onerror = null; // Prevent infinite loop
-                  img.src = fallbackUrl;
-                  // Final fallback to local icon
-                  img.onerror = () => {
-                    const h = (meta.url || "");
-                    if (h.includes("hackerrank")) img.src = "/assets/hackerrank.svg";
-                    else img.src = "/assets/sap.svg";
-                    console.log(`Final fallback image: ${img.src}`);
-                  };
-                };
-              } else {
-                // Standard error handling for other URLs
-                img.onerror = () => {
-                  console.warn(`Failed to load image: ${imageUrl}`);
-                  const h = (meta.url || "");
-                  if (h.includes("hackerrank")) img.src = "/assets/hackerrank.svg";
-                  else img.src = "/assets/sap.svg";
-                  console.log(`Fallback image: ${img.src}`);
-                };
-              }
+              // Error handling with fallback
+              img.onerror = () => {
+                console.warn(`[CERT ${index}] Failed to load image: ${imageUrl}`);
+                const h = (meta.url || c.url || "");
+                if (h.includes("hackerrank")) {
+                  img.src = "/assets/js.svg";
+                } else if (h.includes("credly") || h.includes("sap")) {
+                  img.src = "/assets/sap.svg";
+                } else {
+                  img.src = "/assets/sap.svg";
+                }
+                console.log(`[CERT ${index}] Using fallback image: ${img.src}`);
+              };
               
               // Log successful image load
               img.onload = () => {
-                console.log(`✅ Successfully loaded image for: ${c.title}`);
+                console.log(`[CERT ${index}] ✅ Successfully loaded image for: ${c.title}`);
               };
             }
           } else {
-            // choose local fallback based on host
-            console.warn(`No imageUrl found for certification ${index}, using fallback`);
+            // No imageUrl found - use fallback based on host
+            console.warn(`[CERT ${index}] No imageUrl found, using fallback`);
             try {
-              const h = new URL(meta.url).hostname;
-              if (h.includes("hackerrank")) img.src = "/assets/hackerrank.svg";
-              else if (h.includes("credly") || h.includes("sap")) img.src = "/assets/sap.svg";
-              else img.src = "/assets/sap.svg";
+              const h = new URL(meta.url || c.url || "").hostname;
+              if (h.includes("hackerrank")) {
+                img.src = "/assets/js.svg";
+              } else if (h.includes("credly") || h.includes("sap")) {
+                img.src = "/assets/sap.svg";
+              } else {
+                img.src = "/assets/sap.svg";
+              }
             } catch {
               img.src = "/assets/sap.svg";
             }
-            console.log(`Using fallback image: ${img.src}`);
+            console.log(`[CERT ${index}] Using fallback image: ${img.src}`);
           }
           // SIMPLIFIED: Get title ONLY from c.title - ignore meta.label completely
           let finalTitle = "Certification"; // Safe default
