@@ -444,6 +444,20 @@ function safeLink(url, label) {
   return a;
 }
 
+// Scroll to hero section smoothly
+function scrollToHero() {
+  const hero = document.getElementById('hero');
+  if (hero) {
+    hero.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+    // Fallback: scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+// Make scrollToHero available globally
+window.scrollToHero = scrollToHero;
+
 function getCertificationMeta(cert) {
   // Accepts string URL or { url, title }
   const url = typeof cert === "string" ? cert : (cert && cert.url ? cert.url : "");
@@ -824,8 +838,6 @@ function renderResume(resume) {
       });
       console.log(`Successfully rendered ${certGrid.children.length} certification cards`);
     }
-  } else {
-    console.error('certifications-grid element not found in DOM');
   }
 
   const contact = document.getElementById("contact-items");
